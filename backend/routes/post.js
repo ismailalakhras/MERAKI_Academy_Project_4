@@ -1,5 +1,13 @@
 const express = require("express")
-const { createNewPost, getFollowingPosts, getPostById, deletePostById, updatePostById, createNewComment } = require("../controllers/post")
+
+const { createNewPost,
+    getFollowingPosts,
+    getPostById,
+    deletePostById,
+    updatePostById,
+    createNewComment
+} = require("../controllers/post")
+
 
 const postRouter = express.Router()
 

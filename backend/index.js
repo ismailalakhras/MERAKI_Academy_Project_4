@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const db = require("./models/db");
 const { postRouter } = require("./routes/post");
+const { userRouter } = require("./routes/user");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,7 +16,7 @@ app.use(express.json());
 // Routes Middleware
 app.use("/posts", postRouter)
 
-
+app.use("/users", userRouter)
 
 
 
