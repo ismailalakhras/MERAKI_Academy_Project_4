@@ -8,12 +8,15 @@ const createNewPost = (req, res) => {
 const getFollowingPosts = (req, res) => {
 
 }
+
 const getPostById = (req, res) => {
 
 }
+
 const deletePostById = (req, res) => {
 
 }
+
 const updatePostById = (req, res) => {
 
 }
