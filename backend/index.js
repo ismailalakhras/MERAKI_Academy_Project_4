@@ -5,6 +5,7 @@ require("dotenv").config();
 const db = require("./models/db");
 const { postRouter } = require("./routes/post");
 const { userRouter } = require("./routes/user");
+const uploadRouter = require("./routes/upload");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ app.use(express.json());
 // Routes Middleware
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
+app.use("/users" , uploadRouter)
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("No content at this path"));

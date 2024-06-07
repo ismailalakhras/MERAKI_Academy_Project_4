@@ -1,18 +1,8 @@
-const { cloudinary } = require("../middleware/upload");
 const usersModel = require("../models/user");
 
 
 const register = async (req, res) => {
   const { firstName, lastName, age, country, email, password } = req.body;
-  const profileImage = req.file;
-
-
-  // Upload profile image to Cloudinary
-  const result = await cloudinary.uploader
-    .upload(profileImage.path)
-    .catch((error) => { console.log(error) });
-
-    console.log(result);
 
   const user = new usersModel({
     firstName,
@@ -20,17 +10,15 @@ const register = async (req, res) => {
     age,
     country,
     email,
-    password,
-    profileImage:  result.secure_url , // Save the Cloudinary image URL in profileImage key
+    password
   });
 
   user.save()
-    .then(() => {
-      
+    .then((result) => {
       res.status(201).json({
         success: true,
         message: "Account created successfully",
-        user: savedUser,
+        user: result,
       })
     })
     .catch(err => {
