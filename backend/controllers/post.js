@@ -72,13 +72,47 @@ const getFollowingPosts = (req, res) => {
                 })
         })
         .catch(err => {
-            console.log(err);
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+            });
         })
 }
 
-const getPostById = (req, res) => {
 
+
+
+const getPostsByUserId = (req, res) => {
+    let id = req.params.user_id;
+    postModel
+        .find({ user: id })
+        .populate("user", "firstName -_id")
+        .exec()
+        .then((post) => {
+            if (!post) {
+                return res.status(404).json({
+                    success: false,
+                    message: `The user=> ${id} has no posts`,
+                });
+            }
+            res.status(200).json({
+                success: true,
+                message: `All the posts for the user: ${id} `,
+                post: post,
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+            });
+        });
 }
+
+
+
 
 const deletePostById = (req, res) => {
 
@@ -95,7 +129,7 @@ const createNewComment = (req, res) => {
 module.exports = {
     createNewPost,
     getFollowingPosts,
-    getPostById,
+    getPostsByUserId,
     deletePostById,
     updatePostById,
     createNewComment

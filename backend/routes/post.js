@@ -2,7 +2,7 @@ const express = require("express")
 
 const { createNewPost,
     getFollowingPosts,
-    getPostById,
+    getPostsByUserId,
     deletePostById,
     updatePostById,
     createNewComment
@@ -19,7 +19,7 @@ postRouter.post("/",authentication , createNewPost)
 
 postRouter.get("/",authentication, getFollowingPosts)
 
-postRouter.get("/search/:user_id", getPostById)
+postRouter.get("/search/:user_id", getPostsByUserId)
 
 postRouter.delete("/delete/:post_id", deletePostById)
 
