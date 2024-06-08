@@ -80,9 +80,6 @@ const getFollowingPosts = (req, res) => {
         })
 }
 
-
-
-
 const getPostsByUserId = (req, res) => {
     let id = req.params.user_id;
     postModel
@@ -111,11 +108,29 @@ const getPostsByUserId = (req, res) => {
         });
 }
 
-
-
-
 const deletePostById = (req, res) => {
-
+    const id = req.params.post_id;
+    postModel
+      .findByIdAndDelete(id)
+      .then((result) => {
+        if (!result) {
+          return res.status(404).json({
+            success: false,
+            message: `The post with id => ${id} not found`,
+          });
+        }
+        res.status(200).json({
+          success: true,
+          message: `Post deleted`,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });
 }
 
 const updatePostById = (req, res) => {
