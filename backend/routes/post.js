@@ -8,14 +8,16 @@ const { createNewPost,
     createNewComment
 } = require("../controllers/post")
 
+const authentication = require("../middleware/authentication")
+
 
 const postRouter = express.Router()
 
 
 
-postRouter.post("/", createNewPost)
+postRouter.post("/",authentication , createNewPost)
 
-postRouter.get("/", getFollowingPosts)
+postRouter.get("/",authentication, getFollowingPosts)
 
 postRouter.get("/search/:user_id", getPostById)
 
