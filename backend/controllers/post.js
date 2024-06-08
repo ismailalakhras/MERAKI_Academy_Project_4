@@ -1,5 +1,6 @@
 const postModel = require("../models/post")
 const userModel = require("../models/user");
+const commentModel = require ("../models/comment")
 
 
 
@@ -165,6 +166,47 @@ const updatePostById = (req, res) => {
 
 const createNewComment = (req, res) => {
 
+    const  id  = req.params.post_id
+
+    const { comment } = req.body
+  
+    const commenter = req.token.userId
+  
+    postModel
+      .findOne({ _id: id })
+  
+      .then(post => {
+  
+        const newComment = new commentModel({ comment, commenter })
+  
+        newComment
+          .save()
+          .then(commentResult => {
+            post.comments.push(commentResult._id)
+            post.save()
+            res.status(201).json({
+              success: true,
+              message: commentResult.comment,
+              comment: commentResult
+            })
+          })
+          .catch(err => {
+            res.status(500).json({
+              success: false,
+              message: "Server Error",
+              err: err
+            })
+          })
+  
+      })
+      .catch(err => {
+        res.status(500).json({
+          success: false,
+          message: "Server Error",
+          err: err
+        })
+      })
+  
 }
 
 module.exports = {

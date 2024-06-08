@@ -25,7 +25,7 @@ postRouter.delete("/delete/:post_id", deletePostById)
 
 postRouter.put("/update/:post_id", updatePostById)
 
-postRouter.post("/:post_id/comments", createNewComment)
+postRouter.post("/:post_id/comments",authentication, createNewComment)
 
 
 
