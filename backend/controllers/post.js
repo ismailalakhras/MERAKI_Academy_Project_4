@@ -134,7 +134,33 @@ const deletePostById = (req, res) => {
 }
 
 const updatePostById = (req, res) => {
-
+    const id = req.params.post_id;
+    const filter = req.body;
+    Object.keys(filter).forEach((key) => {
+      filter[key] == "" && delete filter[key];
+    });
+    postModel
+      .findByIdAndUpdate({ _id: id }, req.body, { new: true })
+      .then((newPost) => {
+        if (!newPost) {
+          return res.status(404).json({
+            success: false,
+            message: `The post with id => ${id} not found`,
+          });
+        }
+        res.status(202).json({
+          success: true,
+          message: `post updated`,
+          post: newPost,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });
 }
 
 const createNewComment = (req, res) => {
