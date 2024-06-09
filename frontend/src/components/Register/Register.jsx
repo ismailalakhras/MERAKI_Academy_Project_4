@@ -1,12 +1,18 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import "./Register.css";
+import axios from "axios";
 
 const Register = () => {
   const { setToken, setIsLoggedIn, loginError, setLoginError } =
     useContext(AppContext);
 
   const [loginActive, setLoginActive] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="register-container">
@@ -16,21 +22,89 @@ const Register = () => {
         <div className="form-container sign-up-container">
           <form action="#">
             <h1>Create Account</h1>
+
            
-            <span>or use your email for registration</span>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-            <input type="number" placeholder="Age" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button >Sign Up</button>
+            <input
+              value={firstName}
+              onChange={(e) => {
+                setLoginError("");
+                setFirstName(e.target.value);
+              }}
+              type="text"
+              placeholder="First Name"
+            />
+            <input
+              value={lastName}
+              onChange={(e) => {
+                setLoginError("");
+                setLastName(e.target.value);
+              }}
+              type="text"
+              placeholder="Last Name"
+            />
+            <input
+              value={age}
+              onChange={(e) => {
+                setLoginError("");
+                setAge(e.target.value);
+              }}
+              type="number"
+              placeholder="Age"
+            />
+            <input
+              value={email}
+              onChange={(e) => {
+                setLoginError("");
+                setEmail(e.target.value);
+              }}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              value={password}
+              onChange={(e) => {
+                setLoginError("");
+                setPassword(e.target.value);
+              }}
+              type="password"
+              placeholder="Password"
+            />
+            <button
+              onClick={() => {
+                axios
+                  .post("http://localhost:5000/users/register", {
+                    firstName,
+                    lastName,
+                    age,
+                    email,
+                    password,
+                  })
+                  .then((result) => {
+                    setLoginError("");
+                    setFirstName("");
+                    setLastName("");
+                    setAge("");
+                    setEmail("");
+                    setPassword("");
+                    setLoginActive(true);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setLoginError(err.response.data.message);
+                  });
+              }}
+            >
+              Sign Up
+            </button>
+            <div className={loginError ? "err-message " : "err-message hidden"}>
+              {loginError}
+            </div>
           </form>
         </div>
         <div className="form-container sign-in-container">
           <form action="#">
             <h1>Sign in</h1>
-            
-            <span>or use your account</span>
+
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
@@ -44,14 +118,26 @@ const Register = () => {
               <p>
                 To keep connected with us please login with your personal info
               </p>
-              <button onClick={()=>{setLoginActive(true)}} className="ghost" id="signIn">
+              <button
+                onClick={() => {
+                  setLoginActive(true);
+                }}
+                className="ghost"
+                id="signIn"
+              >
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
               <p>Enter your personal details and start journey with us</p>
-              <button onClick={()=>{setLoginActive(false)}} className="ghost" id="signUp">
+              <button
+                onClick={() => {
+                  setLoginActive(false);
+                }}
+                className="ghost"
+                id="signUp"
+              >
                 Sign Up
               </button>
             </div>
