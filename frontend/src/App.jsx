@@ -1,8 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
+import Register from "./components/Register/Register";
+import Home from "./components/Home/Home";
 import { Route, Routes } from "react-router-dom";
 
 export const AppContext = createContext();
@@ -32,10 +31,7 @@ const App = () => {
           <Home />
         ) : (
           <>
-            <Routes>
-              <Route path="users/register" element={<Register />} />
-              <Route path="users/login" element={<Login />} />
-            </Routes>
+            <Register />
           </>
         )}
       </div>
