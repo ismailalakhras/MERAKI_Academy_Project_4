@@ -208,6 +208,8 @@ input {
   background: #ff020250;
   margin-top: 5px;
   width: 100%;
+  font-size: 12px;
+  padding: 2px 5px;
 }
 
 .err-message.hidden {

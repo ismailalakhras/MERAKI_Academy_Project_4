@@ -23,7 +23,6 @@ const Register = () => {
           <form action="#">
             <h1>Create Account</h1>
 
-           
             <input
               value={firstName}
               onChange={(e) => {
@@ -105,10 +104,51 @@ const Register = () => {
           <form action="#">
             <h1>Sign in</h1>
 
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              value={email}
+              onChange={(e) => {
+                setLoginError("");
+                setEmail(e.target.value);
+              }}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              value={password}
+              onChange={(e) => {
+                setLoginError("");
+                setPassword(e.target.value);
+              }}
+              type="password"
+              placeholder="Password"
+            />
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button
+              onClick={() => {
+                axios
+                  .post("http://localhost:5000/users/login", {
+                    email,
+                    password,
+                  })
+                  .then((result) => {
+                    setToken(result.data.token);
+                    setLoginError("");
+                    setEmail("");
+                    setPassword("");
+                    setIsLoggedIn(true);
+
+                    localStorage.setItem("token", result.data.token);
+                  })
+                  .catch((err) => {
+                    setLoginError(err.response.data.message);
+                  });
+              }}
+            >
+              Sign In
+            </button>
+            <div className={loginError ? "err-message " : "err-message hidden"}>
+              {loginError}
+            </div>
           </form>
         </div>
         <div className="overlay-container">
@@ -120,10 +160,16 @@ const Register = () => {
               </p>
               <button
                 onClick={() => {
+                  setLoginError("");
                   setLoginActive(true);
+                  setLoginError("");
+                  setFirstName("");
+                  setLastName("");
+                  setAge("");
+                  setEmail("");
+                  setPassword("");
                 }}
                 className="ghost"
-                id="signIn"
               >
                 Sign In
               </button>
@@ -133,10 +179,15 @@ const Register = () => {
               <p>Enter your personal details and start journey with us</p>
               <button
                 onClick={() => {
+                  setLoginError("");
                   setLoginActive(false);
+                  setFirstName("");
+                  setLastName("");
+                  setAge("");
+                  setEmail("");
+                  setPassword("");
                 }}
                 className="ghost"
-                id="signUp"
               >
                 Sign Up
               </button>
