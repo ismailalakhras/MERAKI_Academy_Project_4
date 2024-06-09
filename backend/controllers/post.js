@@ -41,8 +41,8 @@ const getFollowingPosts = (req, res) => {
     .findById({ _id: userId }, "following -_id")
     .populate("following")
     .then((result) => {
-
       if (!result.following.length) {
+        console.log(result);
         return res.status(404).json({
           success: false,
           message: `The user : ${userId} has not followed anyone`,
@@ -218,7 +218,7 @@ const addLikeToPost = (req, res) => {
         return res.status(200).json({
           success: true,
           message: "unlike",
-          post : post
+          post: post
         })
       }
 
@@ -228,7 +228,7 @@ const addLikeToPost = (req, res) => {
       return res.status(201).json({
         success: true,
         message: "like",
-        post : post
+        post: post
       })
     })
     .catch(err => {
@@ -240,6 +240,17 @@ const addLikeToPost = (req, res) => {
     })
 }
 
+const getUserById = (req, res) => {
+
+  const userId = req.token.userId;
+  userModel
+    .findById({ _id: userId })
+    .then(result => {
+      res.json(result)
+    })
+    .catch(err => res.json(err))
+}
+
 module.exports = {
   createNewPost,
   getFollowingPosts,
@@ -247,5 +258,6 @@ module.exports = {
   deletePostById,
   updatePostById,
   createNewComment,
-  addLikeToPost
+  addLikeToPost,
+  getUserById
 }
