@@ -240,8 +240,6 @@ const addLikeToPost = (req, res) => {
     })
 }
 
-
-
 module.exports = {
   createNewPost,
   getFollowingPosts,
