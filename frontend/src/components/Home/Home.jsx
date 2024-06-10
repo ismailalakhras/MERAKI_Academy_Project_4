@@ -4,6 +4,8 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import UploadPic from "../UploadPic/UploadPic";
+import Posts from "../Posts/Posts";
+
 
 const Home = () => {
   const [isActive, setIsActive] = useState("");
@@ -16,6 +18,21 @@ const Home = () => {
     profilePicScreen,
     setProfilePicScreen,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/posts", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle]);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -90,6 +107,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <div className="createPost">
         <div className="image">
           <img src={localStorage.getItem("profilePic")} alt="" />
@@ -103,6 +121,8 @@ const Home = () => {
         </div>
         <input type="text" placeholder="Whats on your mind" />
       </div>
+
+      <Posts />
     </div>
   );
 };

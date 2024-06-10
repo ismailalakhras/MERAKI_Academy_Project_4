@@ -5,7 +5,6 @@ const upload = require("../middleware/multer")
 const userModel = require("../models/user");
 
 
-
 uploadRouter.post("/upload", upload.single("image"), (req, res) => {
     console.log(req.data);
     cloudinary.uploader.upload(req.file.path, (err, result) => {
@@ -29,10 +28,6 @@ uploadRouter.post("/upload", upload.single("image"), (req, res) => {
                 })
             })
             .catch(err => res.json(err))
-
-
-
-
     })
 })
 

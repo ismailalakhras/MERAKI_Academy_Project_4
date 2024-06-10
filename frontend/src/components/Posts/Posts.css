@@ -1,0 +1,87 @@
+.posts-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(244, 244, 245);
+  background: linear-gradient(
+    90deg,
+    rgba(244, 244, 245, 1) 0%,
+    rgba(152, 163, 254, 1) 46%
+  );
+  color: white;
+  width: 100%;
+  height: 100vh;
+  z-index: 111;
+}
+
+.post-container {
+  width: 500px;
+  height: 200px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(8, 25, 170, 1) 46%
+  );
+}
+
+.post-container .post-top {
+  display: flex;
+  height: 80%;
+  justify-content: space-between;
+}
+
+.post-container .post-top-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.post-container .post-top-left .image {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.post-container .post-top-left .image img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.post-container .post-top-left .user-name {
+}
+
+.post-container .post-top-right {
+  width: 70%;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background-color: rgba(0, 0, 0, 0.267);
+  padding: 10px;
+  margin: 5px 5px 0 0 ;
+}
+
+.post-container .post-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 20%;
+  padding-left: 20px;
+}
+
+.post-container .post-bottom .like,
+.post-container .post-bottom .comment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.post-container .post-bottom .like i {
+}
