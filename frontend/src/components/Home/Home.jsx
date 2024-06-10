@@ -8,7 +8,7 @@ import UploadPic from "../UploadPic/UploadPic";
 const Home = () => {
   const [isActive, setIsActive] = useState("");
 
-  const { token, setToken } = useContext(AppContext);
+  const { token, setToken, toggle, setToggle } = useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -21,18 +21,16 @@ const Home = () => {
       .then((result) => {
         // console.log(result);
         localStorage.setItem("userId", result.data._id);
-        localStorage.setItem("profilePic", result.data.profileImage
-        );
-
+        localStorage.setItem("profilePic", result.data.profileImage);
       })
       .catch((err) => {
         console.log(err.response.data.message);
       });
-  });
+  },[toggle]);
 
   return (
     <div>
-      <UploadPic/>
+      <UploadPic />
       <div className="header">
         <div className="header-left_side">
           <div className="logo">
@@ -46,7 +44,7 @@ const Home = () => {
             }}
             className="link home"
           >
-            <i class="fa-solid fa-house "></i>Home
+            <i className="fa-solid fa-house "></i>Home
           </Link>
           <Link
             onClick={() => {
@@ -70,16 +68,16 @@ const Home = () => {
             }}
             className="link logout"
           >
-            <i class="fa-solid fa-right-from-bracket"></i>Logout
+            <i className="fa-solid fa-right-from-bracket"></i>Logout
           </Link>
         </div>
         <div className="header-right_side">
           <div className="notification">
-            <i class="fa-regular fa-bell"></i>
+            <i className="fa-regular fa-bell"></i>
             <div>0</div>
           </div>
           <div className="message">
-            <i class="fa-regular fa-message"></i>
+            <i className="fa-regular fa-message"></i>
             <div>0</div>
           </div>
         </div>
@@ -87,7 +85,7 @@ const Home = () => {
       <div className="createPost">
         <div className="image">
           <img src={localStorage.getItem("profilePic")} alt="" />
-          <div >+</div>
+          <div>+</div>
         </div>
         <input type="text" placeholder="Whats on your mind" />
       </div>
