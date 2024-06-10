@@ -10,8 +10,9 @@ const App = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [profilePicScreen, setProfilePicScreen] = useState(false);
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
@@ -27,7 +28,9 @@ const App = () => {
         loginError,
         setLoginError,
         toggle,
-        setToggle
+        setToggle,
+        profilePicScreen,
+        setProfilePicScreen,
       }}
     >
       <div className="App">

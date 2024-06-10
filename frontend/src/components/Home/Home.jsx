@@ -8,7 +8,14 @@ import UploadPic from "../UploadPic/UploadPic";
 const Home = () => {
   const [isActive, setIsActive] = useState("");
 
-  const { token, setToken, toggle, setToggle } = useContext(AppContext);
+  const {
+    token,
+    setToken,
+    toggle,
+    setToggle,
+    profilePicScreen,
+    setProfilePicScreen,
+  } = useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -26,11 +33,12 @@ const Home = () => {
       .catch((err) => {
         console.log(err.response.data.message);
       });
-  },[toggle]);
+  }, [toggle]);
 
   return (
     <div>
-      <UploadPic />
+      {profilePicScreen && <UploadPic />}
+
       <div className="header">
         <div className="header-left_side">
           <div className="logo">
@@ -85,7 +93,13 @@ const Home = () => {
       <div className="createPost">
         <div className="image">
           <img src={localStorage.getItem("profilePic")} alt="" />
-          <div>+</div>
+          <div
+            onClick={() => {
+              setProfilePicScreen(true);
+            }}
+          >
+            +
+          </div>
         </div>
         <input type="text" placeholder="Whats on your mind" />
       </div>
