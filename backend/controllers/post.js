@@ -50,7 +50,9 @@ const getFollowingPosts = (req, res) => {
       }
 
       postModel.find({ user: result.following })
+        .populate("user" , "firstName lastName profileImage -_id")
         .then(posts => {
+          console.log(posts);
           if (!posts.length) {
             return res.status(404).json({
               success: false,

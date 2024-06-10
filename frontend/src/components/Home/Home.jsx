@@ -19,20 +19,7 @@ const Home = () => {
     setProfilePicScreen,
   } = useContext(AppContext);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/posts", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-  }, [toggle]);
+ 
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
