@@ -3,6 +3,7 @@ import { AppContext } from "../../App";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UploadPic from "../UploadPic/UploadPic";
 
 const Home = () => {
   const [isActive, setIsActive] = useState("");
@@ -18,7 +19,7 @@ const Home = () => {
         },
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         localStorage.setItem("userId", result.data._id);
         localStorage.setItem("profilePic", result.data.profileImage
         );
@@ -31,6 +32,7 @@ const Home = () => {
 
   return (
     <div>
+      <UploadPic/>
       <div className="header">
         <div className="header-left_side">
           <div className="logo">

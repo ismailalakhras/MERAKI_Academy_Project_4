@@ -4,6 +4,17 @@
   --primary-color: #025cc9;
 }
 
+
+.uploadPic {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: #00000067;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
 .header {
   display: flex;
   align-items: center;
