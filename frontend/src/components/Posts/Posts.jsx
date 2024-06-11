@@ -70,10 +70,12 @@ const Posts = () => {
             {/* ---------------------------------------- */}
 
             <div className="post-body">
-              <div>{post.post}</div>
-              <div>
-                <img src="" alt="post image" />
-              </div>
+              <div className="post-content">{post.post}</div>
+              {post.image && (
+                <div className="post-image">
+                  <img src={post.image} alt="post image" />
+                </div>
+              )}
             </div>
 
             {/* ---------------------------------------- */}
@@ -81,30 +83,23 @@ const Posts = () => {
             <div className="post-bottom">
               <div className="commentsAndLikesNumber">
                 <div className="like">
-                  <div>
-                    <span>{post.likes.length}</span> Likes
-                  </div>
+                  <span>{post.likes.length}</span> Likes
                 </div>
 
                 <div className="comment">
-                  <div>
-                    <span>{post.comments.length}</span> Comments
-                  </div>
+                  <span>{post.comments.length}</span> Comments
                 </div>
               </div>
+
               <div className="commentsAndLikesButton">
                 <div className="like">
                   <i className="fa-solid fa-heart"></i>
-                  <div>
-                    <span>{post.likes.length}</span> Like
-                  </div>
+                  <div>Like</div>
                 </div>
 
                 <div className="comment">
                   <i className="fa-regular fa-comment"></i>
-                  <div>
-                    <span>{post.comments.length}</span> Comment
-                  </div>
+                  <div>Comment</div>
                 </div>
               </div>
             </div>
