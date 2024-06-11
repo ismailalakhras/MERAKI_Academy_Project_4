@@ -164,58 +164,7 @@
   font-size: 13px;
 }
 
-.createPost {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100px;
-  background: rgb(2, 6, 31);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 6, 31, 1) 0%,
-    rgba(0, 23, 222, 1) 46%
-  );
-}
 
-.createPost .image {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: #025cc9;
-  border-radius: 100%;
-}
-
-.createPost .image img {
-  width: 50px;
-  height: 50px;
-  background: #025cc9;
-  border-radius: 100%;
-}
-
-.createPost .image div {
-  background: rgb(77, 78, 75);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 28px;
-  left: -7px;
-  height: 20px;
-  width: 20px;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-.createPost input {
-  width: 50%;
-  height: 50px;
-  margin-left: 5px;
-}
 
 
 /* ------------------Posts --------------- */

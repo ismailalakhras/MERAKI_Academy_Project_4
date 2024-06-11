@@ -7,6 +7,7 @@ const { postRouter } = require("./routes/post");
 const { userRouter } = require("./routes/user");
 const uploadRouter = require("./routes/images");
 const authentication = require("./middleware/authentication");
+const createPostRouter = require("./routes/createPost");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/posts", postRouter);
 app.use("/users", userRouter);
 app.use("/images" ,authentication, uploadRouter)
+app.use("/createPost",authentication,createPostRouter)
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("No content at this path"));

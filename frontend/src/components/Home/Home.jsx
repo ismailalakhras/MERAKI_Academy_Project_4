@@ -5,18 +5,16 @@ import { Link, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import UploadPic from "../UploadPic/UploadPic";
 import Posts from "../Posts/Posts";
+import CreatePost from "../CreatePost/CreatePost";
+import AddPostScreen from "../addPostScreen/addPostScreen";
 
 const Home = () => {
   const [isActive, setIsActive] = useState("");
+  const [profilePicScreen, setProfilePicScreen] = useState(false);
 
-  const {
-    token,
-    setToken,
-    toggle,
-    setToggle,
-    profilePicScreen,
-    setProfilePicScreen,
-  } = useContext(AppContext);
+  const [addPostScreen, setAddPostScreen] = useState(false);
+
+  const { token, setToken, toggle, setToggle } = useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -37,8 +35,12 @@ const Home = () => {
   }, [toggle]);
 
   return (
-    <div >
-      {profilePicScreen && <UploadPic />}
+    <div>
+      {profilePicScreen && (
+        <UploadPic setProfilePicScreen={setProfilePicScreen} />
+      )}
+
+      {addPostScreen && <AddPostScreen setAddPostScreen={setAddPostScreen} />}
 
       <div className="header">
         <div className="header-left_side">
@@ -93,19 +95,16 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="createPost">
-        <div className="image">
-          <img src={localStorage.getItem("profilePic")} alt="" />
-          <div
-            onClick={() => {
-              setProfilePicScreen(true);
-            }}
-          >
-            +
-          </div>
-        </div>
-        <input type="text" placeholder="Whats on your mind" />
-      </div>
+      {/* --------------------------------- */}
+      {/* --------------------------------- */}
+      {/* --------------------------------- */}
+
+      <CreatePost setAddPostScreen={setAddPostScreen} setProfilePicScreen={setProfilePicScreen} />
+
+      {/* --------------------------------- */}
+      {/* --------------------------------- */}
+      {/* --------------------------------- */}
+
       <Routes>
         <Route path="home" element={<Posts />} />
       </Routes>

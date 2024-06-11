@@ -93,8 +93,17 @@ const Posts = () => {
 
               <div className="commentsAndLikesButton">
                 <div className="like">
-                  <i className="fa-solid fa-heart"></i>
-                  <div>Like</div>
+                  {post.likes.includes(localStorage.getItem("userId")) ? (
+                    <>
+                      <i className="fa-solid fa-heart red"></i>
+                      <div className="red">unlike</div>
+                    </>
+                  ) : (
+                    <>
+                      <i className="fa-solid fa-heart"></i>
+                      <div>Like</div>
+                    </>
+                  )}
                 </div>
 
                 <div className="comment">

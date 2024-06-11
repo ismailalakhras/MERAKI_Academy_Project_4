@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useContext, useRef, useState } from "react";
 import { AppContext } from "../../App";
+import "./addPostScreen.css";
 
-const UploadPic = ({ setProfilePicScreen }) => {
+const AddPostScreen = ({ setAddPostScreen }) => {
   const inputRef = useRef(null);
 
   const [file, setFile] = useState("");
   const [image, setImage] = useState("");
+  const [postContent, setPostContent] = useState("");
 
-  const { token, toggle, setToggle   } = useContext(AppContext);
+  const { token, toggle, setToggle } = useContext(AppContext);
 
   return (
     <div className="uploadPic">
@@ -41,6 +43,17 @@ const UploadPic = ({ setProfilePicScreen }) => {
           }}
         />
       </div>
+      <textarea
+        value={postContent}
+        onChange={(e) => {
+          setPostContent(e.target.value);
+        }}
+        //   onClick={() => {
+        //     setStatusError("");
+        //   }}
+        name="Description"
+        id=""
+      ></textarea>
 
       <div className="button">
         <button
@@ -48,10 +61,10 @@ const UploadPic = ({ setProfilePicScreen }) => {
             const formData = new FormData();
 
             formData.append("image", file);
+            formData.append("postContent", postContent); 
             axios
               .post(
-                "http://localhost:5000/images/upload",
-
+                "http://localhost:5000/createPost/upload",
                 formData,
 
                 {
@@ -61,9 +74,9 @@ const UploadPic = ({ setProfilePicScreen }) => {
                 }
               )
               .then((result) => {
-                console.log(result);
-                setToggle(!toggle);
-                setProfilePicScreen(false);
+                console.log(result.data.post);
+                // setToggle(!toggle);
+                // setAddPostScreen(false);
               })
               .catch((err) => {
                 console.log(err);
@@ -74,7 +87,7 @@ const UploadPic = ({ setProfilePicScreen }) => {
         </button>
         <button
           onClick={() => {
-            setProfilePicScreen(false);
+            setAddPostScreen(false);
           }}
         >
           cancel
@@ -84,4 +97,4 @@ const UploadPic = ({ setProfilePicScreen }) => {
   );
 };
 
-export default UploadPic;
+export default AddPostScreen;
