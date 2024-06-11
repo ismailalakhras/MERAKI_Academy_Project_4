@@ -15,9 +15,8 @@
 }
 
 .post-container {
-  position: relative;
   width: 500px;
-  height: 200px;
+  min-height: 200px;
   background: rgb(0, 0, 0);
   background: linear-gradient(
     90deg,
@@ -26,87 +25,54 @@
   );
   margin-top: 10px;
 }
+/* ---------------.post-top--------------------- */
 
-.deleteAndUpdateBtn {
+.post-top {
   display: flex;
-  gap: 5px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.205);
+  height: 100px;
 }
 
-.deleteAndUpdateBtn .fa-trash {
+.post-top-right {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+  height: 100%;
+  padding: 5px 5px 0 0;
+}
+
+.post-top-right .fa-trash {
   color: red;
 }
 
-.deleteAndUpdateBtn .fa-pen-to-square {
+.post-top-right .fa-pen-to-square {
   color: rgb(239, 255, 17);
 }
 
-.post-container .post-top {
-  display: flex;
-  height: 80%;
-  justify-content: space-between;
-}
 
-.post-container .post-top-left {
+.post-top-left {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 30%;
+  gap: 5px;
+  margin-left: 15px;
 }
-
-.post-container .post-top-left .image {
-  width: 80px;
-  height: 80px;
+.post-top-left .image {
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   overflow: hidden;
 }
 
-.post-container .post-top-left .image img {
-  max-width: 80px;
-  max-height: 80px;
+.post-top-left .image img {
+  max-width: 50px;
+  max-height: 50px;
 }
 
-.post-container .post-top-left .user-name {
+.times span {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(240, 248, 255, 0.582);
 }
 
-.post-container .post-top-right {
-  width: 70%;
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  background-color: rgba(0, 0, 0, 0.267);
-  padding: 10px;
-  margin: 5px 5px 0 0;
-}
-
-.post-container .post-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  font-size: 14px;
-  font-weight: 500;
-  height: 20%;
-  padding-left: 20px;
-}
-
-.post-container .post-bottom .like,
-.post-container .post-bottom .comment {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  height: 100%;
-  cursor: pointer;
-}
-
-.post-container .post-bottom .like span ,
-.post-container .post-bottom .comment span {
-color: rgb(182, 119, 119);
-
-}
-
-.post-container .post-bottom .like i {
-}
+/* --------------------------------------------- */

@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import "./Home.css";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import UploadPic from "../UploadPic/UploadPic";
 import Posts from "../Posts/Posts";
-
 
 const Home = () => {
   const [isActive, setIsActive] = useState("");
@@ -18,8 +17,6 @@ const Home = () => {
     profilePicScreen,
     setProfilePicScreen,
   } = useContext(AppContext);
-
- 
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -40,7 +37,7 @@ const Home = () => {
   }, [toggle]);
 
   return (
-    <div>
+    <div >
       {profilePicScreen && <UploadPic />}
 
       <div className="header">
@@ -51,6 +48,7 @@ const Home = () => {
         </div>
         <div className={`header-middle ${isActive}`}>
           <Link
+            to={"home"}
             onClick={() => {
               setIsActive("home");
             }}
@@ -108,8 +106,9 @@ const Home = () => {
         </div>
         <input type="text" placeholder="Whats on your mind" />
       </div>
-
-      <Posts />
+      <Routes>
+        <Route path="home" element={<Posts />} />
+      </Routes>
     </div>
   );
 };

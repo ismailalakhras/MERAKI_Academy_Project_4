@@ -3,6 +3,7 @@ import "./App.css";
 import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import { Route, Routes } from "react-router-dom";
+import Posts from "./components/Posts/Posts";
 
 export const AppContext = createContext();
 

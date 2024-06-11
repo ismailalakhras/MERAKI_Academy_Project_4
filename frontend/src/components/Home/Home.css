@@ -81,18 +81,16 @@
   position: relative;
 }
 .header-left_side .logo {
-  top: 0;
-  left: -60px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary-color);
+  border: var(--primary-color) 1px solid;
+  border-radius: 100%;
+  overflow: hidden;
+  width:  60px;
+  height: 60px;
+
 }
 
 .header-left_side .logo img {
-  width: 120px;
-  border: var(--primary-color) 1px solid;
+  height: 60px;
 }
 
 .header-middle {

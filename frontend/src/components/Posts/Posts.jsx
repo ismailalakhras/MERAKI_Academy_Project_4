@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import "./Posts.css";
 import axios from "axios";
+import PostTimestamp from "../PostTimestamp";
 
 const Posts = () => {
   const {
@@ -34,40 +35,76 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      {posts?.map((post) => {
+      {posts?.map((post, ind) => {
         return (
-          <div className="post-container">
-            <div className="deleteAndUpdateBtn">
-              <div>
-                <i className="fa-regular fa-pen-to-square"></i>
-              </div>
-              <div>
-                <i className="fa-solid fa-trash"></i>
-              </div>
-            </div>
+          <div key={ind} className="post-container">
+            {/* ---------------------------------------- */}
+
             <div className="post-top">
               <div className="post-top-left">
                 <div className="image">
-                  <img src={(post.user.profileImage)} alt="" />
+                  <img src={post.user.profileImage} alt="" />
                 </div>
-                <div className="user-name">{post.user.firstName}</div>
-              </div>
-              <div className="post-top-right">
-                <p>{post.post}</p>
-              </div>
-            </div>
-            <div className="post-bottom">
-              <div className="like">
-                <i className="fa-solid fa-heart"></i>
+
                 <div>
-                  <span>{post.likes.length}</span> Like
+                  <div className="user-name">
+                    {post.user.firstName} {post.user.lastName}
+                  </div>
+                  <div className="times">
+                    <PostTimestamp timestamp={post.createdAt} />
+                  </div>
                 </div>
               </div>
 
-              <div className="comment">
-                <i className="fa-regular fa-comment"></i>
-                <div>
-                  <span>{post.comments.length}</span> Comment
+              {post.user._id === localStorage.getItem("userId") && (
+                <div className="post-top-right">
+                  <div>
+                    <i className="fa-regular fa-pen-to-square"></i>
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-trash"></i>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* ---------------------------------------- */}
+
+            <div className="post-body">
+              <div>{post.post}</div>
+              <div>
+                <img src="" alt="post image" />
+              </div>
+            </div>
+
+            {/* ---------------------------------------- */}
+
+            <div className="post-bottom">
+              <div className="commentsAndLikesNumber">
+                <div className="like">
+                  <div>
+                    <span>{post.likes.length}</span> Likes
+                  </div>
+                </div>
+
+                <div className="comment">
+                  <div>
+                    <span>{post.comments.length}</span> Comments
+                  </div>
+                </div>
+              </div>
+              <div className="commentsAndLikesButton">
+                <div className="like">
+                  <i className="fa-solid fa-heart"></i>
+                  <div>
+                    <span>{post.likes.length}</span> Like
+                  </div>
+                </div>
+
+                <div className="comment">
+                  <i className="fa-regular fa-comment"></i>
+                  <div>
+                    <span>{post.comments.length}</span> Comment
+                  </div>
                 </div>
               </div>
             </div>
