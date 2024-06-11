@@ -12,7 +12,7 @@ const Home = () => {
   const [isActive, setIsActive] = useState("");
   const [profilePicScreen, setProfilePicScreen] = useState(false);
 
-  const [addPostScreen, setAddPostScreen] = useState(false);
+  const [addPostScreen, setAddPostScreen] = useState(true);
 
   const { token, setToken, toggle, setToggle } = useContext(AppContext);
 

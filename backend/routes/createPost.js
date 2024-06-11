@@ -1,49 +1,58 @@
-const express = require("express")
-const createPostRouter = express.Router()
-const cloudinary = require("../utils/cloudinary")
-const upload = require("../middleware/multer")
+const express = require("express");
+const createPostRouter = express.Router();
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../middleware/multer");
 const postModel = require("../models/post");
 
-
 createPostRouter.post("/upload", upload.single("image"), (req, res) => {
-    console.log(req.data);
+  const { postContent } = req.body;
+  let image = "";
+
+  if (req.file) {
+    // An image was uploaded
     cloudinary.uploader.upload(req.file.path, (err, result) => {
-        if (err) {
-            console.log(err)
-            return res.status(500).json({
-                success: false,
-                message: "Error"
-            })
-        }
-
-        const { postContent } = req.body;
-
-        const image = result.url
-
-        const user = req.token.userId;
-        const newPost = new postModel({
-            post:postContent,
-            image,
-            user,
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: "Error",
         });
+      }
 
-        newPost
-            .save()
-            .then((newPost) => {
-                res.status(201).json({
-                    success: true,
-                    message: `Post created`,
-                    post: newPost,
-                });
-            })
-            .catch((err) => {
-                res.status(500).json({
-                    success: false,
-                    message: `Server Error`,
-                    err: err.message,
-                });
-            });
-    })
-})
+      image = result.url;
 
-module.exports = createPostRouter
+      savePost();
+    });
+  } else {
+    // No image was uploaded
+    savePost();
+  }
+
+  function savePost() {
+    const user = req.token.userId;
+    const newPost = new postModel({
+      post: postContent,
+      image,
+      user,
+    });
+
+    newPost
+      .save()
+      .then((newPost) => {
+        res.status(201).json({
+          success: true,
+          message: `Post created`,
+          post: newPost,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });
+  }
+});
+
+module.exports = createPostRouter;
