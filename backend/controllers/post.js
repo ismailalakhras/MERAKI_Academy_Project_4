@@ -211,6 +211,36 @@ const createNewComment = (req, res) => {
 
 }
 
+
+const getCommentsByPostId = (req,res)=>{
+
+  let id = req.params.post_id;
+  postModel
+    .find({ _id : id })
+    .populate("comments")
+    .exec()
+    .then((comments) => {
+      if (!comments) {
+        return res.status(404).json({
+          success: false,
+          message: `there is no comments`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the comments for the post: ${id} `,
+        comments: comments,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+}
+
 const addLikeToPost = (req, res) => {
   const userId = req.token.userId
   const postId = req.params.post_id
@@ -266,4 +296,5 @@ module.exports = {
   createNewComment,
   addLikeToPost,
   getUserById,
+  getCommentsByPostId
 }

@@ -8,7 +8,8 @@ const { createNewPost,
     createNewComment,
     addLikeToPost,
     getUserById,
-    
+    getCommentsByPostId,
+
 } = require("../controllers/post")
 
 const authentication = require("../middleware/authentication")
@@ -29,6 +30,9 @@ postRouter.delete("/delete/:post_id", deletePostById)
 postRouter.put("/update/:post_id", updatePostById)
 
 postRouter.post("/:post_id/comments", authentication, createNewComment)
+
+postRouter.get("/:post_id/comments", authentication, getCommentsByPostId)
+
 
 postRouter.post("/:post_id/like", authentication, addLikeToPost)
 

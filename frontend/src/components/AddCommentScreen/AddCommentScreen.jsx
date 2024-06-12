@@ -13,9 +13,9 @@ const AddCommentScreen = ({ setAddCommentScreen }) => {
       <div className="addCommentScreen-container">
         <div className="addCommentScreen-container-top">
           <div className="image">
-            <img src={require("../../pic/logo.png")}></img>
+            <img src={localStorage.getItem("profileImage")}></img>
           </div>
-          <div className="userName">xxxxxxxx</div>
+          <div className="userName">{localStorage.getItem("userName")}</div>
         </div>
         <div className="addCommentScreen-container-body">
           <textarea
@@ -37,11 +37,13 @@ const AddCommentScreen = ({ setAddCommentScreen }) => {
           </div>
           <div
             onClick={() => {
+
+                console.log(localStorage.getItem("postId"));
               axios
                 .post(
-                  `http://localhost:5000/posts/${localStorage.getItem(
-                    "postId"
-                  )}/comments`,
+                  `http://localhost:5000/posts/${
+                    localStorage.getItem("postId")
+                  }/comments`,
                   { comment },
                   {
                     headers: {

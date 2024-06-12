@@ -28,7 +28,7 @@ const Posts = () => {
         },
       })
       .then((result) => {
-        console.log(result.data.posts);
+        // console.log(result.data.posts);
 
         setPosts(result.data.posts);
       })
@@ -58,7 +58,6 @@ const Posts = () => {
                     </div>
                     <div className="times">
                       <PostTimestamp timestamp={post.createdAt} />
-                      {console.log(post.createdAt)}
                     </div>
                   </div>
                 </div>
@@ -93,7 +92,31 @@ const Posts = () => {
                     <span>{post.likes.length}</span> Likes
                   </div>
 
-                  <div className="comment">
+                  <div
+                    onClick={() => {
+                      //get comments by post id
+                      axios
+                        .get(
+                          `http://localhost:5000/posts/${localStorage.getItem(
+                            "postId"
+                          )}/comments`,
+
+                          {
+                            headers: {
+                              authorization: `Bearer ${token}`,
+                            },
+                          }
+                        )
+                        .then((result) => {
+                          setToggle(!toggle);
+                          console.log(result.data);
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
+                    }}
+                    className="comment"
+                  >
                     <span>{post.comments.length}</span> Comments
                   </div>
                 </div>
@@ -101,8 +124,6 @@ const Posts = () => {
                 <div className="commentsAndLikesButton">
                   <div
                     onClick={() => {
-                      console.log(post._id);
-                      console.log(token);
                       setToggle(!toggle);
 
                       axios

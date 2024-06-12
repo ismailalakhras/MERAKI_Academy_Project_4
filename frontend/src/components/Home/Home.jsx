@@ -26,7 +26,6 @@ const Home = () => {
         },
       })
       .then((result) => {
-        console.log(result.data);
         localStorage.setItem("userId", result.data._id);
         localStorage.setItem(
           "userName",
