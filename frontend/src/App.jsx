@@ -11,6 +11,7 @@ const App = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   const [toggle, setToggle] = useState(false);
 
@@ -29,6 +30,7 @@ const App = () => {
         setLoginError,
         toggle,
         setToggle,
+  
       }}
     >
       <div className="App">

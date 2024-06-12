@@ -4,7 +4,7 @@ const commentModel = require("../models/comment")
 
 
 
-const createNewPost = (req, res) => {
+const createNewPost = (req, res ) => {
 
   const { post, image } = req.body;
 
@@ -50,7 +50,7 @@ const getFollowingPosts = (req, res) => {
       }
 
       postModel.find({ user: result.following })
-        .populate("user" , "firstName lastName profileImage ")
+        .populate("user", "firstName lastName profileImage ")
         .then(posts => {
           console.log(posts);
           if (!posts.length) {
@@ -82,6 +82,11 @@ const getFollowingPosts = (req, res) => {
       });
     })
 }
+
+
+
+
+
 
 const getPostsByUserId = (req, res) => {
   let id = req.params.user_id;
@@ -212,7 +217,6 @@ const addLikeToPost = (req, res) => {
 
   postModel.findOne({ _id: postId })
     .then(post => {
-
       if (post.likes.includes(userId)) {
         const index = post.likes.indexOf(userId)
         post.likes.splice(index, 1)
@@ -261,5 +265,5 @@ module.exports = {
   updatePostById,
   createNewComment,
   addLikeToPost,
-  getUserById
+  getUserById,
 }

@@ -1,0 +1,14 @@
+.suggestios {
+  width: 100%;
+  margin: 15px;
+}
+
+.suggestios-container {
+  position: sticky;
+  top: 70px;
+  width: 100%;
+  height: 50px;
+  background: #292c2570;
+  height: calc(100vh - 80px);
+  border: 1px solid rgba(245, 222, 179, 0.13);
+}

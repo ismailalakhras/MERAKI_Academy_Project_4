@@ -1,33 +1,39 @@
 .posts-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: rgb(244, 244, 245);
-  background: linear-gradient(
-    90deg,
-    rgba(244, 244, 245, 1) 0%,
-    rgba(152, 163, 254, 1) 46%
-  );
+  display: grid;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  grid-template-columns: 30% 70%;
+  background: black;
   color: white;
   width: 100%;
   min-height: 100vh;
   z-index: 111;
 }
 
+.posts {
+  display: flex ;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
 .post-container {
-  width: 500px;
+  width: 80%;
   min-height: 200px;
   background: rgb(0, 0, 0);
   border-radius: 10px;
+  background: rgb(0, 0, 0);
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(8, 25, 170, 1) 46%
+    rgba(33, 184, 169, 1) 100%
   );
   margin-top: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border: solid 1px rgba(253, 253, 253, 0.356);
+  overflow: hidden;
 }
 /* ---------------.post-top--------------------- */
 /* ---------------.post-top--------------------- */
@@ -95,20 +101,21 @@
 }
 
 .post-body .post-content {
-  width: 90%;
+  width: 100%;
   margin: 10px 0;
   padding: 10px;
-  background: #0c82866e;
+  background: #ffffff1c;
   font-size: 14px;
   font-weight: 300;
 }
 
 .post-body .post-image {
-  width: 90%;
+  /* width: 90%; */
 }
 
 .post-body .post-image img {
   max-width: 100%;
+  /* max-height: 400px; */
 }
 /* --------------------------------------------- */
 /* --------------------------------------------- */

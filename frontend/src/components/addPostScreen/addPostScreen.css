@@ -12,6 +12,8 @@
 }
 
 .addPost_container {
+  position: relative;
+
   width: 500px;
   height: 500px;
   background: #fffefe;
@@ -88,10 +90,10 @@
   /* display: flex; */
   /* align-items: center; */
   /* justify-content: center; */
-  max-width: 100%;
   max-height: 240px;
   background: #f7f7f7;
   overflow-y: scroll;
+  overflow-x: hidden;
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -135,6 +137,8 @@
   text-align: center;
 }
 
+
+
 .addPost_container-button div {
   display: flex;
   align-items: center;
@@ -147,4 +151,29 @@
   background: rgb(0, 4, 255);
   color: #fffefe;
   cursor: pointer;
+}
+
+.addPost_container-button div.unClick {
+  pointer-events: none;
+  background: rgb(75, 75, 83);
+  
+}
+
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  --c:no-repeat linear-gradient(#6100ee 0 0);
+  background: var(--c),var(--c),#d7b8fc;
+  background-size: 60% 100%;
+  animation: l16 3s infinite;
+}
+@keyframes l16 {
+  0%   {background-position:-150% 0,-150% 0}
+  66%  {background-position: 250% 0,-150% 0}
+  100% {background-position: 250% 0, 250% 0}
 }

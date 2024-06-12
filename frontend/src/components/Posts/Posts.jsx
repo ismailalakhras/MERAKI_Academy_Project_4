@@ -3,6 +3,8 @@ import { AppContext } from "../../App";
 import "./Posts.css";
 import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
+import Suggestions from "../Suggestions/Suggestions";
+import AddCommentScreen from "../AddCommentScreen/AddCommentScreen";
 
 const Posts = () => {
   const {
@@ -15,6 +17,8 @@ const Posts = () => {
   } = useContext(AppContext);
 
   const [posts, setPosts] = useState(null);
+
+  const [addCommentScreen, setAddCommentScreen] = useState(false);
 
   useEffect(() => {
     axios
@@ -35,86 +39,128 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      {posts?.map((post, ind) => {
-        return (
-          <div key={ind} className="post-container">
-            {/* ---------------------------------------- */}
+      <Suggestions />
+      <div className="posts">
+        {posts?.map((post, ind) => {
+          return (
+            <div key={ind} className="post-container">
+              {/* ---------------------------------------- */}
 
-            <div className="post-top">
-              <div className="post-top-left">
-                <div className="image">
-                  <img src={post.user.profileImage} alt="" />
-                </div>
-
-                <div>
-                  <div className="user-name">
-                    {post.user.firstName} {post.user.lastName}
+              <div className="post-top">
+                <div className="post-top-left">
+                  <div className="image">
+                    <img src={post.user.profileImage} alt="" />
                   </div>
-                  <div className="times">
-                    <PostTimestamp timestamp={post.createdAt} />
-                  </div>
-                </div>
-              </div>
 
-              {post.user._id === localStorage.getItem("userId") && (
-                <div className="post-top-right">
                   <div>
-                    <i className="fa-regular fa-pen-to-square"></i>
+                    <div className="user-name">
+                      {post.user.firstName} {post.user.lastName}
+                    </div>
+                    <div className="times">
+                      <PostTimestamp timestamp={post.createdAt} />
+                      {console.log(post.createdAt)}
+                    </div>
                   </div>
-                  <div>
-                    <i className="fa-solid fa-trash"></i>
+                </div>
+
+                {post.user._id === localStorage.getItem("userId") && (
+                  <div className="post-top-right">
+                    <div>
+                      <i className="fa-regular fa-pen-to-square"></i>
+                    </div>
+                    <div>
+                      <i className="fa-solid fa-trash"></i>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-            {/* ---------------------------------------- */}
+                )}
+              </div>
+              {/* ---------------------------------------- */}
 
-            <div className="post-body">
-              <div className="post-content">{post.post}</div>
-              {post.image && (
-                <div className="post-image">
-                  <img src={post.image} alt="post image" />
-                </div>
-              )}
-            </div>
-
-            {/* ---------------------------------------- */}
-
-            <div className="post-bottom">
-              <div className="commentsAndLikesNumber">
-                <div className="like">
-                  <span>{post.likes.length}</span> Likes
-                </div>
-
-                <div className="comment">
-                  <span>{post.comments.length}</span> Comments
-                </div>
+              <div className="post-body">
+                <div className="post-content">{post.post}</div>
+                {post.image && (
+                  <div className="post-image">
+                    <img src={post.image} alt="post image" />
+                  </div>
+                )}
               </div>
 
-              <div className="commentsAndLikesButton">
-                <div className="like">
-                  {post.likes.includes(localStorage.getItem("userId")) ? (
-                    <>
-                      <i className="fa-solid fa-heart red"></i>
-                      <div className="red">unlike</div>
-                    </>
-                  ) : (
-                    <>
-                      <i className="fa-solid fa-heart"></i>
-                      <div>Like</div>
-                    </>
-                  )}
+              {/* ---------------------------------------- */}
+
+              <div className="post-bottom">
+                <div className="commentsAndLikesNumber">
+                  <div className="like">
+                    <span>{post.likes.length}</span> Likes
+                  </div>
+
+                  <div className="comment">
+                    <span>{post.comments.length}</span> Comments
+                  </div>
                 </div>
 
-                <div className="comment">
-                  <i className="fa-regular fa-comment"></i>
-                  <div>Comment</div>
+                <div className="commentsAndLikesButton">
+                  <div
+                    onClick={() => {
+                      console.log(post._id);
+                      console.log(token);
+                      setToggle(!toggle);
+
+                      axios
+                        .post(
+                          `http://localhost:5000/posts/${post._id}/like`,
+                          {},
+                          {
+                            headers: {
+                              authorization: `Bearer ${token}`,
+                            },
+                          }
+                        )
+                        .then((result) => {
+                          console.log(result.data);
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
+                    }}
+                    className="like"
+                  >
+                    {post.likes.includes(localStorage.getItem("userId")) ? (
+                      <>
+                        <i className="fa-solid fa-heart red"></i>
+                        <div className="">unlike</div>
+                      </>
+                    ) : (
+                      <>
+                        <i className="fa-solid fa-heart"></i>
+                        <div>Like</div>
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      setAddCommentScreen(true);
+
+                      localStorage.setItem("postId", post._id);
+                    }}
+                    className="comment"
+                  >
+                    <i className="fa-regular fa-comment"></i>
+                    <div>Comment</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
+      {addCommentScreen && (
+        <AddCommentScreen
+          addCommentScreen={addCommentScreen}
+          setAddCommentScreen={setAddCommentScreen}
+        />
+      )}
     </div>
   );
 };

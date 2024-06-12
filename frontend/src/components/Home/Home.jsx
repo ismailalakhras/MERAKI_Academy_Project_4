@@ -18,6 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
+
     axios
       .get("http://localhost:5000/posts/userId", {
         headers: {
@@ -25,14 +26,39 @@ const Home = () => {
         },
       })
       .then((result) => {
-        // console.log(result);
+        console.log(result.data);
         localStorage.setItem("userId", result.data._id);
+        localStorage.setItem(
+          "userName",
+          `${result.data.firstName} ${result.data.lastName}`
+        );
+        localStorage.setItem("firstName", `${result.data.firstName} `);
+
+        localStorage.setItem("profileImage", result.data.profileImage);
         localStorage.setItem("profilePic", result.data.profileImage);
       })
       .catch((err) => {
         console.log(err.response.data.message);
       });
   }, [toggle]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `http://localhost:5000/posts/search/${localStorage.getItem("userId")}`,
+  //       {
+  //         headers: {
+  //           authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     )
+  //     .then((result) => {
+  //       console.log(result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // });
 
   return (
     <div>
@@ -77,6 +103,8 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("logout");
+              setToken("");
+              localStorage.setItem("token", "");
             }}
             className="link logout"
           >
@@ -99,7 +127,10 @@ const Home = () => {
       {/* --------------------------------- */}
       {/* --------------------------------- */}
 
-      <CreatePost setAddPostScreen={setAddPostScreen} setProfilePicScreen={setProfilePicScreen} />
+      <CreatePost
+        setAddPostScreen={setAddPostScreen}
+        setProfilePicScreen={setProfilePicScreen}
+      />
 
       {/* --------------------------------- */}
       {/* --------------------------------- */}
