@@ -25,20 +25,20 @@ const register = async (req, res) => {
         { $push: { following: result._id } },
         { new: true }
       )
-      .then((updatedUser) => {
-        res.status(201).json({
-          success: true,
-          message: "Account created successfully",
-          user: updatedUser
+        .then((updatedUser) => {
+          res.status(201).json({
+            success: true,
+            message: "Account created successfully",
+            user: updatedUser
+          });
+        })
+        .catch(err => {
+          res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: err.message
+          });
         });
-      })
-      .catch(err => {
-        res.status(500).json({
-          success: false,
-          message: "Server error",
-          error: err.message
-        });
-      });
     })
     .catch(err => {
       if (err.keyPattern) {
@@ -108,9 +108,28 @@ const login = (req, res) => {
 };
 
 
+const getUserById = (req, res) => {
+
+  const userId = req.token.userId;
+  userModel
+    .findById({ _id: userId })
+    .populate("followers")
+    .then(result => {
+      res.status(200).json({
+        success: true,
+        message: "user",
+        user: result
+      });
+    })
+    .catch(err => res.json(err))
+}
+
+
+
 
 
 module.exports = {
   register,
   login,
+  getUserById,
 };

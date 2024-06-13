@@ -20,6 +20,10 @@ const Posts = () => {
 
   const [addCommentScreen, setAddCommentScreen] = useState(false);
 
+  const [followers, setFollowers] = useState([]);
+
+  const [following, setFollowing] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/posts", {
@@ -29,7 +33,6 @@ const Posts = () => {
       })
       .then((result) => {
         // console.log(result.data.posts);
-        console.log(result);
 
         setPosts(result.data.posts);
       })
@@ -38,17 +41,28 @@ const Posts = () => {
       });
   }, [toggle]);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users/userId`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        setFollowers(result.data.user.followers);
 
+        setFollowing(result.data.user.following);
 
-
-
-
-
-
+        console.log(result.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle]);
 
   return (
     <div className="posts-page">
-      <Suggestions />
+      <Suggestions followers={followers} />
       <div className="posts">
         {posts?.map((post, ind) => {
           return (
@@ -85,7 +99,7 @@ const Posts = () => {
                             )
                             .then((result) => {
                               console.log("deleted");
-                              setToggle(!toggle)
+                              setToggle(!toggle);
                             })
                             .catch((err) => {
                               console.log(err);

@@ -15,6 +15,8 @@ const App = () => {
 
   const [toggle, setToggle] = useState(false);
 
+  const [pageName, setPageName] = useState("");
+
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
   });
@@ -30,7 +32,8 @@ const App = () => {
         setLoginError,
         toggle,
         setToggle,
-  
+        pageName,
+        setPageName,
       }}
     >
       <div className="App">

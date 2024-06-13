@@ -14,7 +14,8 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const { token, setToken, toggle, setToggle } = useContext(AppContext);
+
+  const { token, setToken, toggle, setToggle,pageName, setPageName } = useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -34,7 +35,7 @@ const Home = () => {
         localStorage.setItem("firstName", `${result.data.firstName} `);
 
         localStorage.setItem("profileImage", result.data.profileImage);
-        // localStorage.setItem("profilePic", result.data.profileImage);
+        localStorage.setItem("profilePic", result.data.profileImage);
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -70,6 +71,7 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("followers");
+              setPageName("followers")
             }}
             className="link followers"
           >
@@ -78,6 +80,8 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("following");
+              setPageName("following")
+
             }}
             className="link following"
           >

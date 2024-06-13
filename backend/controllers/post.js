@@ -33,30 +33,6 @@ const createNewPost = (req, res) => {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------------
-// --------------------------------------
-// --------------------------------------
-
-// --------------------------------------
 const getFollowingPosts = (req, res) => {
   const userId = req.token.userId;
   console.log(userId);
@@ -106,26 +82,6 @@ const getFollowingPosts = (req, res) => {
       });
     })
 }
-// --------------------------------------
-// --------------------------------------
-// --------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const getPostsByUserId = (req, res) => {
   let id = req.params.user_id;
@@ -315,16 +271,7 @@ const addLikeToPost = (req, res) => {
     })
 }
 
-const getUserById = (req, res) => {
 
-  const userId = req.token.userId;
-  userModel
-    .findById({ _id: userId })
-    .then(result => {
-      res.json(result)
-    })
-    .catch(err => res.json(err))
-}
 
 module.exports = {
   createNewPost,
@@ -334,6 +281,6 @@ module.exports = {
   updatePostById,
   createNewComment,
   addLikeToPost,
-  getUserById,
+
   getCommentsByPostId
 }
