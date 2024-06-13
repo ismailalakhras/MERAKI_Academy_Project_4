@@ -63,6 +63,7 @@ const Home = () => {
             to={"home"}
             onClick={() => {
               setIsActive("home");
+              setPageName("My Profile Info")
             }}
             className="link home"
           >
@@ -71,7 +72,7 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("followers");
-              setPageName("followers")
+              setPageName("Followers")
             }}
             className="link followers"
           >
@@ -80,7 +81,7 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("following");
-              setPageName("following")
+              setPageName("Following")
 
             }}
             className="link following"

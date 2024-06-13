@@ -14,6 +14,8 @@ const Posts = () => {
     setToggle,
     profilePicScreen,
     setProfilePicScreen,
+    pageName,
+    setPageName
   } = useContext(AppContext);
 
   const [posts, setPosts] = useState(null);
@@ -24,6 +26,8 @@ const Posts = () => {
 
   const [following, setFollowing] = useState([]);
 
+  const [user, setUser] = useState({});
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/posts", {
@@ -33,7 +37,7 @@ const Posts = () => {
       })
       .then((result) => {
         // console.log(result.data.posts);
-
+        setPageName("My Profile Info")
         setPosts(result.data.posts);
       })
       .catch((err) => {
@@ -53,6 +57,8 @@ const Posts = () => {
 
         setFollowing(result.data.user.following);
 
+        setUser(result.data.user);
+
         console.log(result.data.user);
       })
       .catch((err) => {
@@ -62,7 +68,7 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      <Suggestions followers={followers} />
+      <Suggestions following={following} followers={followers} user={user} />
       <div className="posts">
         {posts?.map((post, ind) => {
           return (

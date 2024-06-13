@@ -113,7 +113,7 @@ const getUserById = (req, res) => {
   const userId = req.token.userId;
   userModel
     .findById({ _id: userId })
-    .populate("followers")
+    .populate("followers following")
     .then(result => {
       res.status(200).json({
         success: true,
