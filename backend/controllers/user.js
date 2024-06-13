@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { firstName, lastName, age, country, email, password } = req.body;
-  const profileImage = "https://images.app.goo.gl/VzLmVTfuoVnxUi6d8"
+  const profileImage = "https://images.app.goo.gl/VzLmVTfuoVnxUi6d8";
 
   const user = new userModel({
     firstName,
@@ -14,30 +14,46 @@ const register = async (req, res) => {
     email,
     password,
     profileImage,
+    following: []
   });
 
   user.save()
     .then((result) => {
-      res.status(201).json({
-        success: true,
-        message: "Account created successfully",
-        user: result,
+      // Add the user's ID to the 'following' array
+      userModel.findByIdAndUpdate(
+        result._id,
+        { $push: { following: result._id } },
+        { new: true }
+      )
+      .then((updatedUser) => {
+        res.status(201).json({
+          success: true,
+          message: "Account created successfully",
+          user: updatedUser
+        });
       })
+      .catch(err => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          error: err.message
+        });
+      });
     })
     .catch(err => {
       if (err.keyPattern) {
         res.status(409).json({
           success: false,
-          message: "The email already exists",
+          message: "The email already exists"
         });
       } else {
         res.status(500).json({
           success: false,
           message: "Server error",
-          error: err.message,
+          error: err.message
         });
       }
-    })
+    });
 };
 
 const login = (req, res) => {

@@ -33,6 +33,30 @@ const createNewPost = (req, res) => {
     });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------
+// --------------------------------------
+// --------------------------------------
+
+// --------------------------------------
 const getFollowingPosts = (req, res) => {
   const userId = req.token.userId;
   console.log(userId);
@@ -82,79 +106,6 @@ const getFollowingPosts = (req, res) => {
       });
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------------
-// --------------------------------------
-// --------------------------------------
-
-// --------------------------------------
-// const getFollowingPosts = (req, res) => {
-//   const userId = req.token.userId;
-//   console.log(userId);
-
-//   userModel
-//     .findById({ _id: userId }, "following  _id")
-//     .populate("following")
-//     .then((result) => {
-//       if (!result.following.length) {
-//         console.log(result);
-//         return res.status(404).json({
-//           success: false,
-//           message: `The user : ${userId} has not followed anyone`,
-//         });
-//       }
-
-//       postModel.find({ user: result.following })
-//         .populate("user", "firstName lastName profileImage ")
-//         .then(posts => {
-//           console.log(posts);
-//           if (!posts.length) {
-//             return res.status(404).json({
-//               success: false,
-//               message: `The user : ${userId} follows people who have not published any post`,
-//             });
-//           }
-
-//           res.status(200).json({
-//             success: true,
-//             message: `All the posts available for the user : ${userId}`,
-//             posts: posts,
-//           });
-//         })
-//         .catch(err => {
-//           res.status(500).json({
-//             success: false,
-//             message: `Server Error`,
-//             err: err.message,
-//           });
-//         })
-//     })
-//     .catch(err => {
-//       res.status(500).json({
-//         success: false,
-//         message: `Server Error`,
-//         err: err.message,
-//       });
-//     })
-// }
 // --------------------------------------
 // --------------------------------------
 // --------------------------------------
