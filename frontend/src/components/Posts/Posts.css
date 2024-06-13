@@ -2,8 +2,8 @@
   display: grid;
   /* flex-direction: column; */
   /* align-items: center; */
-  grid-template-columns: 30% 70%;
-  background: black;
+  grid-template-columns: 40% 58%;
+  background: rgb(240, 240, 240);
   color: white;
   width: 100%;
   min-height: 100vh;
@@ -18,17 +18,17 @@
 }
 
 .post-container {
-  width: 80%;
+  width: 100%;
   min-height: 200px;
   background: rgb(0, 0, 0);
   border-radius: 10px;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
+  background: rgb(22, 22, 22);
+  /* background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(33, 184, 169, 1) 100%
-  );
-  margin-top: 10px;
+  ); */
+  margin: 15px 2%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -46,6 +46,7 @@
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.205);
   height: 100px;
+  background: #181818;
 }
 
 .post-top-right {
@@ -95,7 +96,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #00000060;
+  background: #000000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.205);
   /* min-height: 100px; */
 }
@@ -104,7 +105,7 @@
   width: 100%;
   margin: 10px 0;
   padding: 10px;
-  background: #ffffff1c;
+  background: #ffffff00;
   font-size: 14px;
   font-weight: 300;
 }
@@ -123,7 +124,7 @@
 .post-bottom {
   display: flex;
   flex-direction: column;
-  background: #000000b0;
+  background: #181818;
 }
 
 .commentsAndLikesNumber {

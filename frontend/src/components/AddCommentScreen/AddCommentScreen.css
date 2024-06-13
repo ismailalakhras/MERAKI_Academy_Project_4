@@ -12,14 +12,14 @@
 }
 
 .addCommentScreen-container {
-  background: rgb(211, 223, 193);
+  background: rgba(211, 223, 193, 0.521);
   display: flex;
   flex-direction: column;
   width: 400px;
   height: 400px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(245, 222, 179, 0.199);
+  border: 1px solid rgba(255, 255, 255, 0.178);
 
 }
 
@@ -76,7 +76,7 @@
   background: #037938;
   border-radius: 5px;
   cursor: pointer;
-  border: 1px solid rgba(231, 231, 231, 0.432);
+  border: 1px solid rgba(231, 231, 231, 0.219);
 }
 
 .addCommentScreen-container-bottom .cancel-btn {

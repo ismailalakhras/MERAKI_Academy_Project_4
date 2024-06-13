@@ -86,6 +86,8 @@
   height: 60px;
   background: var(--background);
   z-index: 1000;
+  border-bottom: #ffffff3f solid 1px;
+  padding: 35px 0;
 }
 .header-left_side {
   position: relative;
@@ -150,12 +152,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-color);
+  background: #181818;
   color: var(--color);
   width: 40px;
   height: 40px;
   border-radius: 100%;
   font-size: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.137);
 }
 
 .header-right_side .notification div,

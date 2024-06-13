@@ -34,30 +34,14 @@ const Home = () => {
         localStorage.setItem("firstName", `${result.data.firstName} `);
 
         localStorage.setItem("profileImage", result.data.profileImage);
-        localStorage.setItem("profilePic", result.data.profileImage);
+        // localStorage.setItem("profilePic", result.data.profileImage);
       })
       .catch((err) => {
         console.log(err.response.data.message);
       });
   }, [toggle]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `http://localhost:5000/posts/search/${localStorage.getItem("userId")}`,
-  //       {
-  //         headers: {
-  //           authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     )
-  //     .then((result) => {
-  //       console.log(result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
+
 
   return (
     <div>

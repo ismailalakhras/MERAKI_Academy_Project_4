@@ -29,6 +29,7 @@ const Posts = () => {
       })
       .then((result) => {
         // console.log(result.data.posts);
+        console.log(result);
 
         setPosts(result.data.posts);
       })
@@ -36,6 +37,14 @@ const Posts = () => {
         console.log(err.response.data.message);
       });
   }, [toggle]);
+
+
+
+
+
+
+
+
 
   return (
     <div className="posts-page">
@@ -68,7 +77,22 @@ const Posts = () => {
                       <i className="fa-regular fa-pen-to-square"></i>
                     </div>
                     <div>
-                      <i className="fa-solid fa-trash"></i>
+                      <i
+                        onClick={() => {
+                          axios
+                            .delete(
+                              `http://localhost:5000/posts/delete/${post._id}`
+                            )
+                            .then((result) => {
+                              console.log("deleted");
+                              setToggle(!toggle)
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                            });
+                        }}
+                        className="fa-solid fa-trash"
+                      ></i>
                     </div>
                   </div>
                 )}

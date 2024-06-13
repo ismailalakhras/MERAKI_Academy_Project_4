@@ -46,6 +46,7 @@ const login = (req, res) => {
   userModel
     .findOne({ email })
     .then(async (result) => {
+
       if (!result) {
         return res.status(403).json({
           success: false,
@@ -53,7 +54,7 @@ const login = (req, res) => {
         });
       }
       try {
-        console.log(result);
+
         const valid = await bcrypt.compare(password, result.password);
         if (!valid) {
           return res.status(403).json({
@@ -65,7 +66,7 @@ const login = (req, res) => {
           userId: result._id,
           userName: result.firstName,
           country: result.country,
-          profilePic : result.profileImage
+          profilePic: result.profileImage
         };
 
         const options = {
