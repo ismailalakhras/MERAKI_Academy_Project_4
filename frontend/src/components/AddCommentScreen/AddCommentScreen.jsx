@@ -13,7 +13,7 @@ const AddCommentScreen = ({ setAddCommentScreen }) => {
       <div className="addCommentScreen-container">
         <div className="addCommentScreen-container-top">
           <div className="image">
-            <img src={localStorage.getItem("profileImage")}></img>
+            <img src={localStorage.getItem("profilePic")}></img>
           </div>
           <div className="userName">{localStorage.getItem("userName")}</div>
         </div>

@@ -13,7 +13,7 @@ const register = async (req, res) => {
     country,
     email,
     password,
-    profileImage,
+    profileImage :"https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
     following: []
   });
 

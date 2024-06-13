@@ -20,7 +20,6 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.178);
-
 }
 
 .addCommentScreen-container-top {
@@ -79,7 +78,15 @@
   border: 1px solid rgba(231, 231, 231, 0.219);
 }
 
+.addCommentScreen-container-bottom .AddComment-btn:hover {
+  background: #035327;
+}
+
+.addCommentScreen-container-bottom .cancel-btn:hover{
+  background: #800101;
+
+}
+
 .addCommentScreen-container-bottom .cancel-btn {
   background: #c20202;
-
 }

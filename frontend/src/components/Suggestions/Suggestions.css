@@ -8,12 +8,13 @@
   flex-direction: column;
   align-items: center;
   position: sticky;
-  top: 70px;
+  top: 80px;
   width: 100%;
   height: 50px;
   background: #000000;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 90px);
   border: 1px solid rgba(245, 222, 179, 0.13);
+  overflow-y: auto;
 }
 
 .suggestios-container h1 {
@@ -24,6 +25,7 @@
   width: 100%;
   height: 90px;
   border-bottom: #ffffff solid 1px;
+  color: #ffd700;
 }
 
 .suggestios-container-user {
@@ -60,13 +62,29 @@
   align-items: center;
   justify-content: center;
   background: rgb(0, 96, 175);
-  width: 70px;
+  width: 80px;
   height: 40px;
   cursor: pointer;
-  border-radius: 20px 0;
-  border: #03dbeb 1px solid;
+  border-radius: 10px 0;
+  font-size: 14px;
+  transition: 0.5s;
 }
 
+.suggestios-container-user .button:hover {
+  background: rgb(2, 72, 129);
+
+}
+
+.suggestios-container-user .button.unFollow {
+  background: rgb(192, 5, 5);
+
+  
+}
+.suggestios-container-user .button.unFollow:hover {
+  background: rgb(122, 3, 3);
+
+  
+}
 
 .myProfileInfo {
   margin-top: 15px;
@@ -76,25 +94,26 @@
   align-items: center;
 }
 
-
 .myProfileInfo .info {
-display: flex;
-flex-direction: column;
-justify-content: start;
-width: 90%;
-margin-top: 15px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 90%;
+  margin-top: 15px;
 }
-
 
 .myProfileInfo .info div {
+  /* color: #ffd700; */
 }
 
-
+.myProfileInfo .info div span {
+  color: #ffd700;
+  font-size: 14px;
+  margin-left: 5px;
+}
 
 .myProfileInfo img {
   width: 90%;
   max-height: 400px;
   background: #991818;
 }
-

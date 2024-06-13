@@ -14,40 +14,42 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-
-  const { token, setToken, toggle, setToggle,pageName, setPageName } = useContext(AppContext);
+  const { token, setToken, toggle, setToggle, pageName, setPageName } =
+    useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
 
     axios
-      .get("http://localhost:5000/posts/userId", {
+      .get("http://localhost:5000/users/userId ", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((result) => {
-        localStorage.setItem("userId", result.data._id);
+        console.log("from Home ", result.data);
+        setPageName("My Profile Info");
+        localStorage.setItem("userId", result.data.user._id);
         localStorage.setItem(
           "userName",
-          `${result.data.firstName} ${result.data.lastName}`
+          `${result.data.user.firstName} ${result.data.user.lastName}`
         );
-        localStorage.setItem("firstName", `${result.data.firstName} `);
+        localStorage.setItem("firstName", `${result.data.user.firstName} `);
 
-        localStorage.setItem("profileImage", result.data.profileImage);
-        localStorage.setItem("profilePic", result.data.profileImage);
+        // localStorage.setItem("profileImage", result.data.profileImage);
+        localStorage.setItem("profilePic", result.data.user.profileImage);
       })
       .catch((err) => {
         console.log(err.response.data.message);
       });
   }, [toggle]);
 
-
-
   return (
-    <div>
+    <div className="Home">
       {profilePicScreen && (
-        <UploadPic setProfilePicScreen={setProfilePicScreen} />
+        <>
+          <UploadPic setProfilePicScreen={setProfilePicScreen} />
+        </>
       )}
 
       {addPostScreen && <AddPostScreen setAddPostScreen={setAddPostScreen} />}
@@ -55,15 +57,15 @@ const Home = () => {
       <div className="header">
         <div className="header-left_side">
           <div className="logo">
-            <img src={require("../../pic/logo.png")} alt="" />
+            <img src={require("../../pic/logo2.png")} alt="" />
           </div>
         </div>
         <div className={`header-middle ${isActive}`}>
           <Link
-            to={"home"}
+           
             onClick={() => {
               setIsActive("home");
-              setPageName("My Profile Info")
+              setPageName("My Profile Info");
             }}
             className="link home"
           >
@@ -72,7 +74,7 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("followers");
-              setPageName("Followers")
+              setPageName("Followers");
             }}
             className="link followers"
           >
@@ -81,8 +83,7 @@ const Home = () => {
           <Link
             onClick={() => {
               setIsActive("following");
-              setPageName("Following")
-
+              setPageName("Following");
             }}
             className="link following"
           >
@@ -92,7 +93,8 @@ const Home = () => {
             onClick={() => {
               setIsActive("logout");
               setToken("");
-              localStorage.setItem("token", "");
+
+              localStorage.clear();
             }}
             className="link logout"
           >

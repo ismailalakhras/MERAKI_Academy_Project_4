@@ -58,7 +58,18 @@
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.5s;
 }
+
+
+.addPost_container-top .x:hover {
+
+  color: rgb(228, 186, 186);
+ 
+  background: #810202fd;
+
+}
+
 
 /* -------------------------------------- */
 /* -------------------------------------- */
@@ -95,11 +106,16 @@
   /* align-items: center; */
   /* justify-content: center; */
   max-height: 220px;
+  /* max-width: 250px; */
   background: #f7f7f7;
-  overflow-y: scroll;
+  overflow-y: auto;
   /* overflow-x: hidden; */
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.addPost_container-image img {
+  width: 100%;
 }
 
 .addPost_container-image .no-img {
@@ -124,11 +140,12 @@
 }
 
 .addPost_container-textArea textarea {
-  width: 90%;
+  width: 99%;
   height: 50px;
   resize: none;
   margin-bottom: 10px;
   padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.212);
 }
 /* -------------------------------------- */
 /* -------------------------------------- */
@@ -157,6 +174,14 @@
   background: rgb(0, 4, 255);
   color: #fffefe;
   cursor: pointer;
+  transition: 0.5s;
+
+}
+
+.addPost_container-button div:hover{
+ 
+  background: rgb(0, 2, 138);
+  color: #fffefe;
 }
 
 .addPost_container-button div.unClick {

@@ -29,7 +29,7 @@ const AddPostScreen = ({ setAddPostScreen }) => {
         </div>
         <div className="addPost_container-user">
           <div className="image">
-            <img src={localStorage.getItem("profileImage")} alt="" />
+            <img src={localStorage.getItem("profilePic")} alt="" />
           </div>
           <div className="userName">{localStorage.getItem("userName")}</div>
         </div>
@@ -76,7 +76,6 @@ const AddPostScreen = ({ setAddPostScreen }) => {
         <div className="addPost_container-button">
           <div
             onClick={(e) => {
-              console.log("xxxxxxxxxxxxx");
               const formData = new FormData();
               setLoader(true);
 

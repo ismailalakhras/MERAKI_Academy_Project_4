@@ -4,7 +4,7 @@ import { AppContext } from "../../App";
 
 const Suggestions = ({ followers, following, user }) => {
   const { pageName } = useContext(AppContext);
-
+  console.log("followers : ", followers);
   return (
     <div className="suggestios">
       <div className="suggestios-container">
@@ -13,18 +13,26 @@ const Suggestions = ({ followers, following, user }) => {
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
+
         {pageName === "Followers" &&
           followers?.map((ele, ind) => {
             return (
               <>
-                <div key={ind} className="suggestios-container-user">
+                <div key={ind} className="suggestios-container-user ">
                   <div className="left-side">
                     <img src={ele.profileImage} alt="" />
                     <div className="userName">
                       {ele.firstName} {ele.lastName}
                     </div>
                   </div>
-                  <div className="button">Follow</div>
+
+                  {following?.some((element) => {
+                    return element._id === ele._id;
+                  }) ? (
+                    <div className="button unFollow">unFollow</div>
+                  ) : (
+                    <div className="button">follow</div>
+                  )}
                 </div>
               </>
             );
@@ -35,17 +43,26 @@ const Suggestions = ({ followers, following, user }) => {
 
         {pageName === "Following" &&
           following?.map((ele, ind) => {
-            return (
-              <div key={ind} className="suggestios-container-user">
-                <div className="left-side">
-                  <img src={ele.profileImage} alt="" />
-                  <div className="userName">
-                    {ele.firstName} {ele.lastName}
+            if (ele._id !== user._id) {
+              return (
+                <div key={ind} className="suggestios-container-user ">
+                  <div className="left-side">
+                    <img src={ele.profileImage} alt="" />
+
+                    <div className="userName">
+                      {ele.firstName} {ele.lastName}
+                    </div>
                   </div>
+                  {followers?.some((element) => {
+                    return element._id === ele._id;
+                  }) ? (
+                    <div className="button unFollow">unFollow</div>
+                  ) : (
+                    <div className="button">follow</div>
+                  )}
                 </div>
-                <div className="button">Follow</div>
-              </div>
-            );
+              );
+            }
           })}
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
@@ -55,9 +72,15 @@ const Suggestions = ({ followers, following, user }) => {
           <div className="myProfileInfo">
             <img src={user.profileImage} alt="" />
             <div className="info">
-              <div>First Name : {user.firstName}</div>
-              <div>Last Name : {user.lastName}</div>
-              <div>age : {user.age}</div>
+              <div>
+                First Name :<span>{user.firstName}</span>{" "}
+              </div>
+              <div>
+                Last Name :<span>{user.lastName}</span>{" "}
+              </div>
+              <div>
+                age :<span>{user.age}</span>{" "}
+              </div>
             </div>
           </div>
         )}

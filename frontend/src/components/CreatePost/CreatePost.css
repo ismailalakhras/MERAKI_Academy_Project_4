@@ -3,9 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 100px;
-  background: rgb(0,0,0);
   /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(33,184,169,1) 100%); */
 
   background: #181818;

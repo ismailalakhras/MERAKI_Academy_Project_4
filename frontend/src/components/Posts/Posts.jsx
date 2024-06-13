@@ -59,7 +59,7 @@ const Posts = () => {
 
         setUser(result.data.user);
 
-        console.log(result.data.user);
+        // console.log(result.data.user);
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -70,7 +70,7 @@ const Posts = () => {
     <div className="posts-page">
       <Suggestions following={following} followers={followers} user={user} />
       <div className="posts">
-        {posts?.map((post, ind) => {
+        {posts?.reverse().map((post, ind) => {
           return (
             <div key={ind} className="post-container">
               {/* ---------------------------------------- */}
@@ -153,7 +153,7 @@ const Posts = () => {
                         )
                         .then((result) => {
                           setToggle(!toggle);
-                          console.log(result.data);
+                          // console.log(result.data);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
@@ -181,7 +181,7 @@ const Posts = () => {
                           }
                         )
                         .then((result) => {
-                          console.log(result.data);
+                          // console.log(result.data);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
