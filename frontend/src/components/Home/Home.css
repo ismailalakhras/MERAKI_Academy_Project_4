@@ -157,7 +157,7 @@
 
 .header-middle .link:hover {
   color: rgb(255, 255, 255);
-  background: #00000075;
+  background: #000000;
 }
 
 .header-middle.home .link:first-child {

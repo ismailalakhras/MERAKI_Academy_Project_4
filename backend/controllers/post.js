@@ -211,11 +211,16 @@ const getCommentsByPostId = (req, res) => {
 
   let id = req.params.post_id;
   postModel
-    .find({ _id: id })
-    .populate("comments")
+    .findOne({ _id: id })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'commenter'
+      },
+    })
     .exec()
-    .then((comments) => {
-      if (!comments) {
+    .then((post) => {
+      if (!post) {
         return res.status(404).json({
           success: false,
           message: `there is no comments`,
@@ -224,7 +229,8 @@ const getCommentsByPostId = (req, res) => {
       res.status(200).json({
         success: true,
         message: `All the comments for the post: ${id} `,
-        comments: comments,
+        post: post,
+
       });
     })
     .catch((err) => {

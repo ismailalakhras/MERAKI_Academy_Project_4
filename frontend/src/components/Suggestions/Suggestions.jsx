@@ -3,11 +3,40 @@ import "./Suggestions.css";
 import { AppContext } from "../../App";
 
 const Suggestions = ({ followers, following, user }) => {
-  const { pageName } = useContext(AppContext);
-  console.log("followers : ", followers);
+  const { pageName, showComments, setShowComments, comments, setComments } =
+    useContext(AppContext);
   return (
     <div className="suggestios">
       <div className="suggestios-container">
+        {/* ------------------------------------------- */}
+        {/* ------------------------------------------- */}
+        {/* ------------------------------------------- */}
+
+        <div className={showComments ? "showComments" : "showComments hidden"}>
+          <div onClick={() => setShowComments(false)} className="close-tap">
+            X
+          </div>
+          {comments?.map((ele, ind) => {
+            return (
+              <div key={ind} className="comment-container">
+                <div className="comment-container-top">
+                  <div className="image">
+                    <img src={ele.commenter.profileImage} alt="" />
+                  </div>
+                  <div className="userName">
+                    {ele.commenter.firstName} {ele.commenter.lastName}
+                  </div>
+                </div>
+
+
+                <div className="comment-container-bottom">
+
+                  <div className="comment-content">{ele.comment}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <h1>{pageName}</h1>
 
         {/* ------------------------------------------- */}
@@ -53,13 +82,7 @@ const Suggestions = ({ followers, following, user }) => {
                       {ele.firstName} {ele.lastName}
                     </div>
                   </div>
-                  {followers?.some((element) => {
-                    return element._id === ele._id;
-                  }) ? (
-                    <div className="button unFollow">unFollow</div>
-                  ) : (
-                    <div className="button">follow</div>
-                  )}
+                  <div className="button unFollow">unFollow</div>
                 </div>
               );
             }

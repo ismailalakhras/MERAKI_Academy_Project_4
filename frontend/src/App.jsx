@@ -17,6 +17,10 @@ const App = () => {
 
   const [pageName, setPageName] = useState("");
 
+  const [showComments, setShowComments] = useState(false);
+
+  const [comments, setComments] = useState([]);
+
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
   });
@@ -34,6 +38,10 @@ const App = () => {
         setToggle,
         pageName,
         setPageName,
+        showComments,
+        setShowComments,
+        comments,
+        setComments,
       }}
     >
       <div className="App">

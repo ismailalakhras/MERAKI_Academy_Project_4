@@ -15,7 +15,11 @@ const Posts = () => {
     profilePicScreen,
     setProfilePicScreen,
     pageName,
-    setPageName
+    setPageName,
+    showComments,
+    setShowComments,
+    comments,
+    setComments,
   } = useContext(AppContext);
 
   const [posts, setPosts] = useState(null);
@@ -28,6 +32,10 @@ const Posts = () => {
 
   const [user, setUser] = useState({});
 
+  // const [showComments, setShowComments] = useState(false);
+
+  // const [comments, setComments] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/posts", {
@@ -37,7 +45,7 @@ const Posts = () => {
       })
       .then((result) => {
         // console.log(result.data.posts);
-        setPageName("My Profile Info")
+        setPageName("My Profile Info");
         setPosts(result.data.posts);
       })
       .catch((err) => {
@@ -70,7 +78,7 @@ const Posts = () => {
     <div className="posts-page">
       <Suggestions following={following} followers={followers} user={user} />
       <div className="posts">
-        {posts?.reverse().map((post, ind) => {
+        {posts?.map((post, ind) => {
           return (
             <div key={ind} className="post-container">
               {/* ---------------------------------------- */}
@@ -120,6 +128,8 @@ const Posts = () => {
               {/* ---------------------------------------- */}
 
               <div className="post-body">
+               
+
                 <div className="post-content">{post.post}</div>
                 {post.image && (
                   <div className="post-image">
@@ -141,9 +151,7 @@ const Posts = () => {
                       //get comments by post id
                       axios
                         .get(
-                          `http://localhost:5000/posts/${localStorage.getItem(
-                            "postId"
-                          )}/comments`,
+                          `http://localhost:5000/posts/${post._id}/comments`,
 
                           {
                             headers: {
@@ -153,7 +161,10 @@ const Posts = () => {
                         )
                         .then((result) => {
                           setToggle(!toggle);
-                          // console.log(result.data);
+                          setShowComments(true);
+                          setComments(result.data.post.comments);
+
+                          console.log(result.data.post.comments);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);

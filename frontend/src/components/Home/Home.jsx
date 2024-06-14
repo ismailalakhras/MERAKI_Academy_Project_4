@@ -14,7 +14,7 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const { token, setToken, toggle, setToggle, pageName, setPageName } =
+  const { token, setToken, toggle, setToggle, pageName, setPageName,setShowComments } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ const Home = () => {
         },
       })
       .then((result) => {
-        console.log("from Home ", result.data);
         setPageName("My Profile Info");
         localStorage.setItem("userId", result.data.user._id);
         localStorage.setItem(
@@ -62,8 +61,8 @@ const Home = () => {
         </div>
         <div className={`header-middle ${isActive}`}>
           <Link
-           
             onClick={() => {
+              setShowComments(false)
               setIsActive("home");
               setPageName("My Profile Info");
             }}
@@ -73,6 +72,8 @@ const Home = () => {
           </Link>
           <Link
             onClick={() => {
+              setShowComments(false)
+
               setIsActive("followers");
               setPageName("Followers");
             }}
@@ -82,6 +83,8 @@ const Home = () => {
           </Link>
           <Link
             onClick={() => {
+              setShowComments(false)
+
               setIsActive("following");
               setPageName("Following");
             }}
@@ -126,9 +129,11 @@ const Home = () => {
       {/* --------------------------------- */}
       {/* --------------------------------- */}
 
-      <Routes>
+      {/* <Routes>
         <Route path="home" element={<Posts />} />
-      </Routes>
+      </Routes> */}
+
+      <Posts />
     </div>
   );
 };
