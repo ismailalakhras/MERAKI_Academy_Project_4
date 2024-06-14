@@ -35,14 +35,14 @@ const createNewPost = (req, res) => {
 
 const getFollowingPosts = (req, res) => {
   const userId = req.token.userId;
-  console.log(userId);
+  // console.log(userId);
 
   userModel
     .findById({ _id: userId }, "following  _id")
     .populate("following")
     .then((result) => {
       if (!result.following.length) {
-        console.log(result);
+        // console.log(result);
         return res.status(404).json({
           success: false,
           message: `The user : ${userId} has not followed anyone`,
@@ -52,7 +52,7 @@ const getFollowingPosts = (req, res) => {
       postModel.find({ user: result.following })
         .populate("user", "firstName lastName profileImage ")
         .then(posts => {
-          console.log(posts);
+          // console.log(posts);
           if (!posts.length) {
             return res.status(404).json({
               success: false,
@@ -278,6 +278,45 @@ const addLikeToPost = (req, res) => {
 }
 
 
+const deleteCommentById = (req, res) => {
+  const comment_id = req.params.comment_id;
+  const post_id = req.params.post_id;
+
+
+  // --------------------------------
+  // --------------------------------
+
+
+  postModel.findById({ _id: post_id })
+    .then(post => {
+      const index = post.comments.indexOf(comment_id);
+      if (index !== -1) {
+        post.comments.splice(index, 1);
+        post.save()
+          .then(() => {
+            res.status(200).json({
+              success: true,
+              message: `Comment deleted`,
+            });
+          })
+          .catch(err => {
+            res.status(500).json({
+              success: false,
+              message: `Error saving post after comment deletion`,
+              error: err.message,
+            });
+          });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: `The comment with id => ${comment_id} not found in the post`,
+        });
+      }
+    })
+
+
+}
+
 
 module.exports = {
   createNewPost,
@@ -288,5 +327,6 @@ module.exports = {
   createNewComment,
   addLikeToPost,
 
-  getCommentsByPostId
+  getCommentsByPostId,
+  deleteCommentById
 }

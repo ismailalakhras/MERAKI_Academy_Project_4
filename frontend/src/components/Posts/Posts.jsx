@@ -20,6 +20,8 @@ const Posts = () => {
     setShowComments,
     comments,
     setComments,
+    post,
+    setPost,
   } = useContext(AppContext);
 
   const [posts, setPosts] = useState(null);
@@ -128,8 +130,6 @@ const Posts = () => {
               {/* ---------------------------------------- */}
 
               <div className="post-body">
-               
-
                 <div className="post-content">{post.post}</div>
                 {post.image && (
                   <div className="post-image">
@@ -163,6 +163,7 @@ const Posts = () => {
                           setToggle(!toggle);
                           setShowComments(true);
                           setComments(result.data.post.comments);
+                          setPost(result.data.post);
 
                           console.log(result.data.post.comments);
                         })

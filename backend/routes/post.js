@@ -8,6 +8,7 @@ const { createNewPost,
     createNewComment,
     addLikeToPost,
     getCommentsByPostId,
+    deleteCommentById,
 
 } = require("../controllers/post")
 
@@ -36,6 +37,7 @@ postRouter.get("/:post_id/comments", authentication, getCommentsByPostId)
 postRouter.post("/:post_id/like", authentication, addLikeToPost)
 
 
+postRouter.delete("/delete/comment/:comment_id/:post_id", deleteCommentById)
 
 
 

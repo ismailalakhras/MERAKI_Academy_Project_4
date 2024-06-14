@@ -21,6 +21,9 @@ const App = () => {
 
   const [comments, setComments] = useState([]);
 
+  const [post, setPost] = useState(null);
+
+
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
   });
@@ -42,6 +45,8 @@ const App = () => {
         setShowComments,
         comments,
         setComments,
+        post,
+        setPost,
       }}
     >
       <div className="App">

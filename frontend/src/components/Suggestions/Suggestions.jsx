@@ -1,10 +1,20 @@
 import React, { useContext } from "react";
 import "./Suggestions.css";
 import { AppContext } from "../../App";
+import axios from "axios";
 
 const Suggestions = ({ followers, following, user }) => {
-  const { pageName, showComments, setShowComments, comments, setComments } =
-    useContext(AppContext);
+  const {
+    pageName,
+    showComments,
+    setShowComments,
+    comments,
+    setComments,
+    setToggle,
+    toggle,
+    post,
+    setPost,
+  } = useContext(AppContext);
   return (
     <div className="suggestios">
       <div className="suggestios-container">
@@ -20,6 +30,25 @@ const Suggestions = ({ followers, following, user }) => {
             return (
               <div key={ind} className="comment-container">
                 <div className="comment-container-top">
+                  {ele.commenter._id === localStorage.getItem("userId") && (
+                    <i
+                      onClick={() => {
+                        axios
+                          .delete(
+                            `http://localhost:5000/posts/delete/comment/${ele._id}/${post._id}`
+                          )
+                          .then((result) => {
+                            console.log("deleted");
+                            setToggle(!toggle);
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                      }}
+                      class="fa-solid fa-trash x"
+                    ></i>
+                  )}
+
                   <div className="image">
                     <img src={ele.commenter.profileImage} alt="" />
                   </div>
@@ -28,9 +57,7 @@ const Suggestions = ({ followers, following, user }) => {
                   </div>
                 </div>
 
-
                 <div className="comment-container-bottom">
-
                   <div className="comment-content">{ele.comment}</div>
                 </div>
               </div>
