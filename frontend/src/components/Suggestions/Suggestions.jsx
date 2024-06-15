@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Suggestions.css";
 import { AppContext } from "../../App";
 import axios from "axios";
@@ -14,7 +14,35 @@ const Suggestions = ({ followers, following, user }) => {
     toggle,
     post,
     setPost,
+    token,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log("xxxxxxxxxxx");
+
+    {
+      post &&
+        axios
+          .get(
+            `http://localhost:5000/posts/${post._id}/comments`,
+
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((result) => {
+            setComments(result.data.post.comments);
+
+            console.log(result.data.post.comments);
+          })
+          .catch((err) => {
+            console.log(err.response.data.message);
+          });
+    }
+  }, [toggle]);
+
   return (
     <div className="suggestios">
       <div className="suggestios-container">
