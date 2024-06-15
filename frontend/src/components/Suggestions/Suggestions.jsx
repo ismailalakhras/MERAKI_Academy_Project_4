@@ -18,8 +18,6 @@ const Suggestions = ({ followers, following, user }) => {
   } = useContext(AppContext);
 
   useEffect(() => {
-    console.log("xxxxxxxxxxx");
-
     {
       post &&
         axios
@@ -58,7 +56,12 @@ const Suggestions = ({ followers, following, user }) => {
             return (
               <div key={ind} className="comment-container">
                 <div className="comment-container-top">
-                  {ele.commenter._id === localStorage.getItem("userId") && (
+                  {/* ------------------------------------------------------ */}
+                  {/* ------------------------------------------------------ */}
+                  {/* ------------------------------------------------------ */}
+
+                  {(post.user === localStorage.getItem("userId") ||
+                    ele.commenter._id === localStorage.getItem("userId")) && (
                     <i
                       onClick={() => {
                         axios
@@ -76,6 +79,10 @@ const Suggestions = ({ followers, following, user }) => {
                       class="fa-solid fa-trash x"
                     ></i>
                   )}
+
+                  {/* ------------------------------------------------------ */}
+                  {/* ------------------------------------------------------ */}
+                  {/* ------------------------------------------------------ */}
 
                   <div className="image">
                     <img src={ele.commenter.profileImage} alt="" />
