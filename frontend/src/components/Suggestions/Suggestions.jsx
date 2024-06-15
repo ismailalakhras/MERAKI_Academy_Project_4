@@ -4,9 +4,17 @@ import { AppContext } from "../../App";
 import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 
-const Suggestions = ({ followers, following, user }) => {
+const Suggestions = ({
+  followers,
+  following,
+  user,
+  setFollowers,
+  setFollowing,
+  setUser,
+}) => {
   const {
     pageName,
+    setPageName,
     showComments,
     setShowComments,
     comments,
@@ -18,6 +26,8 @@ const Suggestions = ({ followers, following, user }) => {
     token,
     userId,
   } = useContext(AppContext);
+
+  const [togglee, setTogglee] = useState(false)
 
   useEffect(() => {
     {
@@ -42,6 +52,25 @@ const Suggestions = ({ followers, following, user }) => {
           });
     }
   }, [toggle]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users/userId`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        setFollowers(result.data.user.followers);
+
+        setFollowing(result.data.user.following);
+
+        setUser(result.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [togglee]);
 
   return (
     <div className="suggestios">
@@ -138,9 +167,8 @@ const Suggestions = ({ followers, following, user }) => {
                           )
                           .then((result) => {
                             // setComments(result.data.post.comments);
-
+                            setTogglee(!togglee);
                             console.log(result.data.user);
-
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -173,7 +201,27 @@ const Suggestions = ({ followers, following, user }) => {
                       {ele.firstName} {ele.lastName}
                     </div>
                   </div>
-                  <div className="button unFollow">unFollow</div>
+                  <div
+                    onClick={() => {
+                      axios
+                        .put(
+                          `http://localhost:5000/users/unFollow/${localStorage.getItem(
+                            "userId"
+                          )}/${ele._id}`
+                        )
+                        .then((result) => {
+                          // setComments(result.data.post.comments);
+                          setTogglee(!togglee);
+                          console.log(result.data.user);
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
+                    }}
+                    className="button unFollow"
+                  >
+                    unFollow
+                  </div>
                 </div>
               );
             }

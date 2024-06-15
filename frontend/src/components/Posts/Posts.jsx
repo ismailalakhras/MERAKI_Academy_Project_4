@@ -68,7 +68,6 @@ const Posts = () => {
         setFollowing(result.data.user.following);
 
         setUser(result.data.user);
-
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -77,7 +76,14 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      <Suggestions following={following} followers={followers} user={user} />
+      <Suggestions
+        following={following}
+        followers={followers}
+        user={user}
+        setFollowers={setFollowers}
+        setFollowing={setFollowing}
+        setUser={setUser}
+      />
       <div className="posts">
         {posts?.map((post, ind) => {
           return (
@@ -147,14 +153,17 @@ const Posts = () => {
 
                   <div
                     onClick={() => {
-
-
-
                       //get comments by post id
 
-              {/* ---------------------------------------- */}
-              {/* ---------------------------------------- */}
-              {/* ---------------------------------------- */}
+                      {
+                        /* ---------------------------------------- */
+                      }
+                      {
+                        /* ---------------------------------------- */
+                      }
+                      {
+                        /* ---------------------------------------- */
+                      }
 
                       axios
                         .get(
@@ -177,10 +186,15 @@ const Posts = () => {
                         .catch((err) => {
                           console.log(err.response.data.message);
                         });
-              {/* ---------------------------------------- */}
-              {/* ---------------------------------------- */}
-              {/* ---------------------------------------- */}
-
+                      {
+                        /* ---------------------------------------- */
+                      }
+                      {
+                        /* ---------------------------------------- */
+                      }
+                      {
+                        /* ---------------------------------------- */
+                      }
                     }}
                     className="comment"
                   >

@@ -161,11 +161,15 @@ const unFollow = (req, res) => {
   userModel
     .findById(userId)
     .then((user) => {
-      let index = user.followers.indexOf(unFollowId)
+      let indexOfFollowers = user.followers.indexOf(unFollowId)
+      let indexOfFollowing = user.followers.indexOf(unFollowId)
 
-      user.followers.splice(index, 1)
-
+      user.followers.splice(indexOfFollowers, 1)
+      user.following.splice(indexOfFollowing, 1)
       user.save()
+
+
+
       res.status(201).json({
         success: true,
         message: "removed user",
