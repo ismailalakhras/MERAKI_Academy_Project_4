@@ -16,6 +16,8 @@
   height: calc(100vh - 90px);
   border: 1px solid rgba(245, 222, 179, 0.13);
   overflow-y: auto;
+  border-radius: 10px;
+
 }
 
 /* -------------------------------------------- */
@@ -24,11 +26,11 @@
   position: relative;
   position: absolute;
   width: 100%;
-  height:100%;
+  height: 100%;
   background: #000000;
   bottom: 0;
   left: 0;
-padding: 50px 10px 10px 10px;
+  padding: 50px 10px 10px 10px;
   transition: 0.5s;
 }
 
@@ -37,7 +39,6 @@ padding: 50px 10px 10px 10px;
   opacity: 0;
   /* width: 0; */
   /* transform: translateX(100%); */
-
 }
 
 .close-tap {
@@ -46,7 +47,7 @@ padding: 50px 10px 10px 10px;
   justify-content: center;
   position: absolute;
   width: 30px;
-  height:30px;
+  height: 30px;
   top: 10px;
   right: 10px;
   background: #ff0000;
@@ -55,12 +56,13 @@ padding: 50px 10px 10px 10px;
   cursor: pointer;
 }
 
-
 .comment-container {
-background: #fcfcfc;
-color: #000000;
+  background: #fcfcfc;
+  color: #000000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
 }
-
 
 .comment-container-top {
   position: relative;
@@ -75,6 +77,14 @@ color: #000000;
   font-weight: 500;
 }
 
+.comment-container-top .userName {
+line-height: 1;
+
+}
+
+.comment-container-top .userName .times span {
+  color: #000000;
+}
 
 .fa-trash.x {
   position: absolute;
@@ -84,38 +94,26 @@ color: #000000;
   cursor: pointer;
 }
 
-.comment-container-top .image  {
+.comment-container-top .image {
   height: 100%;
- }
+  border-radius: 100%;
+overflow: hidden;
+}
 
 .comment-container-top .image img {
- height: 100%;
- border-radius: 100%;
+  height: 100%;
 }
 
 .comment-container-bottom {
   display: flex;
   align-items: center;
   padding: 5px;
-  border-bottom: #ffffff 1px solid;
-
+  background: #21c0125e;
+  font-size: 12px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.comment-container-bottom .comment-content {
+}
 
 /* ---------------------------------------------- */
 .suggestios-container h1 {
@@ -173,18 +171,13 @@ color: #000000;
 
 .suggestios-container-user .button:hover {
   background: rgb(2, 72, 129);
-
 }
 
 .suggestios-container-user .button.unFollow {
   background: rgb(192, 5, 5);
-
-  
 }
 .suggestios-container-user .button.unFollow:hover {
   background: rgb(122, 3, 3);
-
-  
 }
 
 .myProfileInfo {

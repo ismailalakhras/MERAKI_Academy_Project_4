@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Suggestions.css";
 import { AppContext } from "../../App";
 import axios from "axios";
+import PostTimestamp from "../PostTimestamp";
 
 const Suggestions = ({ followers, following, user }) => {
   const {
@@ -15,6 +16,7 @@ const Suggestions = ({ followers, following, user }) => {
     post,
     setPost,
     token,
+    userId,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const Suggestions = ({ followers, following, user }) => {
           .then((result) => {
             setComments(result.data.post.comments);
 
-            console.log(result.data.post.comments);
+            // console.log(result.data.post.comments);
           })
           .catch((err) => {
             console.log(err.response.data.message);
@@ -54,7 +56,7 @@ const Suggestions = ({ followers, following, user }) => {
           </div>
           {comments?.map((ele, ind) => {
             return (
-              <div key={ind} className="comment-container">
+              <div key={ele._id} className="comment-container">
                 <div className="comment-container-top">
                   {/* ------------------------------------------------------ */}
                   {/* ------------------------------------------------------ */}
@@ -88,7 +90,13 @@ const Suggestions = ({ followers, following, user }) => {
                     <img src={ele.commenter.profileImage} alt="" />
                   </div>
                   <div className="userName">
-                    {ele.commenter.firstName} {ele.commenter.lastName}
+                    <div>
+                      {ele.commenter.firstName} {ele.commenter.lastName}
+                    </div>
+
+                    <div className="times">
+                      <PostTimestamp timestamp={ele.createdAt} />
+                    </div>
                   </div>
                 </div>
 
@@ -120,7 +128,28 @@ const Suggestions = ({ followers, following, user }) => {
                   {following?.some((element) => {
                     return element._id === ele._id;
                   }) ? (
-                    <div className="button unFollow">unFollow</div>
+                    <div
+                      onClick={() => {
+                        axios
+                          .put(
+                            `http://localhost:5000/users/unFollow/${localStorage.getItem(
+                              "userId"
+                            )}/${ele._id}`
+                          )
+                          .then((result) => {
+                            // setComments(result.data.post.comments);
+
+                            console.log(result.data.user);
+
+                          })
+                          .catch((err) => {
+                            console.log(err.response.data.message);
+                          });
+                      }}
+                      className="button unFollow"
+                    >
+                      unFollow
+                    </div>
                   ) : (
                     <div className="button">follow</div>
                   )}

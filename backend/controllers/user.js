@@ -13,7 +13,7 @@ const register = async (req, res) => {
     country,
     email,
     password,
-    profileImage :"https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
+    profileImage: "https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
     following: []
   });
 
@@ -114,14 +114,72 @@ const getUserById = (req, res) => {
   userModel
     .findById({ _id: userId })
     .populate("followers following")
-    .then(result => {
+    .then(user => {
+      // console.log(user);
       res.status(200).json({
         success: true,
         message: "user",
-        user: result
+        user: user
       });
     })
     .catch(err => res.json(err))
+}
+
+
+const unFollow = (req, res) => {
+  const userId = req.params.userId
+
+  const unFollowId = req.params.unFollowId
+
+
+  // userModel
+  //   .findByIdAndUpdate(
+  //      userId , // User ID
+  //     { $pull: { followers: unFollowId } }, // Element to remove
+  //     { new: true }
+  //   )
+  //   .then((updatedUser) => { 
+  //     res.status(201).json({
+  //       success: true,
+  //       message: "removed user",
+  //       user: updatedUser
+  //     });
+  //   })
+  //   .catch(err => {
+  //     res.status(500).json({
+  //       success: false,
+  //       message: "Server error",
+  //       error: err.message
+  //     });
+  //   });
+
+
+
+
+
+
+  userModel
+    .findById(userId)
+    .then((user) => {
+      let index = user.followers.indexOf(unFollowId)
+
+      user.followers.splice(index, 1)
+
+      user.save()
+      res.status(201).json({
+        success: true,
+        message: "removed user",
+        user: user
+
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        error: err.message
+      });
+    });
 }
 
 
@@ -132,4 +190,5 @@ module.exports = {
   register,
   login,
   getUserById,
+  unFollow
 };

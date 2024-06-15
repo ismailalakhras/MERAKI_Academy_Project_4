@@ -69,7 +69,6 @@ const Posts = () => {
 
         setUser(result.data.user);
 
-        // console.log(result.data.user);
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -172,7 +171,7 @@ const Posts = () => {
                           setShowComments(true);
                           setComments(result.data.post.comments);
                           setPost(result.data.post);
-
+                          // setPageName(result.data.post)
                           console.log(result.data.post.comments);
                         })
                         .catch((err) => {
