@@ -14,8 +14,17 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const { token, setToken, toggle, setToggle, pageName, setPageName,setShowComments } =
-    useContext(AppContext);
+  const {
+    token,
+    setToken,
+    toggle,
+    setToggle,
+    pageName,
+    setPageName,
+    setShowComments,
+    isLoggedIn,
+    setIsLoggedIn,
+  } = useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -62,7 +71,7 @@ const Home = () => {
         <div className={`header-middle ${isActive}`}>
           <Link
             onClick={() => {
-              setShowComments(false)
+              setShowComments(false);
               setIsActive("home");
               setPageName("My Profile Info");
             }}
@@ -72,7 +81,7 @@ const Home = () => {
           </Link>
           <Link
             onClick={() => {
-              setShowComments(false)
+              setShowComments(false);
 
               setIsActive("followers");
               setPageName("Followers");
@@ -83,7 +92,7 @@ const Home = () => {
           </Link>
           <Link
             onClick={() => {
-              setShowComments(false)
+              setShowComments(false);
 
               setIsActive("following");
               setPageName("Following");
@@ -94,9 +103,20 @@ const Home = () => {
           </Link>
           <Link
             onClick={() => {
+              setShowComments(false);
+
+              setIsActive("suggestion");
+              setPageName("Suggestions");
+            }}
+            className="link suggestion"
+          >
+            Suggestions
+          </Link>
+          <Link
+            onClick={() => {
               setIsActive("logout");
               setToken("");
-
+              setIsLoggedIn(false)
               localStorage.clear();
             }}
             className="link logout"
@@ -133,7 +153,7 @@ const Home = () => {
         <Route path="home" element={<Posts />} />
       </Routes> */}
 
-      <Posts />
+      <Posts setProfilePicScreen={setProfilePicScreen}/>
     </div>
   );
 };

@@ -27,30 +27,28 @@ const Suggestions = ({
     userId,
   } = useContext(AppContext);
 
-  const [togglee, setTogglee] = useState(false)
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    {
-      post &&
-        axios
-          .get(
-            `http://localhost:5000/posts/${post._id}/comments`,
+    post &&
+      axios
+        .get(
+          `http://localhost:5000/posts/${post._id}/comments`,
 
-            {
-              headers: {
-                authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then((result) => {
-            setComments(result.data.post.comments);
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((result) => {
+          setComments(result.data.post.comments);
 
-            // console.log(result.data.post.comments);
-          })
-          .catch((err) => {
-            console.log(err.response.data.message);
-          });
-    }
+          // console.log(result.data.post.comments);
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
   }, [toggle]);
 
   useEffect(() => {
@@ -70,7 +68,19 @@ const Suggestions = ({
       .catch((err) => {
         console.log(err.response.data.message);
       });
-  }, [togglee]);
+  });
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users`)
+      .then((result) => {
+        console.log(result.data.users);
+        setUsers(result.data.users);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, []);
 
   return (
     <div className="suggestios">
@@ -161,13 +171,15 @@ const Suggestions = ({
                       onClick={() => {
                         axios
                           .put(
-                            `http://localhost:5000/users/unFollow/${localStorage.getItem(
-                              "userId"
-                            )}/${ele._id}`
+                            `http://localhost:5000/users/unFollow/${ele._id}`,
+                            {},
+                            {
+                              headers: {
+                                authorization: `Bearer ${token}`,
+                              },
+                            }
                           )
                           .then((result) => {
-                            // setComments(result.data.post.comments);
-                            setTogglee(!togglee);
                             console.log(result.data.user);
                           })
                           .catch((err) => {
@@ -179,7 +191,30 @@ const Suggestions = ({
                       unFollow
                     </div>
                   ) : (
-                    <div className="button">follow</div>
+                    <div
+                      onClick={() => {
+                        axios
+                          .put(
+                            `http://localhost:5000/users/follow/${ele._id}`,
+                            {},
+                            {
+                              headers: {
+                                authorization: `Bearer ${token}`,
+                              },
+                            }
+                          )
+
+                          .then((result) => {
+                            console.log(result.data.user);
+                          })
+                          .catch((err) => {
+                            console.log(err.response.data.message);
+                          });
+                      }}
+                      className="button"
+                    >
+                      Follow
+                    </div>
                   )}
                 </div>
               </>
@@ -205,13 +240,16 @@ const Suggestions = ({
                     onClick={() => {
                       axios
                         .put(
-                          `http://localhost:5000/users/unFollow/${localStorage.getItem(
-                            "userId"
-                          )}/${ele._id}`
+                          `http://localhost:5000/users/unFollow/${ele._id}`,
+                          {},
+                          {
+                            headers: {
+                              authorization: `Bearer ${token}`,
+                            },
+                          }
                         )
+
                         .then((result) => {
-                          // setComments(result.data.post.comments);
-                          setTogglee(!togglee);
                           console.log(result.data.user);
                         })
                         .catch((err) => {
@@ -226,6 +264,83 @@ const Suggestions = ({
               );
             }
           })}
+
+        {/* ------------------------------------------- */}
+        {/* ------------------------------------------- */}
+        {/* ------------------------------------------- */}
+
+        {pageName === "Suggestions" &&
+          users?.map((ele, ind) => {
+            if (ele._id !== user._id) {
+              return (
+                <>
+                  <div key={ind} className="suggestios-container-user ">
+                    <div className="left-side">
+                      <img src={ele.profileImage} alt="" />
+                      <div className="userName">
+                        {ele.firstName} {ele.lastName}
+                      </div>
+                    </div>
+
+                    {following?.some((element) => {
+                      return element._id === ele._id;
+                    }) ? (
+                      <div
+                        onClick={() => {
+                          axios
+                            .put(
+                              `http://localhost:5000/users/unFollow/${ele._id}`,
+                              {},
+                              {
+                                headers: {
+                                  authorization: `Bearer ${token}`,
+                                },
+                              }
+                            )
+                            //!xxxx followers
+                            .then((result) => {
+                              console.log(result.data.user);
+                            })
+                            .catch((err) => {
+                              console.log(err.response.data.message);
+                            });
+                        }}
+                        className="button unFollow"
+                      >
+                        unFollow
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          axios
+                            .put(
+                              `http://localhost:5000/users/follow/${ele._id}`,
+                              {},
+                              {
+                                headers: {
+                                  authorization: `Bearer ${token}`,
+                                },
+                              }
+                            )
+
+                            .then((result) => {
+                              console.log(result.data.user);
+                            })
+                            .catch((err) => {
+                              console.log(err.response.data.message);
+                            });
+                        }}
+                        className="button"
+                      >
+                        follow
+                      </div>
+                    )}
+                  </div>
+                </>
+              );
+            }
+          })}
+
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}

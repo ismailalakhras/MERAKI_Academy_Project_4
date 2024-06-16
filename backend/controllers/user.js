@@ -20,6 +20,7 @@ const register = async (req, res) => {
   user.save()
     .then((result) => {
       // Add the user's ID to the 'following' array
+
       userModel.findByIdAndUpdate(
         result._id,
         { $push: { following: result._id } },
@@ -126,56 +127,69 @@ const getUserById = (req, res) => {
 }
 
 
-const unFollow = (req, res) => {
-  const userId = req.params.userId
 
-  const unFollowId = req.params.unFollowId
+const unFollow = async (req, res) => {
+  try {
+    const userId = req.token.userId;
+    const unFollowId = req.params.unFollowId;
+
+    const user = await userModel.findById(userId);
+    const result = await userModel.findById(unFollowId);
+
+    const indexOfFollowing = user.following.indexOf(unFollowId);
+    const indexOfFollowers = result.followers.indexOf(userId);
+
+    if (indexOfFollowing !== -1) {
+      user.following.splice(indexOfFollowing, 1);
+      await user.save();
+    }
+
+    if (indexOfFollowers !== -1) {
+      result.followers.splice(indexOfFollowers, 1);
+      await result.save();
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "User removed",
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
 
 
-  // userModel
-  //   .findByIdAndUpdate(
-  //      userId , // User ID
-  //     { $pull: { followers: unFollowId } }, // Element to remove
-  //     { new: true }
-  //   )
-  //   .then((updatedUser) => { 
-  //     res.status(201).json({
-  //       success: true,
-  //       message: "removed user",
-  //       user: updatedUser
-  //     });
-  //   })
-  //   .catch(err => {
-  //     res.status(500).json({
-  //       success: false,
-  //       message: "Server error",
-  //       error: err.message
-  //     });
-  //   });
+const follow = (req, res) => {
+  const userId = req.token.userId
 
-
-
-
-
+  const followId = req.params.followId
 
   userModel
     .findById(userId)
     .then((user) => {
-      let indexOfFollowers = user.followers.indexOf(unFollowId)
-      let indexOfFollowing = user.followers.indexOf(unFollowId)
 
-      user.followers.splice(indexOfFollowers, 1)
-      user.following.splice(indexOfFollowing, 1)
+      user.following.push(followId)
       user.save()
 
+      userModel
+        .findById(followId)
+        .then(result => {
 
+          result.followers.push(userId)
+          result.save()
 
-      res.status(201).json({
-        success: true,
-        message: "removed user",
-        user: user
+          res.status(201).json({
+            success: true,
+            message: "followed",
+            user: user
 
-      });
+          })
+        })
     })
     .catch(err => {
       res.status(500).json({
@@ -189,10 +203,33 @@ const unFollow = (req, res) => {
 
 
 
+const getAllUsers = (req, res) => {
+  userModel
+    .find()
+    .then(users => {
+      console.log("users");
+      res.status(200).json({
+        success: true,
+        message: "Users retrieved successfully",
+        users: users
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        success: false,
+        message: "Failed to retrieve users"
+      });
+    });
+};
+
+
 
 module.exports = {
   register,
   login,
   getUserById,
-  unFollow
+  unFollow,
+  follow,
+  getAllUsers
 };

@@ -13,11 +13,10 @@
   width: 100%;
   height: 50px;
   background: #000000;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 115px);
   border: 1px solid rgba(245, 222, 179, 0.13);
   overflow-y: auto;
   border-radius: 10px;
-
 }
 
 /* -------------------------------------------- */
@@ -78,8 +77,7 @@
 }
 
 .comment-container-top .userName {
-line-height: 1;
-
+  line-height: 1;
 }
 
 .comment-container-top .userName .times span {
@@ -97,7 +95,7 @@ line-height: 1;
 .comment-container-top .image {
   height: 100%;
   border-radius: 100%;
-overflow: hidden;
+  overflow: hidden;
 }
 
 .comment-container-top .image img {
@@ -134,13 +132,14 @@ overflow: hidden;
   padding: 15px;
   margin-top: 10px;
   background: #ffffff;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
 }
 
 .suggestios-container-user .left-side {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .suggestios-container-user .left-side img {
@@ -154,6 +153,7 @@ overflow: hidden;
   color: #000000;
   font-weight: 500;
   cursor: default;
+  font-size: 13px;
 }
 
 .suggestios-container-user .button {
@@ -165,7 +165,7 @@ overflow: hidden;
   height: 40px;
   cursor: pointer;
   border-radius: 10px 0;
-  font-size: 14px;
+  font-size: 12px;
   transition: 0.5s;
 }
 
@@ -210,4 +210,35 @@ overflow: hidden;
   width: 90%;
   max-height: 400px;
   background: #991818;
+}
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .suggestios-container-user .left-side .userName {
+    font-size: 11px;
+  }
+
+  .suggestios-container-user  .button {
+    font-size: 10px;
+  }
+  .suggestios-container h1 {
+    font-size: 22px;
+  }
+
+  .comment-container-top .userName {
+    line-height: 1;
+    font-size: 12px;
+  }
+  
+}
+
+
+@media (max-width: 850px) {
+  
+  .suggestios.rightSide {
+    display: none;
+  }
 }

@@ -12,7 +12,8 @@ const createNewPost = (req, res) => {
   const newPost = new postModel({
     post,
     image,
-    user,
+    user
+    
   });
 
   newPost

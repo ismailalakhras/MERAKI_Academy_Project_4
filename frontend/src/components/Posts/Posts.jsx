@@ -5,6 +5,7 @@ import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 import Suggestions from "../Suggestions/Suggestions";
 import AddCommentScreen from "../AddCommentScreen/AddCommentScreen";
+import RightSide from "../../RightSide/RightSide";
 
 const Posts = () => {
   const {
@@ -12,8 +13,7 @@ const Posts = () => {
     setToken,
     toggle,
     setToggle,
-    profilePicScreen,
-    setProfilePicScreen,
+   
     pageName,
     setPageName,
     showComments,
@@ -84,6 +84,7 @@ const Posts = () => {
         setFollowing={setFollowing}
         setUser={setUser}
       />
+
       <div className="posts">
         {posts?.map((post, ind) => {
           return (
@@ -257,6 +258,14 @@ const Posts = () => {
         })}
       </div>
 
+      <RightSide
+        following={following}
+        followers={followers}
+        user={user}
+        setFollowers={setFollowers}
+        setFollowing={setFollowing}
+        setUser={setUser}
+      />
       {addCommentScreen && (
         <AddCommentScreen
           addCommentScreen={addCommentScreen}

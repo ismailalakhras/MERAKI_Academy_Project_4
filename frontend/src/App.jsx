@@ -26,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
-  });
+  },[]);
 
   return (
     <AppContext.Provider
