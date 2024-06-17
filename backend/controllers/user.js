@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { firstName, lastName, age, country, email, password } = req.body;
-  const profileImage = "https://images.app.goo.gl/VzLmVTfuoVnxUi6d8";
 
   const user = new userModel({
     firstName,

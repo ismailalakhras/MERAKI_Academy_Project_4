@@ -140,9 +140,16 @@
   gap: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.205);
   padding: 10px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 300;
+}
+
+.commentsAndLikesNumber div {
   cursor: pointer;
+}
+
+.commentsAndLikesNumber div:hover {
+  color: aqua;
 }
 
 .commentsAndLikesButton {
@@ -157,21 +164,29 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  width: 100px;
+  width: 75px;
   height: 50px;
   transition: 0.5s;
+margin-right: 5px;
+}
+
+
+.commentsAndLikesButton .comment {
+ width: 100px;
 }
 
 .commentsAndLikesButton .like div,
 .commentsAndLikesButton .comment div {
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 11px;
+  font-weight: 400;
 }
 
 .commentsAndLikesButton .like:hover,
 .commentsAndLikesButton .comment:hover {
-  background: #000;
-  width: 100px;
+  /* background: #000; */
+
+  background: rgb(35, 51, 51);
+  
   height: 50px;
 }
 

@@ -244,7 +244,32 @@ const Posts = () => {
                     onClick={() => {
                       setAddCommentScreen(true);
 
+                      setShowComments(true)
+
                       localStorage.setItem("postId", post._id);
+
+
+                      axios
+                      .get(
+                        `http://localhost:5000/posts/${post._id}/comments`,
+
+                        {
+                          headers: {
+                            authorization: `Bearer ${token}`,
+                          },
+                        }
+                      )
+                      .then((result) => {
+                        setToggle(!toggle);
+                        setShowComments(true);
+                        setComments(result.data.post.comments);
+                        setPost(result.data.post);
+                        // setPageName(result.data.post)
+                        console.log(result.data.post.comments);
+                      })
+                      .catch((err) => {
+                        console.log(err.response.data.message);
+                      });
                     }}
                     className="comment"
                   >
