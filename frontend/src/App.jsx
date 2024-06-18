@@ -20,6 +20,7 @@ const App = () => {
   const [post, setPost] = useState(null);
 
   const [users, setUsers] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     axios
@@ -56,6 +57,8 @@ const App = () => {
         setPost,
         users,
         setUsers,
+        toggle,
+        setToggle,
       }}
     >
       <div className="App">

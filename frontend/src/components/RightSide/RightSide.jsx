@@ -2,16 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../../App";
 
-const RightSide = ({
-  following,
-  user,
-  toggle,
-  setToggle,
-  setFollowers,
-  setFollowing,
-  setUser,
-}) => {
-  const { token, users } = useContext(AppContext);
+const RightSide = ({ following, user }) => {
+  const { token, users, toggle, setToggle } = useContext(AppContext);
 
   return (
     <div className="suggestios rightSide">

@@ -4,7 +4,7 @@ import { AppContext } from "../../App";
 import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 
-const Suggestions = ({ followers, following, user, setToggle, toggle }) => {
+const Suggestions = ({ followers, following, user }) => {
   const {
     pageName,
     showComments,
@@ -14,6 +14,8 @@ const Suggestions = ({ followers, following, user, setToggle, toggle }) => {
     post,
     token,
     users,
+    setToggle,
+    toggle,
   } = useContext(AppContext);
 
   useEffect(() => {

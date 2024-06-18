@@ -10,7 +10,8 @@ import RightSide from "../RightSide/RightSide";
 const Posts = () => {
   const {
     token,
-
+    setToggle,
+    toggle,
     setPageName,
     setShowComments,
     setComments,
@@ -26,8 +27,6 @@ const Posts = () => {
   const [following, setFollowing] = useState([]);
 
   const [user, setUser] = useState({});
-
-  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     axios
@@ -96,13 +95,7 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      <Suggestions
-        following={following}
-        followers={followers}
-        user={user}
-        toggle={toggle}
-        setToggle={setToggle}
-      />
+      <Suggestions following={following} followers={followers} user={user} />
 
       <div className="posts">
         {posts?.map((post, ind) => {
@@ -231,8 +224,27 @@ const Posts = () => {
                   <div
                     onClick={() => {
                       setAddCommentScreen(true);
-                      setShowComments(true);
+                      // setShowComments(true);
                       localStorage.setItem("postId", post._id);
+                      axios
+                        .get(
+                          `http://localhost:5000/posts/${post._id}/comments`,
+
+                          {
+                            headers: {
+                              authorization: `Bearer ${token}`,
+                            },
+                          }
+                        )
+                        .then((result) => {
+                          setToggle(!toggle);
+                          setShowComments(true);
+                          setComments(result.data.post.comments);
+                          setPost(result.data.post);
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
                     }}
                     className="comment"
                   >
@@ -246,16 +258,7 @@ const Posts = () => {
         })}
       </div>
 
-      <RightSide
-        following={following}
-        setFollowing={setFollowing}
-        user={user}
-        setUser={setUser}
-        toggle={toggle}
-        setToggle={setToggle}
-        followers={followers}
-        setFollowers={setFollowers}
-      />
+      <RightSide following={following} user={user} />
       {addCommentScreen && (
         <AddCommentScreen
           addCommentScreen={addCommentScreen}

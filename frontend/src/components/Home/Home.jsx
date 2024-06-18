@@ -14,17 +14,8 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const {
-    token,
-    setToken,
-    toggle,
-    setToggle,
-    pageName,
-    setPageName,
-    setShowComments,
-    isLoggedIn,
-    setIsLoggedIn,
-  } = useContext(AppContext);
+  const { setToken, toggle, setPageName, setShowComments, setIsLoggedIn } =
+    useContext(AppContext);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -116,7 +107,7 @@ const Home = () => {
             onClick={() => {
               setIsActive("logout");
               setToken("");
-              setIsLoggedIn(false)
+              setIsLoggedIn(false);
               localStorage.clear();
             }}
             className="link logout"
@@ -149,11 +140,7 @@ const Home = () => {
       {/* --------------------------------- */}
       {/* --------------------------------- */}
 
-      {/* <Routes>
-        <Route path="home" element={<Posts />} />
-      </Routes> */}
-
-      <Posts setProfilePicScreen={setProfilePicScreen}/>
+      <Posts setProfilePicScreen={setProfilePicScreen} />
     </div>
   );
 };

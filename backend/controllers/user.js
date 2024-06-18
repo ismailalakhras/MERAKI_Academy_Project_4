@@ -125,8 +125,6 @@ const getUserById = (req, res) => {
     .catch(err => res.json(err))
 }
 
-
-
 const unFollow = async (req, res) => {
   try {
     const userId = req.token.userId;
@@ -161,8 +159,6 @@ const unFollow = async (req, res) => {
     });
   }
 };
-
-
 
 
 const follow = async (req, res) => {

@@ -5,6 +5,8 @@ import "./addPostScreen.css";
 import makeToast from "../sweetalert2/Toaster";
 
 const AddPostScreen = ({ setAddPostScreen }) => {
+  const { token, toggle, setToggle } = useContext(AppContext);
+
   const inputRef = useRef(null);
 
   const [file, setFile] = useState("");
@@ -12,15 +14,6 @@ const AddPostScreen = ({ setAddPostScreen }) => {
   const [postContent, setPostContent] = useState("");
 
   const [loader, setLoader] = useState(false);
-  const [scroll, setScroll] = useState(false);
-  const { token, toggle, setToggle } = useContext(AppContext);
-
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: document.documentElement.scrollHeight,
-  //     behavior: "smooth",
-  //   });
-  // }, [scroll]);
 
   return (
     <div className="screenPage">
@@ -78,8 +71,6 @@ const AddPostScreen = ({ setAddPostScreen }) => {
               setImage(e.target.files[0]);
             }}
           />
-
-          {/* <img src={require("../../pic/logo.png")} alt="" /> */}
         </div>
 
         <div className="addPost_container-button">
@@ -108,7 +99,7 @@ const AddPostScreen = ({ setAddPostScreen }) => {
                       behavior: "smooth",
                     });
                   }, 1000);
-                  makeToast("success", result.data.message)
+                  makeToast("success", result.data.message);
                   console.log(result.data.post);
                   setToggle(!toggle);
                   setAddPostScreen(false);
