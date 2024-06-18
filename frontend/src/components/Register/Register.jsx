@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import "./Register.css";
 import axios from "axios";
+import makeToast from "../sweetalert2/Toaster";
 
 const Register = () => {
   const { setToken, setIsLoggedIn, loginError, setLoginError } =
@@ -138,9 +139,11 @@ const Register = () => {
                     setIsLoggedIn(true);
 
                     localStorage.setItem("token", result.data.token);
+                    makeToast("success", result.data.message)
                   })
                   .catch((err) => {
                     setLoginError(err.response.data.message);
+                    makeToast("error", err.response.data.message)
                   });
               }}
             >

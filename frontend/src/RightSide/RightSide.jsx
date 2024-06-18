@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 // import "../../src/Suggestions/Suggestions.css";
 import axios from "axios";
 import { AppContext } from "../App";
@@ -12,31 +12,12 @@ const RightSide = ({
   setFollowing,
   setUser,
 }) => {
-  const { setComments, toggle, post, token } = useContext(AppContext);
+  const { setComments, toggle, setToggle, post, token } =
+    useContext(AppContext);
 
   const [users, setUsers] = useState([]);
 
-  //   useEffect(() => {
-  //     post &&
-  //       axios
-  //         .get(
-  //           `http://localhost:5000/posts/${post._id}/comments`,
-
-  //           {
-  //             headers: {
-  //               authorization: `Bearer ${token}`,
-  //             },
-  //           }
-  //         )
-  //         .then((result) => {
-  //           setComments(result.data.post.comments);
-
-  //           // console.log(result.data.post.comments);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err.response.data.message);
-  //         });
-  //   }, [toggle]);
+  
 
   useEffect(() => {
     axios
@@ -55,7 +36,7 @@ const RightSide = ({
       .catch((err) => {
         console.log(err.response.data.message);
       });
-  }, []);
+  }, [toggle, followers, following]);
 
   useEffect(() => {
     axios
@@ -68,6 +49,9 @@ const RightSide = ({
         console.log(err.response.data.message);
       });
   }, []);
+
+
+
 
   return (
     <div className="suggestios rightSide">
@@ -101,7 +85,7 @@ const RightSide = ({
                             }
                           )
                           .then((result) => {
-                            console.log(result.data.user);
+                            // console.log(result.data.user);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -126,7 +110,7 @@ const RightSide = ({
                           )
 
                           .then((result) => {
-                            console.log(result.data.user);
+                            // console.log(result.data.user);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);

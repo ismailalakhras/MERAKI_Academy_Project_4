@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../../App";
 import "./addPostScreen.css";
+import makeToast from "../sweetalert2/Toaster";
 
 const AddPostScreen = ({ setAddPostScreen }) => {
   const inputRef = useRef(null);
@@ -11,8 +12,16 @@ const AddPostScreen = ({ setAddPostScreen }) => {
   const [postContent, setPostContent] = useState("");
 
   const [loader, setLoader] = useState(false);
-
+  const [scroll, setScroll] = useState(false);
   const { token, toggle, setToggle } = useContext(AppContext);
+
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: document.documentElement.scrollHeight,
+  //     behavior: "smooth",
+  //   });
+  // }, [scroll]);
+
   return (
     <div className="screenPage">
       <div className="addPost_container">
@@ -93,12 +102,14 @@ const AddPostScreen = ({ setAddPostScreen }) => {
                   }
                 )
                 .then((result) => {
-                  window.scrollTo({
-                    top: document.documentElement.scrollHeight,
-                    behavior: "smooth",
-                  });
+                  setTimeout(() => {
+                    window.scrollTo({
+                      top: document.documentElement.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }, 1000);
+                  makeToast("success", result.data.message)
                   console.log(result.data.post);
-
                   setToggle(!toggle);
                   setAddPostScreen(false);
                   setLoader(false);

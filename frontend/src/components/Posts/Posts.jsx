@@ -13,7 +13,7 @@ const Posts = () => {
     setToken,
     toggle,
     setToggle,
-   
+
     pageName,
     setPageName,
     showComments,
@@ -74,6 +74,36 @@ const Posts = () => {
       });
   }, [toggle]);
 
+  // -------------------------------------------
+  // -------------------------------------------
+  // -------------------------------------------
+
+  const [postToDelete, setPostToDelete] = useState(null);
+
+  useEffect(() => {
+    if (postToDelete) {
+      const timer = setTimeout(() => {
+        axios
+          .delete(`http://localhost:5000/posts/delete/${postToDelete}`)
+          .then((result) => {
+            console.log("deleted");
+            setToggle(!toggle);
+            setPostToDelete(null);
+          })
+          .catch((err) => {
+            console.log(err);
+            setPostToDelete(null);
+          });
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [postToDelete, toggle]);
+
+  // -------------------------------------------
+  // -------------------------------------------
+  // -------------------------------------------
+
   return (
     <div className="posts-page">
       <Suggestions
@@ -90,7 +120,11 @@ const Posts = () => {
           return (
             <div key={ind} className="post-container">
               {/* ---------------------------------------- */}
-
+              <div
+                className={`changeColor ${
+                  postToDelete === post._id ? "deleting" : ""
+                }`}
+              ></div>
               <div className="post-top">
                 <div className="post-top-left">
                   <div className="image">
@@ -115,17 +149,7 @@ const Posts = () => {
                     <div>
                       <i
                         onClick={() => {
-                          axios
-                            .delete(
-                              `http://localhost:5000/posts/delete/${post._id}`
-                            )
-                            .then((result) => {
-                              console.log("deleted");
-                              setToggle(!toggle);
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                            });
+                          setPostToDelete(post._id);
                         }}
                         className="fa-solid fa-trash"
                       ></i>
@@ -244,32 +268,31 @@ const Posts = () => {
                     onClick={() => {
                       setAddCommentScreen(true);
 
-                      setShowComments(true)
+                      setShowComments(true);
 
                       localStorage.setItem("postId", post._id);
 
-
                       axios
-                      .get(
-                        `http://localhost:5000/posts/${post._id}/comments`,
+                        .get(
+                          `http://localhost:5000/posts/${post._id}/comments`,
 
-                        {
-                          headers: {
-                            authorization: `Bearer ${token}`,
-                          },
-                        }
-                      )
-                      .then((result) => {
-                        setToggle(!toggle);
-                        setShowComments(true);
-                        setComments(result.data.post.comments);
-                        setPost(result.data.post);
-                        // setPageName(result.data.post)
-                        console.log(result.data.post.comments);
-                      })
-                      .catch((err) => {
-                        console.log(err.response.data.message);
-                      });
+                          {
+                            headers: {
+                              authorization: `Bearer ${token}`,
+                            },
+                          }
+                        )
+                        .then((result) => {
+                          setToggle(!toggle);
+                          setShowComments(true);
+                          setComments(result.data.post.comments);
+                          setPost(result.data.post);
+                          // setPageName(result.data.post)
+                          console.log(result.data.post.comments);
+                        })
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
                     }}
                     className="comment"
                   >
@@ -285,10 +308,10 @@ const Posts = () => {
 
       <RightSide
         following={following}
-        followers={followers}
-        user={user}
-        setFollowers={setFollowers}
         setFollowing={setFollowing}
+        followers={followers}
+        setFollowers={setFollowers}
+        user={user}
         setUser={setUser}
       />
       {addCommentScreen && (

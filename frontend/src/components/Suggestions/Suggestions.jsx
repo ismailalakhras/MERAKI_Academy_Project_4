@@ -68,7 +68,7 @@ const Suggestions = ({
       .catch((err) => {
         console.log(err.response.data.message);
       });
-  });
+  },[]);
 
   useEffect(() => {
     axios
