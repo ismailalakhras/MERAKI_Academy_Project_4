@@ -163,43 +163,45 @@ const unFollow = async (req, res) => {
 };
 
 
-const follow = (req, res) => {
-  const userId = req.token.userId
 
-  const followId = req.params.followId
 
-  userModel
-    .findById(userId)
-    .then((user) => {
+const follow = async (req, res) => {
+  try {
+    const userId = req.token.userId;
+    const followId = req.params.followId;
 
-      user.following.push(followId)
-      user.save()
-
-      userModel
-        .findById(followId)
-        .then(result => {
-
-          result.followers.push(userId)
-          result.save()
-
-          res.status(201).json({
-            success: true,
-            message: "followed",
-            user: user
-
-          })
-        })
-    })
-    .catch(err => {
-      res.status(500).json({
-        success: false,
-        message: "Server error",
-        error: err.message
-      });
+    const user = await userModel.findOne({
+      _id: userId,
+      following: { $ne: followId } // التحقق من عدم وجود followId في الـ following
     });
-}
 
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User already follows the specified user"
+      });
+    }
 
+    user.following.push(followId);
+    await user.save();
+
+    const result = await userModel.findById(followId);
+    result.followers.push(userId);
+    await result.save();
+
+    res.status(201).json({
+      success: true,
+      message: "followed",
+      user: user
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message
+    });
+  }
+};
 
 
 const getAllUsers = (req, res) => {

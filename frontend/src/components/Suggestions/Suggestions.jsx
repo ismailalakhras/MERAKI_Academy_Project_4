@@ -4,30 +4,17 @@ import { AppContext } from "../../App";
 import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 
-const Suggestions = ({
-  followers,
-  following,
-  user,
-  setFollowers,
-  setFollowing,
-  setUser,
-}) => {
+const Suggestions = ({ followers, following, user, setToggle, toggle }) => {
   const {
     pageName,
-    setPageName,
     showComments,
     setShowComments,
     comments,
     setComments,
-    setToggle,
-    toggle,
     post,
-    setPost,
     token,
-    userId,
+    users,
   } = useContext(AppContext);
-
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     post &&
@@ -43,44 +30,11 @@ const Suggestions = ({
         )
         .then((result) => {
           setComments(result.data.post.comments);
-
-          // console.log(result.data.post.comments);
         })
         .catch((err) => {
           console.log(err.response.data.message);
         });
   }, [toggle]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users/userId`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((result) => {
-        setFollowers(result.data.user.followers);
-
-        setFollowing(result.data.user.following);
-
-        setUser(result.data.user);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-  },[]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users`)
-      .then((result) => {
-        console.log(result.data.users);
-        setUsers(result.data.users);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-  }, []);
 
   return (
     <div className="suggestios">
@@ -120,11 +74,9 @@ const Suggestions = ({
                       class="fa-solid fa-trash x"
                     ></i>
                   )}
-
                   {/* ------------------------------------------------------ */}
                   {/* ------------------------------------------------------ */}
                   {/* ------------------------------------------------------ */}
-
                   <div className="image">
                     <img src={ele.commenter.profileImage} alt="" />
                   </div>
@@ -180,7 +132,7 @@ const Suggestions = ({
                             }
                           )
                           .then((result) => {
-                            console.log(result.data.user);
+                            setToggle(!toggle);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -205,7 +157,7 @@ const Suggestions = ({
                           )
 
                           .then((result) => {
-                            console.log(result.data.user);
+                            setToggle(!toggle);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -250,7 +202,7 @@ const Suggestions = ({
                         )
 
                         .then((result) => {
-                          console.log(result.data.user);
+                          setToggle(!toggle);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
@@ -297,10 +249,8 @@ const Suggestions = ({
                                 },
                               }
                             )
-                            //!xxxx followers
-                            .then((result) => {
-                              console.log(result.data.user);
-                            })
+
+                            .then((result) => {})
                             .catch((err) => {
                               console.log(err.response.data.message);
                             });
@@ -323,9 +273,7 @@ const Suggestions = ({
                               }
                             )
 
-                            .then((result) => {
-                              console.log(result.data.user);
-                            })
+                            .then((result) => {})
                             .catch((err) => {
                               console.log(err.response.data.message);
                             });

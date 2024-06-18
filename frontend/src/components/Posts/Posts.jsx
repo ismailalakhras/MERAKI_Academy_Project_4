@@ -5,22 +5,15 @@ import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 import Suggestions from "../Suggestions/Suggestions";
 import AddCommentScreen from "../AddCommentScreen/AddCommentScreen";
-import RightSide from "../../RightSide/RightSide";
+import RightSide from "../RightSide/RightSide";
 
 const Posts = () => {
   const {
     token,
-    setToken,
-    toggle,
-    setToggle,
 
-    pageName,
     setPageName,
-    showComments,
     setShowComments,
-    comments,
     setComments,
-    post,
     setPost,
   } = useContext(AppContext);
 
@@ -34,9 +27,7 @@ const Posts = () => {
 
   const [user, setUser] = useState({});
 
-  // const [showComments, setShowComments] = useState(false);
-
-  // const [comments, setComments] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     axios
@@ -46,7 +37,6 @@ const Posts = () => {
         },
       })
       .then((result) => {
-        // console.log(result.data.posts);
         setPageName("My Profile Info");
         setPosts(result.data.posts);
       })
@@ -110,9 +100,8 @@ const Posts = () => {
         following={following}
         followers={followers}
         user={user}
-        setFollowers={setFollowers}
-        setFollowing={setFollowing}
-        setUser={setUser}
+        toggle={toggle}
+        setToggle={setToggle}
       />
 
       <div className="posts">
@@ -178,18 +167,6 @@ const Posts = () => {
 
                   <div
                     onClick={() => {
-                      //get comments by post id
-
-                      {
-                        /* ---------------------------------------- */
-                      }
-                      {
-                        /* ---------------------------------------- */
-                      }
-                      {
-                        /* ---------------------------------------- */
-                      }
-
                       axios
                         .get(
                           `http://localhost:5000/posts/${post._id}/comments`,
@@ -205,21 +182,10 @@ const Posts = () => {
                           setShowComments(true);
                           setComments(result.data.post.comments);
                           setPost(result.data.post);
-                          // setPageName(result.data.post)
-                          console.log(result.data.post.comments);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
                         });
-                      {
-                        /* ---------------------------------------- */
-                      }
-                      {
-                        /* ---------------------------------------- */
-                      }
-                      {
-                        /* ---------------------------------------- */
-                      }
                     }}
                     className="comment"
                   >
@@ -242,9 +208,7 @@ const Posts = () => {
                             },
                           }
                         )
-                        .then((result) => {
-                          // console.log(result.data);
-                        })
+                        .then((result) => {})
                         .catch((err) => {
                           console.log(err.response.data.message);
                         });
@@ -267,32 +231,8 @@ const Posts = () => {
                   <div
                     onClick={() => {
                       setAddCommentScreen(true);
-
                       setShowComments(true);
-
                       localStorage.setItem("postId", post._id);
-
-                      axios
-                        .get(
-                          `http://localhost:5000/posts/${post._id}/comments`,
-
-                          {
-                            headers: {
-                              authorization: `Bearer ${token}`,
-                            },
-                          }
-                        )
-                        .then((result) => {
-                          setToggle(!toggle);
-                          setShowComments(true);
-                          setComments(result.data.post.comments);
-                          setPost(result.data.post);
-                          // setPageName(result.data.post)
-                          console.log(result.data.post.comments);
-                        })
-                        .catch((err) => {
-                          console.log(err.response.data.message);
-                        });
                     }}
                     className="comment"
                   >
@@ -309,10 +249,12 @@ const Posts = () => {
       <RightSide
         following={following}
         setFollowing={setFollowing}
-        followers={followers}
-        setFollowers={setFollowers}
         user={user}
         setUser={setUser}
+        toggle={toggle}
+        setToggle={setToggle}
+        followers={followers}
+        setFollowers={setFollowers}
       />
       {addCommentScreen && (
         <AddCommentScreen

@@ -2,8 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
 import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
-import { Route, Routes } from "react-router-dom";
-import Posts from "./components/Posts/Posts";
+import axios from "axios";
 
 export const AppContext = createContext();
 
@@ -11,9 +10,6 @@ const App = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [profileImage, setProfileImage] = useState("");
-
-  const [toggle, setToggle] = useState(false);
 
   const [pageName, setPageName] = useState("");
 
@@ -23,10 +19,23 @@ const App = () => {
 
   const [post, setPost] = useState(null);
 
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users`)
+      .then((result) => {
+        console.log("from App.jsx", result.data.users);
+        setUsers(result.data.users);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, []);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
-  },[]);
+  }, []);
 
   return (
     <AppContext.Provider
@@ -37,8 +46,6 @@ const App = () => {
         setIsLoggedIn,
         loginError,
         setLoginError,
-        toggle,
-        setToggle,
         pageName,
         setPageName,
         showComments,
@@ -47,6 +54,8 @@ const App = () => {
         setComments,
         post,
         setPost,
+        users,
+        setUsers,
       }}
     >
       <div className="App">

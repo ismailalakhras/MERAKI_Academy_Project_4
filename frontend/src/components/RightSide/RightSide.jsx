@@ -1,62 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-// import "../../src/Suggestions/Suggestions.css";
 import axios from "axios";
-import { AppContext } from "../App";
-// import PostTimestamp from "../PostTimestamp";
+import { AppContext } from "../../App";
 
 const RightSide = ({
-  followers,
   following,
   user,
+  toggle,
+  setToggle,
   setFollowers,
   setFollowing,
   setUser,
 }) => {
-  const { setComments, toggle, setToggle, post, token } =
-    useContext(AppContext);
-
-  const [users, setUsers] = useState([]);
-
-  
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users/userId`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((result) => {
-        setFollowers(result.data.user.followers);
-
-        setFollowing(result.data.user.following);
-
-        setUser(result.data.user);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-  }, [toggle, followers, following]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users`)
-      .then((result) => {
-        console.log(result.data.users);
-        setUsers(result.data.users);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-  }, []);
-
-
-
+  const { token, users } = useContext(AppContext);
 
   return (
     <div className="suggestios rightSide">
       <div className="suggestios-container">
         <h1>Suggestions</h1>
+
         {users?.map((ele, ind) => {
           if (ele._id !== user._id) {
             return (
@@ -85,7 +46,7 @@ const RightSide = ({
                             }
                           )
                           .then((result) => {
-                            // console.log(result.data.user);
+                            setToggle(!toggle);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -110,7 +71,7 @@ const RightSide = ({
                           )
 
                           .then((result) => {
-                            // console.log(result.data.user);
+                            setToggle(!toggle);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
