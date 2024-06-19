@@ -28,6 +28,10 @@ const Posts = () => {
 
   const [user, setUser] = useState({});
 
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const [postId, setPostId] = useState(null)
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/posts", {
@@ -131,7 +135,8 @@ const Posts = () => {
                     <div>
                       <i
                         onClick={() => {
-                          setPostToDelete(post._id);
+                          setConfirmDelete(true);
+                          setPostId(post._id)
                         }}
                         className="fa-solid fa-trash"
                       ></i>
@@ -264,6 +269,36 @@ const Posts = () => {
           addCommentScreen={addCommentScreen}
           setAddCommentScreen={setAddCommentScreen}
         />
+      )}
+
+      {confirmDelete && (
+        <div className="confirm-delete">
+          <div className="confirm-delete-container">
+            <div className="message">
+              Are you sure you want to delete this post?
+            </div>
+            <div className="button">
+              <button
+                onClick={() => {
+                  setConfirmDelete(false);
+                }}
+                className="cancel"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setPostToDelete(postId);
+
+                  setConfirmDelete(false);
+                }}
+                className="delete"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

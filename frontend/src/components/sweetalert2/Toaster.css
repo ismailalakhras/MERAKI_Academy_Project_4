@@ -1,0 +1,20 @@
+.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    top: 1.175em !important;
+    width: 2.075em !important;
+}
+
+
+
+
+
+.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long] {
+    top: 1.2375em;
+    right: -0.0125em;
+    width: 2.275em;
+}
+
+.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip] {
+    top: 1.625em;
+    left: -0.1125em;
+    width: 1.25em;
+}
