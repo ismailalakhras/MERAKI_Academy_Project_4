@@ -7,6 +7,7 @@ import UploadPic from "../UploadPic/UploadPic";
 import Posts from "../Posts/Posts";
 import CreatePost from "../CreatePost/CreatePost";
 import AddPostScreen from "../addPostScreen/addPostScreen";
+import Chat from "../Chat/Chat";
 
 const Home = () => {
   const [isActive, setIsActive] = useState("");
@@ -45,6 +46,8 @@ const Home = () => {
 
   return (
     <div className="Home">
+      <Chat/>
+
       {profilePicScreen && (
         <>
           <UploadPic setProfilePicScreen={setProfilePicScreen} />
@@ -141,6 +144,8 @@ const Home = () => {
       {/* --------------------------------- */}
 
       <Posts setProfilePicScreen={setProfilePicScreen} />
+
+
     </div>
   );
 };
