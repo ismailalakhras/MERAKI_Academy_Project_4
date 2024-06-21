@@ -9,11 +9,10 @@ const Conversation = ({ data }) => {
     );
     setUserData(userId);
   }, []);
-  console.log("userData", userData);
 
   return (
     <>
-      <div className="follower-conversation">
+      <div className="follower conversation">
         <div className="online-dot"></div>
         <div className="image">
           <img src={userData && userData.profileImage} alt="" />

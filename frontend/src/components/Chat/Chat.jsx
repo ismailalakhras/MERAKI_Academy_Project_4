@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Chat.css";
 import axios from "axios";
 import Conversation from "../Conversation/Conversation";
+import ChatBox from "../ChatBox/ChatBox";
 const Chat = () => {
   const [chats, setChats] = useState([]);
-  const [currentChat, setCurrentChat] = useState(null)
+  const [currentChat, setCurrentChat] = useState(null);
 
   useEffect(() => {
     axios
@@ -17,8 +18,6 @@ const Chat = () => {
       });
   }, []);
 
-  console.log(chats);
-
   return (
     <div className="chat">
       <div className="leftSide">
@@ -27,7 +26,12 @@ const Chat = () => {
           <div className="chat-list">
             {chats.map((chat) => {
               return (
-                <div>
+                <div key={chat._id}
+                  onClick={() => {
+                    setCurrentChat(chat);
+                    console.log("currentChat",currentChat);
+                  }}
+                >
                   <Conversation data={chat} />
                 </div>
               );
@@ -37,7 +41,6 @@ const Chat = () => {
       </div>
       {/* -------------------------------------- */}
       <div className="rightSide">
-
         <ChatBox chat={currentChat} />
       </div>
     </div>
