@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import PostTimestamp from "../PostTimestamp";
 
 const ChatBox = ({ chat }) => {
   const [userData, setUserData] = useState(null);
@@ -24,7 +25,7 @@ const ChatBox = ({ chat }) => {
         });
   }, [chat]);
 
-  //   console.log("messages",messages);
+  console.log("messages", messages);
 
   //   console.log("chatBox data", userData);
   return (
@@ -48,7 +49,36 @@ const ChatBox = ({ chat }) => {
 
         {/* chat box messages */}
 
-        <div className="chat-body"></div>
+        <div className="chat-body">
+          {messages.map((message) => {
+            return (
+              <>
+                <div
+                  className={
+                    message.senderId._id === localStorage.getItem("userId")
+                      ? "times own"
+                      : "times"
+                  }
+                >
+                  <PostTimestamp timestamp={message.createdAt} />
+                </div>
+                <div
+                  className={
+                    message.senderId._id === localStorage.getItem("userId")
+                      ? "message own"
+                      : "message"
+                  }
+                >
+                  <div className="content">{message.text}</div>
+                </div>
+              </>
+            );
+          })}
+        </div>
+
+        {/* chat sender  */}
+
+        
       </div>
     </>
   );

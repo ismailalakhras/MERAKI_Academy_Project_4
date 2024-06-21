@@ -100,6 +100,10 @@ hr {
 }
 
 .chatBox-container {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  overflow-y: auto;
 }
 
 .chatBox-container .chat-header {
@@ -125,5 +129,49 @@ hr {
 /* ---------------------------------------- */
 
 .chatBox-container .chat-body {
-    
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  margin: 15px;
+}
+
+.chatBox-container .chat-body .times  {
+  color: black;
+  align-self: flex-start;
+}
+
+.chatBox-container .chat-body .times.own  {
+  color: black;
+  align-self: flex-end;
+}
+
+.chatBox-container .chat-body .times span {
+    color: black;
+    align-self: flex-start;
+  }
+  
+  
+
+
+.chatBox-container .chat-body .message {
+  background: #aa0e0e8a;
+  border-radius: 50px 50px 50px 0;
+  min-width: 200px;
+  padding: 15px;
+  align-self: flex-start;
+}
+
+.chatBox-container .chat-body .message content {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.chatBox-container .chat-body .message.own {
+  background: #00000067;
+  border-radius: 50px 50px 0px 50px;
+  padding: 15px;
+  min-width: 200px;
+  align-self: end;
 }

@@ -29,7 +29,7 @@ const Chat = () => {
                 <div key={chat._id}
                   onClick={() => {
                     setCurrentChat(chat);
-                    console.log("currentChat",currentChat);
+                    // console.log("currentChat",currentChat);
                   }}
                 >
                   <Conversation data={chat} />

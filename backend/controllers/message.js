@@ -21,7 +21,9 @@ const getMessage = (req, res) => {
 
     const { chatId } = req.params
 
-    messageModel.find({ chatId })
+    messageModel
+        .find({ chatId })
+        .populate("senderId")
         .then(result => {
             res.status(200).json(result)
         })
