@@ -4,6 +4,7 @@ import axios from "axios";
 import Conversation from "../Conversation/Conversation";
 const Chat = () => {
   const [chats, setChats] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null)
 
   useEffect(() => {
     axios
@@ -15,69 +16,29 @@ const Chat = () => {
         console.log(err);
       });
   }, []);
+
   console.log(chats);
 
   return (
     <div className="chat">
-      <div className="chat-container">
-        <div className="leftSide">
-          <div className="userContainer">
-            <div className="image">
-              <img src={require("../../pic/logo.png")} alt="" />
-            </div>
-            <div className="userName">
-              <div className="name">ismail mohd</div>
-              <div className="offline">offline</div>
-            </div>
-          </div>
-          {/* -------------------------------------- */}
-
-          <div className="userContainer">
-            <div className="image">
-              <img src={require("../../pic/logo.png")} alt="" />
-            </div>
-            <div className="userName">
-              <div className="name">ismail mohd</div>
-              <div className="offline">offline</div>
-            </div>
-          </div>
-          {/* -------------------------------------- */}
-          <div className="userContainer">
-            <div className="image">
-              <img src={require("../../pic/logo.png")} alt="" />
-            </div>
-            <div className="userName">
-              <div className="name">ismail mohd</div>
-              <div className="offline">offline</div>
-            </div>
-          </div>
-          {/* -------------------------------------- */}
-
-          <div className="userContainer">
-            <div className="image">
-              <img src={require("../../pic/logo.png")} alt="" />
-            </div>
-            <div className="userName">
-              <div className="name">ismail mohd</div>
-              <div className="offline">offline</div>
-            </div>
-          </div>
-          {/* -------------------------------------- */}
-        </div>
-        <div className="rightSide">
-          <div className="chatContainer">
-            <h2>Chats</h2>
-            <div className="chat-list">
-              {chats.map((chat) => {
-                return (
-                  <div>
-                    <Conversation data={chat} />
-                  </div>
-                );
-              })}
-            </div>
+      <div className="leftSide">
+        <div className="chatContainer">
+          <h2>Chats</h2>
+          <div className="chat-list">
+            {chats.map((chat) => {
+              return (
+                <div>
+                  <Conversation data={chat} />
+                </div>
+              );
+            })}
           </div>
         </div>
+      </div>
+      {/* -------------------------------------- */}
+      <div className="rightSide">
+
+        <ChatBox chat={currentChat} />
       </div>
     </div>
   );

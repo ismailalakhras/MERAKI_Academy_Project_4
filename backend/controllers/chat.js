@@ -19,10 +19,14 @@ const createChat = (req, res) => {
 
 const userChats = (req, res) => {
 
-    chatModel.find({
-        members: { $in: [req.params.userId] }
-    })
+    chatModel
+        .find({
+            members: { $in: [req.params.userId] }
+        })
+        .populate("members")
+        
         .then(result => {
+            console.log("populate members" , result);
             res.status(200).json(result)
         })
         .catch(err => {
