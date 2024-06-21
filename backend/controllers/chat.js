@@ -28,11 +28,10 @@ const userChats = (req, res) => {
         .catch(err => {
             res.status(500).json(err)
         })
-
 }
 
 const findChat = (req, res) => {
-    
+
     chatModel.findOne({
         members: { $all: [req.params.firstId, req.params.secondId] }
     })
