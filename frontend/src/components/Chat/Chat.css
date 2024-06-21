@@ -101,12 +101,17 @@ hr {
 
 .chatBox-container {
   width: 100%;
-  height: 100%;
-  padding: 25px;
+  height: calc(100vh - 110px);
   overflow-y: auto;
+  border-bottom: 1px solid rgb(143, 143, 143);
 }
 
 .chatBox-container .chat-header {
+  position: sticky;
+  top: 0;
+  background: #f7f5f5;
+  padding: 15px;
+  border-bottom: 1px solid rgb(143, 143, 143);
 }
 
 .chatBox-container .chat-header .follower {
@@ -134,26 +139,23 @@ hr {
   gap: 15px;
   width: 100%;
   height: 100%;
-  margin: 15px;
+  padding: 15px ;
 }
 
-.chatBox-container .chat-body .times  {
+.chatBox-container .chat-body .times {
   color: black;
   align-self: flex-start;
 }
 
-.chatBox-container .chat-body .times.own  {
+.chatBox-container .chat-body .times.own {
   color: black;
   align-self: flex-end;
 }
 
 .chatBox-container .chat-body .times span {
-    color: black;
-    align-self: flex-start;
-  }
-  
-  
-
+  color: black;
+  align-self: flex-start;
+}
 
 .chatBox-container .chat-body .message {
   background: #aa0e0e8a;
@@ -174,4 +176,24 @@ hr {
   padding: 15px;
   min-width: 200px;
   align-self: end;
+}
+/* ---------------------------------------- */
+.chat-sender {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background: #f7f5f5;
+    padding: 0 15px;
+}
+
+.chat-sender .send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width:  90px;
+    background: #00369b;
+    color: #fffbfb;
+    cursor: pointer;
+    border-radius: 5px;
 }

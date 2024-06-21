@@ -41,7 +41,7 @@ const Chat = () => {
       </div>
       {/* -------------------------------------- */}
       <div className="rightSide">
-        <ChatBox chat={currentChat} />
+        {currentChat && <ChatBox chat={currentChat} />}
       </div>
     </div>
   );

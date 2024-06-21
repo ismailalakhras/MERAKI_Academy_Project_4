@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PostTimestamp from "../PostTimestamp";
+import InputEmoji from "react-input-emoji";
 
 const ChatBox = ({ chat }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     const userId = chat?.members?.find(
@@ -45,7 +47,6 @@ const ChatBox = ({ chat }) => {
             </div>
           </div>
         </div>
-        <hr />
 
         {/* chat box messages */}
 
@@ -77,8 +78,15 @@ const ChatBox = ({ chat }) => {
         </div>
 
         {/* chat sender  */}
-
-        
+      </div>
+      <div className="chat-sender">
+        <div className="send">Send </div>
+        <InputEmoji
+          value={newMessage}
+          onChange={() => {
+            setNewMessage(newMessage);
+          }}
+        />
       </div>
     </>
   );
