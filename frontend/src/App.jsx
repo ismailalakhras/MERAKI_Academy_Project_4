@@ -22,6 +22,8 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [toggle, setToggle] = useState(false);
 
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/users`)
