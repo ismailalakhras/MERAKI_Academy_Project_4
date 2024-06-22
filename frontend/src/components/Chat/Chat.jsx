@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import axios from "axios";
 import Conversation from "../Conversation/Conversation";
 import ChatBox from "../ChatBox/ChatBox";
+import { io } from "socket.io-client";
+
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -26,7 +28,8 @@ const Chat = () => {
           <div className="chat-list">
             {chats.map((chat) => {
               return (
-                <div key={chat._id}
+                <div
+                  key={chat._id}
                   onClick={() => {
                     setCurrentChat(chat);
                     // console.log("currentChat",currentChat);

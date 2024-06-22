@@ -109,7 +109,7 @@ hr {
 .chatBox-container .chat-header {
   position: sticky;
   top: 0;
-  background: #f7f5f5;
+  background: #e0e0e0;
   padding: 15px;
   border-bottom: 1px solid rgb(143, 143, 143);
 }
@@ -136,10 +136,10 @@ hr {
 .chatBox-container .chat-body {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  /* gap: 15px; */
   width: 100%;
   height: 100%;
-  padding: 15px ;
+  padding: 15px;
 }
 
 .chatBox-container .chat-body .times {
@@ -155,14 +155,25 @@ hr {
 .chatBox-container .chat-body .times span {
   color: black;
   align-self: flex-start;
+  margin: 20px;
+
 }
 
 .chatBox-container .chat-body .message {
-  background: #aa0e0e8a;
+  background: rgb(203, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(203, 0, 0, 1) 0%,
+    rgba(255, 47, 1, 1) 78%,
+    rgba(255, 52, 1, 1) 100%,
+    rgba(255, 128, 1, 1) 100%
+  );
   border-radius: 50px 50px 50px 0;
-  min-width: 200px;
+  /* min-width: 200px; */
   padding: 15px;
   align-self: flex-start;
+  color: #f7f5f5;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .chatBox-container .chat-body .message content {
@@ -171,29 +182,37 @@ hr {
 }
 
 .chatBox-container .chat-body .message.own {
-  background: #00000067;
+  background: rgb(1, 189, 255);
+  background: linear-gradient(
+    243deg,
+    rgba(1, 189, 255, 1) 0%,
+    rgba(9, 1, 255, 1) 100%
+  );
   border-radius: 50px 50px 0px 50px;
   padding: 15px;
-  min-width: 200px;
+  /* min-width: 200px; */
   align-self: end;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  color: #f7f5f5;
+
 }
 /* ---------------------------------------- */
 .chat-sender {
-    display: flex;
-    align-items: center;
-    height: 70px;
-    background: #f7f5f5;
-    padding: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background: #afafaf;
+  padding: 0 15px;
 }
 
 .chat-sender .send {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width:  90px;
-    background: #00369b;
-    color: #fffbfb;
-    cursor: pointer;
-    border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 90px;
+  background: #00369b;
+  color: #fffbfb;
+  cursor: pointer;
+  border-radius: 5px;
 }

@@ -26,7 +26,6 @@ const userChats = (req, res) => {
         .populate("members")
         
         .then(result => {
-            console.log("populate members" , result);
             res.status(200).json(result)
         })
         .catch(err => {

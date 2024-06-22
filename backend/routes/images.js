@@ -6,7 +6,6 @@ const userModel = require("../models/user");
 
 
 uploadRouter.post("/upload", upload.single("image"), (req, res) => {
-    console.log(req.data);
     cloudinary.uploader.upload(req.file.path, (err, result) => {
         if (err) {
             console.log(err)

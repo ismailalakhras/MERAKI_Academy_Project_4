@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PostTimestamp from "../PostTimestamp";
 import InputEmoji from "react-input-emoji";
 
@@ -7,6 +7,8 @@ const ChatBox = ({ chat }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
+  const scroll = useRef();
 
   useEffect(() => {
     const userId = chat?.members?.find(
@@ -25,11 +27,14 @@ const ChatBox = ({ chat }) => {
         .catch((err) => {
           console.log(err);
         });
-  }, [chat]);
+  }, [chat,newMessage]);
 
-  console.log("messages", messages);
+  // scroll to the last messsage
 
-  //   console.log("chatBox data", userData);
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <>
       <div className="chatBox-container">
@@ -64,6 +69,7 @@ const ChatBox = ({ chat }) => {
                   <PostTimestamp timestamp={message.createdAt} />
                 </div>
                 <div
+                  ref={scroll}
                   className={
                     message.senderId._id === localStorage.getItem("userId")
                       ? "message own"
@@ -80,11 +86,31 @@ const ChatBox = ({ chat }) => {
         {/* chat sender  */}
       </div>
       <div className="chat-sender">
-        <div className="send">Send </div>
+        <div
+          onClick={() => {
+            newMessage &&
+              axios
+                .post(`http://localhost:5000/message`, {
+                  senderId: localStorage.getItem("userId"),
+                  text: newMessage,
+                  chatId: chat._id,
+                })
+                .then((result) => {
+                  setMessages([...messages, result.data]);
+                  setNewMessage("");
+                })
+                .catch((err) => {
+                  console.log(err.response.data.message);
+                });
+          }}
+          className="send"
+        >
+          Send
+        </div>
         <InputEmoji
           value={newMessage}
-          onChange={() => {
-            setNewMessage(newMessage);
+          onChange={(text) => {
+            setNewMessage(text);
           }}
         />
       </div>
