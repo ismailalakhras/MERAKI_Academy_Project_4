@@ -8,6 +8,37 @@ import { io } from "socket.io-client";
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [sendMessage, setSendMessage] = useState(null);
+  const [receiveMessage, setReceiveMessage] = useState(null);
+
+
+  const socket = useRef();
+
+  
+  // send message to socket server
+
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.current.emit("send-message", sendMessage);
+    }
+  }, [sendMessage]);
+
+  // receive message from socket server
+
+  useEffect(() => {
+    socket.current = io("http://localhost:8800");
+    socket.current.emit("new-user-add", localStorage.getItem("userId"));
+    socket.current.on("get-users", (users) => {
+      setOnlineUsers(users);
+    });
+  }, [localStorage.getItem("userId")]);
+
+  useEffect(() => {
+    socket.current.on("receive-message", (data) => {
+      setReceiveMessage(data);
+    });
+  }, []);
 
   useEffect(() => {
     axios
@@ -19,6 +50,10 @@ const Chat = () => {
         console.log(err);
       });
   }, []);
+  {
+    chats && !currentChat && console.log("chats", chats);
+    currentChat && console.log("currentChat", currentChat);
+  }
 
   return (
     <div className="chat">
@@ -32,7 +67,6 @@ const Chat = () => {
                   key={chat._id}
                   onClick={() => {
                     setCurrentChat(chat);
-                    // console.log("currentChat",currentChat);
                   }}
                 >
                   <Conversation data={chat} />
@@ -44,7 +78,13 @@ const Chat = () => {
       </div>
       {/* -------------------------------------- */}
       <div className="rightSide">
-        {currentChat && <ChatBox chat={currentChat} />}
+        {currentChat && (
+          <ChatBox
+            chat={currentChat}
+            setSendMessage={setSendMessage}
+            receiveMessage={receiveMessage}
+          />
+        )}
       </div>
     </div>
   );

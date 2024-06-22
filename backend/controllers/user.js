@@ -204,7 +204,6 @@ const getAllUsers = (req, res) => {
   userModel
     .find()
     .then(users => {
-      console.log("users");
       res.status(200).json({
         success: true,
         message: "Users retrieved successfully",

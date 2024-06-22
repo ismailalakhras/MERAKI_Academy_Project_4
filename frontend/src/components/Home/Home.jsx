@@ -9,7 +9,9 @@ import CreatePost from "../CreatePost/CreatePost";
 import AddPostScreen from "../addPostScreen/addPostScreen";
 import Chat from "../Chat/Chat";
 
+
 const Home = () => {
+  const [chatScreen, setChatScreen] = useState(false);
   const [isActive, setIsActive] = useState("");
   const [profilePicScreen, setProfilePicScreen] = useState(false);
 
@@ -17,6 +19,7 @@ const Home = () => {
 
   const { setToken, toggle, setPageName, setShowComments, setIsLoggedIn } =
     useContext(AppContext);
+
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -46,7 +49,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <Chat/>
+      {chatScreen && <Chat />}
 
       {profilePicScreen && (
         <>
@@ -121,11 +124,11 @@ const Home = () => {
         <div className="header-right_side">
           <div className="notification">
             <i className="fa-regular fa-bell"></i>
-            <div>0</div>
+            {/* <div>0</div> */}
           </div>
-          <div className="message">
+          <div onClick={() => setChatScreen(true)} className="message">
             <i className="fa-regular fa-message"></i>
-            <div>0</div>
+            {/* <div>0</div> */}
           </div>
         </div>
       </div>
@@ -144,8 +147,6 @@ const Home = () => {
       {/* --------------------------------- */}
 
       <Posts setProfilePicScreen={setProfilePicScreen} />
-
-
     </div>
   );
 };

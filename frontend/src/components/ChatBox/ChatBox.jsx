@@ -3,12 +3,22 @@ import React, { useEffect, useRef, useState } from "react";
 import PostTimestamp from "../PostTimestamp";
 import InputEmoji from "react-input-emoji";
 
-const ChatBox = ({ chat }) => {
+const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
+  messages && console.log("messages", messages);
+
   const scroll = useRef();
+
+  useEffect(() => {
+    if (receiveMessage !== null && receiveMessage.chatId === chat.Id) {
+      setMessages([...messages, receiveMessage]);
+    }
+    console.log("receiveMessage", receiveMessage);
+  }, [receiveMessage]);
+
 
   useEffect(() => {
     const userId = chat?.members?.find(
@@ -27,7 +37,7 @@ const ChatBox = ({ chat }) => {
         .catch((err) => {
           console.log(err);
         });
-  }, [chat,newMessage]);
+  }, [chat, newMessage , receiveMessage]);
 
   // scroll to the last messsage
 
@@ -60,6 +70,7 @@ const ChatBox = ({ chat }) => {
             return (
               <>
                 <div
+                  key={message._id}
                   className={
                     message.senderId._id === localStorage.getItem("userId")
                       ? "times own"
@@ -98,6 +109,12 @@ const ChatBox = ({ chat }) => {
                 .then((result) => {
                   setMessages([...messages, result.data]);
                   setNewMessage("");
+
+                  const receiverId = chat?.members?.find(
+                    (ele) => ele._id !== localStorage.getItem("userId")
+                  );
+
+                  setSendMessage({ ...result.data, receiverId });
                 })
                 .catch((err) => {
                   console.log(err.response.data.message);

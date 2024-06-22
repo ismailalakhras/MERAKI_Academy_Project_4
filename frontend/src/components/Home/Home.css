@@ -223,8 +223,13 @@
   border-radius: 100%;
   font-size: 16px;
   border: 1px solid rgba(255, 255, 255, 0.137);
+  cursor: pointer;
+  transition: 0.5s;
 }
 
+.header-right_side .message:hover {
+  background: #0000007a;
+}
 .header-right_side .notification div,
 .header-right_side .message div {
   display: flex;
