@@ -5,7 +5,6 @@ import Home from "./components/Home/Home";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-
 export const AppContext = createContext();
 
 const App = () => {
@@ -24,11 +23,9 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
-
+  const [suggestions, setSuggestions] = useState(false);
 
   const socket = useRef();
-
-
 
   useEffect(() => {
     socket.current = io("http://localhost:8800");
@@ -37,8 +34,6 @@ const App = () => {
       setOnlineUsers(users);
     });
   }, [localStorage.getItem("userId")]);
-
-
 
   useEffect(() => {
     axios
@@ -79,6 +74,8 @@ const App = () => {
         setToggle,
         onlineUsers,
         setOnlineUsers,
+        suggestions,
+        setSuggestions,
       }}
     >
       <div className="App">

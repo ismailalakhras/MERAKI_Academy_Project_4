@@ -85,7 +85,6 @@
 .comment-container-top .userName .times span {
   color: #000000;
   font-size: 10px;
-
 }
 
 .fa-trash.x {
@@ -138,16 +137,13 @@
   background: #ffffff;
   width: 90%;
   border-radius: 10px;
-transition: 0.5s;
+  transition: 0.5s;
 }
-
-
 
 .suggestios-container-user .left-side {
   display: flex;
   align-items: center;
   width: 100%;
-
 }
 
 .suggestios-container-user .left-side img {
@@ -163,14 +159,10 @@ transition: 0.5s;
   cursor: default;
   font-size: 13px;
   cursor: pointer;
-
 }
 
-
-.suggestios-container-user .left-side .userName:hover{
-
+.suggestios-container-user .left-side .userName:hover {
   color: #1e03b9;
-
 }
 
 .suggestios-container-user .button {
@@ -238,7 +230,7 @@ transition: 0.5s;
     font-size: 11px;
   }
 
-  .suggestios-container-user  .button {
+  .suggestios-container-user .button {
     font-size: 10px;
   }
   .suggestios-container h1 {
@@ -249,13 +241,27 @@ transition: 0.5s;
     line-height: 1;
     font-size: 12px;
   }
-  
 }
 
-
 @media (max-width: 850px) {
-  
   .suggestios.rightSide {
     display: none;
+  }
+}
+
+@media (max-width: 655px) {
+  .suggestios {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    display: none;
+  }
+
+  .suggestios-container {
+    height: calc(100vh - 80px);
+  }
+
+  .suggestios.visible {
+    display: block;
   }
 }

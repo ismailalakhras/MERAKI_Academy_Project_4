@@ -16,13 +16,15 @@ const Suggestions = ({ followers, following, user }) => {
     users,
     setToggle,
     toggle,
+    suggestions,
+    setSuggestions,
   } = useContext(AppContext);
 
-  // const [createChat, setCreateChat] = useState(null);
+  const [createChat, setCreateChat] = useState(null);
 
-  // useEffect(() => {
-  //   createChat && console.log("createChat",createChat);
-  // }, [createChat]);
+  useEffect(() => {
+    createChat && console.log("createChat", createChat);
+  }, []);
 
   useEffect(() => {
     post &&
@@ -45,14 +47,20 @@ const Suggestions = ({ followers, following, user }) => {
   }, [toggle]);
 
   return (
-    <div className="suggestios">
+    <div className={suggestions ? "suggestios visible" : "suggestios "}>
       <div className="suggestios-container">
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
 
         <div className={showComments ? "showComments" : "showComments hidden"}>
-          <div onClick={() => setShowComments(false)} className="close-tap">
+          <div
+            onClick={() => {
+              setSuggestions(false);
+              setShowComments(false);
+            }}
+            className="close-tap"
+          >
             X
           </div>
           {comments?.map((ele, ind) => {

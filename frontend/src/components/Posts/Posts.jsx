@@ -16,6 +16,8 @@ const Posts = () => {
     setShowComments,
     setComments,
     setPost,
+    suggestions,
+    setSuggestions,
   } = useContext(AppContext);
 
   const [posts, setPosts] = useState(null);
@@ -180,6 +182,7 @@ const Posts = () => {
                           setShowComments(true);
                           setComments(result.data.post.comments);
                           setPost(result.data.post);
+                          setSuggestions(true)
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);

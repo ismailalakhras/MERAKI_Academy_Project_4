@@ -14,7 +14,7 @@ const RightSide = ({ following, user }) => {
           if (ele._id !== user._id) {
             return (
               <>
-                <div key={ind} className="suggestios-container-user ">
+                <div key={ele._id} className="suggestios-container-user ">
                   <div className="left-side">
                     <img src={ele.profileImage} alt="" />
                     <div className="userName">

@@ -80,7 +80,7 @@ const Chat = ({ setChatScreen }) => {
       </div>
       {/* -------------------------------------- */}
       <div className="rightSide">
-        <div
+      <div
           onClick={() => {
             setChatScreen(false);
           }}

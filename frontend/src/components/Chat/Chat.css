@@ -35,19 +35,14 @@
 .leftSide .chatContainer .chat-list {
   width: 100%;
 }
-.leftSide .chatContainer .chat-list>div {
+.leftSide .chatContainer .chat-list > div {
   transition: 0.5s;
   cursor: pointer;
-
-
- }
-
-.leftSide .chatContainer .chat-list>div:hover {
- background: #0000003b;
 }
 
-
-
+.leftSide .chatContainer .chat-list > div:hover {
+  background: #0000003b;
+}
 
 .leftSide .chatContainer .chat-list .follower.conversation {
   position: relative;
@@ -68,7 +63,6 @@
 }
 
 .leftSide .chatContainer .chat-list .follower.conversation .userName span {
-
   font-size: 14px;
   font-weight: 500;
 }
@@ -79,16 +73,14 @@
   .follower.conversation
   .userName
   span.online {
-    
-    position: absolute;
-    top: 62px;
-    left: 67px;
+  position: absolute;
+  top: 62px;
+  left: 67px;
   background: #1eb400;
   width: 15px;
   height: 15px;
   border-radius: 100%;
 }
-
 
 .leftSide
   .chatContainer
@@ -96,9 +88,9 @@
   .follower.conversation
   .userName
   span.offline {
-    position: absolute;
-    top: 62px;
-    left: 67px;
+  position: absolute;
+  top: 62px;
+  left: 67px;
   background: #5e5e5e;
   width: 15px;
   height: 15px;
@@ -135,7 +127,6 @@ hr {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-
 }
 
 .close-tap-chat {
@@ -162,6 +153,7 @@ hr {
 }
 
 .chatBox-container .chat-header {
+  position: relative;
   position: sticky;
   top: 0;
   background: #e0e0e0;
@@ -170,7 +162,6 @@ hr {
 }
 
 .chatBox-container .chat-header .follower {
-
   display: flex;
   align-items: center;
   gap: 15px;
@@ -187,7 +178,7 @@ hr {
   width: 100%;
 }
 
-.chatBox-container .chat-header .follower .userName span{
+.chatBox-container .chat-header .follower .userName span {
   font-size: 18px;
   font-weight: 500;
 }
@@ -217,7 +208,6 @@ hr {
   color: black;
   align-self: flex-start;
   margin: 20px;
-
 }
 
 .chatBox-container .chat-body .message {
@@ -255,7 +245,6 @@ hr {
   align-self: end;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   color: #f7f5f5;
-
 }
 /* ---------------------------------------- */
 .chat-sender {
@@ -276,4 +265,65 @@ hr {
   color: #fffbfb;
   cursor: pointer;
   border-radius: 5px;
+}
+
+/* ---------------------------------------------------- */
+
+@media (max-width: 655px) {
+  .chat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .leftSide .chatContainer {
+  }
+
+  .leftSide .chatContainer .chat-list {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .chat .rightSide {
+    overflow-y: auto;
+  }
+
+  .chat .leftSide {
+    height: 170px;
+  }
+
+  .leftSide .chatContainer .chat-list > div {
+    width: 178px;
+  }
+
+  .leftSide .chatContainer .chat-list .follower.conversation {
+    width: 184px;
+  }
+
+  .chatBox-container .chat-header {
+    position: fixed;
+    top: 165px;
+    background: #e0e0e0;
+    padding: 15px;
+    border-bottom: 1px solid rgb(143, 143, 143);
+    width: 100%;
+  }
+
+  .chat-sender {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background: #afafaf;
+    padding: 0 15px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .chatBox-container {
+    height: 528px;
+    width: 100%;
+    overflow-y: auto;
+    margin-top: 62px;
+  }
 }
