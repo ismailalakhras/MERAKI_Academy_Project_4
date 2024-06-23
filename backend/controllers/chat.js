@@ -2,18 +2,35 @@ const chatModel = require("../models/chat")
 
 const createChat = (req, res) => {
     const { senderId, receiverId } = req.body;
-    const newChat = new chatModel({
-        members: [senderId, receiverId]
-    })
 
-    newChat
-        .save()
+
+    chatModel.findOne({
+        members: { $all: [senderId, receiverId ] }
+    })
         .then(result => {
-            res.status(200).json(result)
+            if (!result) {
+                const newChat = new chatModel({
+                    members: [senderId, receiverId]
+                })
+
+                newChat
+                    .save()
+                    .then(result => {
+                        res.status(200).json(result)
+                    })
+                    .catch(err => {
+                        res.status(500).json(err)
+                    })
+            } else {
+                res.status(400).json("chat already exist")
+            }
         })
         .catch(err => {
             res.status(500).json(err)
         })
+
+
+
 }
 
 
@@ -25,7 +42,7 @@ const userChats = (req, res) => {
             members: { $in: [req.params.userId] }
         })
         .populate("members")
-        
+
         .then(result => {
             res.status(200).json(result)
         })

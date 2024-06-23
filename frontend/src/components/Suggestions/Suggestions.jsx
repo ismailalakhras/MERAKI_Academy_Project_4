@@ -18,6 +18,12 @@ const Suggestions = ({ followers, following, user }) => {
     toggle,
   } = useContext(AppContext);
 
+  // const [createChat, setCreateChat] = useState(null);
+
+  // useEffect(() => {
+  //   createChat && console.log("createChat",createChat);
+  // }, [createChat]);
+
   useEffect(() => {
     post &&
       axios
@@ -234,7 +240,7 @@ const Suggestions = ({ followers, following, user }) => {
                       <div
                         onClick={() => {
                           console.log("xxxxxxxxx");
-
+                          // setCreateChat(ele._id);
                           // axios
                           //   .post(`http://localhost:5000/chat`, {
                           //     senderId: localStorage.getItem("userId"),
