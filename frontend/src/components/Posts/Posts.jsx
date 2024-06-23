@@ -30,7 +30,7 @@ const Posts = () => {
 
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const [postId, setPostId] = useState(null)
+  const [postId, setPostId] = useState(null);
 
   useEffect(() => {
     axios
@@ -136,7 +136,7 @@ const Posts = () => {
                       <i
                         onClick={() => {
                           setConfirmDelete(true);
-                          setPostId(post._id)
+                          setPostId(post._id);
                         }}
                         className="fa-solid fa-trash"
                       ></i>

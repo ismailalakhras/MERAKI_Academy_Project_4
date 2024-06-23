@@ -1,8 +1,9 @@
 const chatModel = require("../models/chat")
 
 const createChat = (req, res) => {
+    const { senderId, receiverId } = req.body;
     const newChat = new chatModel({
-        members: [req.body.senderId, req.body.receiverId]
+        members: [senderId, receiverId]
     })
 
     newChat

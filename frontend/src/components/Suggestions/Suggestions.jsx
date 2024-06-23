@@ -231,7 +231,26 @@ const Suggestions = ({ followers, following, user }) => {
                   <div key={ind} className="suggestios-container-user ">
                     <div className="left-side">
                       <img src={ele.profileImage} alt="" />
-                      <div className="userName">
+                      <div
+                        onClick={() => {
+                          console.log("xxxxxxxxx");
+
+                          // axios
+                          //   .post(`http://localhost:5000/chat`, {
+                          //     senderId: localStorage.getItem("userId"),
+                          //     receiverId: ele._id,
+                          //   })
+
+                          //   .then((result) => {
+                          //     console.log(result.data);
+                          //     console.log("xxxxxxxxx");
+                          //   })
+                          //   .catch((err) => {
+                          //     console.log(err.response.data.message);
+                          //   });
+                        }}
+                        className="userName"
+                      >
                         {ele.firstName} {ele.lastName}
                       </div>
                     </div>

@@ -49,7 +49,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      {chatScreen && <Chat />}
+      {chatScreen && <Chat setChatScreen={setChatScreen}  />}
 
       {profilePicScreen && (
         <>

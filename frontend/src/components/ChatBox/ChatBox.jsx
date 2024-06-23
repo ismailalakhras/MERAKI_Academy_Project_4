@@ -8,17 +8,16 @@ const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  messages && console.log("messages", messages);
-
   const scroll = useRef();
+
+  messages && console.log("messages", messages);
+  console.log("receiveMessage", receiveMessage);
 
   useEffect(() => {
     if (receiveMessage !== null && receiveMessage.chatId === chat.Id) {
       setMessages([...messages, receiveMessage]);
     }
-    console.log("receiveMessage", receiveMessage);
   }, [receiveMessage]);
-
 
   useEffect(() => {
     const userId = chat?.members?.find(
@@ -37,7 +36,7 @@ const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
         .catch((err) => {
           console.log(err);
         });
-  }, [chat, newMessage , receiveMessage]);
+  }, [chat, newMessage, receiveMessage]);
 
   // scroll to the last messsage
 
@@ -61,6 +60,8 @@ const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
               </span>
             </div>
           </div>
+
+         
         </div>
 
         {/* chat box messages */}

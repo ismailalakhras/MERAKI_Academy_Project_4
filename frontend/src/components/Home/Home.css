@@ -114,12 +114,10 @@
   z-index: 112;
   border-bottom: #0000009c solid 1px;
   padding: 35px 0;
-  background: #ffd700;
-  background: rgb(255, 215, 0);
   background: linear-gradient(
     90deg,
     rgb(250, 234, 7) 0%,
-    rgba(245, 255, 1, 1) 100%
+    rgb(255, 213, 25) 100%
   );
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,

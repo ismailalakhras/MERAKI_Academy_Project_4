@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../App";
 
 const Conversation = ({ data }) => {
+  const { onlineUsers, setOnlineUsers } = useContext(AppContext);
+
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -21,7 +24,20 @@ const Conversation = ({ data }) => {
           <span>
             {userData?.firstName} {userData?.lastName}
           </span>
-          <span className="online">Online</span>
+
+          {console.log(
+            "onlineUsersssss",
+            onlineUsers.find((ele) => ele.userId === userData?._id)
+          )}
+          <span
+            className={
+              onlineUsers.find((ele) => ele.userId === userData?._id)
+                ? "online"
+                : "offline"
+            }
+          >
+          
+          </span>
         </div>
       </div>
       <hr />

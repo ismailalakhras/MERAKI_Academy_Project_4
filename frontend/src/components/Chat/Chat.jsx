@@ -1,21 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import axios from "axios";
 import Conversation from "../Conversation/Conversation";
 import ChatBox from "../ChatBox/ChatBox";
 import { io } from "socket.io-client";
+import { AppContext } from "../../App";
 
-const Chat = () => {
+const Chat = ({ setChatScreen }) => {
+  const { onlineUsers, setOnlineUsers } = useContext(AppContext);
+
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [receiveMessage, setReceiveMessage] = useState(null);
 
-
   const socket = useRef();
 
-  
+  console.log("onlineUsers", onlineUsers);
+
   // send message to socket server
 
   useEffect(() => {
@@ -78,6 +80,14 @@ const Chat = () => {
       </div>
       {/* -------------------------------------- */}
       <div className="rightSide">
+        <div
+          onClick={() => {
+            setChatScreen(false);
+          }}
+          className="close-tap-chat"
+        >
+          x
+        </div>
         {currentChat && (
           <ChatBox
             chat={currentChat}

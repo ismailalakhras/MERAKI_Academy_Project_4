@@ -138,12 +138,16 @@
   background: #ffffff;
   width: 90%;
   border-radius: 10px;
+transition: 0.5s;
 }
+
+
 
 .suggestios-container-user .left-side {
   display: flex;
   align-items: center;
   width: 100%;
+
 }
 
 .suggestios-container-user .left-side img {
@@ -158,6 +162,15 @@
   font-weight: 500;
   cursor: default;
   font-size: 13px;
+  cursor: pointer;
+
+}
+
+
+.suggestios-container-user .left-side .userName:hover{
+
+  color: #1e03b9;
+
 }
 
 .suggestios-container-user .button {

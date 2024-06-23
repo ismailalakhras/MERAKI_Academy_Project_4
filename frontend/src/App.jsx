@@ -1,8 +1,10 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useRef } from "react";
 import "./App.css";
 import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import axios from "axios";
+import { io } from "socket.io-client";
+
 
 export const AppContext = createContext();
 
@@ -21,6 +23,20 @@ const App = () => {
 
   const [users, setUsers] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+
+  const socket = useRef();
+
+
+
+  useEffect(() => {
+    socket.current = io("http://localhost:8800");
+    socket.current.emit("new-user-add", localStorage.getItem("userId"));
+    socket.current.on("get-users", (users) => {
+      setOnlineUsers(users);
+    });
+  }, [localStorage.getItem("userId")]);
 
 
 
@@ -61,6 +77,8 @@ const App = () => {
         setUsers,
         toggle,
         setToggle,
+        onlineUsers,
+        setOnlineUsers,
       }}
     >
       <div className="App">
