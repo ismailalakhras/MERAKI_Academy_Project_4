@@ -25,21 +25,26 @@ const App = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [suggestions, setSuggestions] = useState(false);
 
+  const [createChat, setCreateChat] = useState(null);
+
+  const [chatScreen, setChatScreen] = useState(false);
+
+
   const socket = useRef();
 
-  useEffect(() => {
-    socket.current = io("http://localhost:8800");
-    socket.current.emit("new-user-add", localStorage.getItem("userId"));
-    socket.current.on("get-users", (users) => {
-      setOnlineUsers(users);
-    });
-  }, [localStorage.getItem("userId")]);
+  // useEffect(() => {
+  //   socket.current = io("http://localhost:8800");
+  //   socket.current.emit("new-user-add", localStorage.getItem("userId"));
+  //   socket.current.on("get-users", (users) => {
+  //     setOnlineUsers(users);
+  //   });
+  // }, [localStorage.getItem("userId")]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/users`)
       .then((result) => {
-        console.log("from App.jsx", result.data.users);
+        // console.log("from App.jsx", result.data.users);
         setUsers(result.data.users);
       })
       .catch((err) => {
@@ -76,6 +81,10 @@ const App = () => {
         setOnlineUsers,
         suggestions,
         setSuggestions,
+        createChat,
+        setCreateChat,
+        chatScreen, setChatScreen
+        
       }}
     >
       <div className="App">

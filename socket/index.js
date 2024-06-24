@@ -33,12 +33,15 @@ io.on("connection", (socket) => {
             return ele.userId === receiverId
         })
 
-        console.log("activeUsers", activeUsers);
 
-        console.log("user", user);
 
-        console.log("send from socket to ", receiverId);
-        // console.log("Data", data);
+
+        // console.log("activeUsers", activeUsers);
+
+        // console.log("user", user);
+
+        // console.log("send from socket to ", receiverId);
+        console.log("Data", data);
         if (user) {
             io.to(user.socketId).emit("receive-message", data)
         }

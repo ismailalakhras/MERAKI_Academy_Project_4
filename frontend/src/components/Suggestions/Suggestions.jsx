@@ -5,6 +5,7 @@ import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 
 const Suggestions = ({ followers, following, user }) => {
+
   const {
     pageName,
     showComments,
@@ -18,9 +19,9 @@ const Suggestions = ({ followers, following, user }) => {
     toggle,
     suggestions,
     setSuggestions,
+    createChat, setCreateChat
   } = useContext(AppContext);
 
-  const [createChat, setCreateChat] = useState(null);
 
   useEffect(() => {
     createChat && console.log("createChat", createChat);
@@ -47,7 +48,7 @@ const Suggestions = ({ followers, following, user }) => {
   }, [toggle]);
 
   return (
-    <div className={suggestions ? "suggestios visible" : "suggestios "}>
+    <div className={suggestions ? "suggestios visible" : "suggestios "} >
       <div className="suggestios-container">
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
@@ -242,11 +243,16 @@ const Suggestions = ({ followers, following, user }) => {
             if (ele._id !== user._id) {
               return (
                 <>
-                  <div key={ind} className="suggestios-container-user ">
+                  <div key={ind} className="suggestios-container-user" onClick={(e)=>{
+                    console.log("test")
+                  }}>
                     <div className="left-side">
-                      <img src={ele.profileImage} alt="" />
+                      <img src={ele.profileImage} alt="" onClick={(e)=>{
+                    console.log("test")
+                  }} />
                       <div
-                        onClick={() => {
+                      className="userName"
+                        onClick={(e) => {
                           console.log("xxxxxxxxx");
                           // setCreateChat(ele._id);
                           // axios
@@ -263,7 +269,6 @@ const Suggestions = ({ followers, following, user }) => {
                           //     console.log(err.response.data.message);
                           //   });
                         }}
-                        className="userName"
                       >
                         {ele.firstName} {ele.lastName}
                       </div>

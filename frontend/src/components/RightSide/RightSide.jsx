@@ -3,7 +3,16 @@ import axios from "axios";
 import { AppContext } from "../../App";
 
 const RightSide = ({ following, user }) => {
-  const { token, users, toggle, setToggle } = useContext(AppContext);
+  const {
+    token,
+    users,
+    toggle,
+    setToggle,
+    createChat,
+    setCreateChat,
+    chatScreen,
+    setChatScreen,
+  } = useContext(AppContext);
 
   return (
     <div className="suggestios rightSide">
@@ -17,8 +26,27 @@ const RightSide = ({ following, user }) => {
                 <div key={ele._id} className="suggestios-container-user ">
                   <div className="left-side">
                     <img src={ele.profileImage} alt="" />
-                    <div className="userName">
+                    <div
+                      onClick={() => {
+                        setCreateChat(ele._id);
+                        axios
+                          .post(`http://localhost:5000/chat`, {
+                            senderId: localStorage.getItem("userId"),
+                            receiverId: ele._id,
+                          })
+
+                          .then((result) => {
+                            setChatScreen(true);
+                          })
+                          .catch((err) => {
+                            console.log(err.response.data.message);
+                          });
+                      }}
+                      className="userName"
+                    >
+
                       {ele.firstName} {ele.lastName}
+                    <i class="fa-brands fa-rocketchat"></i>
                     </div>
                   </div>
 

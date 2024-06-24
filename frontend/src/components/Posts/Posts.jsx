@@ -82,8 +82,13 @@ const Posts = () => {
           .delete(`http://localhost:5000/posts/delete/${postToDelete}`)
           .then((result) => {
             console.log("deleted");
+
             setToggle(!toggle);
             setPostToDelete(null);
+            const filtredArray = posts.filter((elem,i)=>{
+              return elem._id!==postToDelete
+            })
+            setPosts(filtredArray)
           })
           .catch((err) => {
             console.log(err);
@@ -294,6 +299,7 @@ const Posts = () => {
                   setPostToDelete(postId);
 
                   setConfirmDelete(false);
+                  
                 }}
                 className="delete"
               >

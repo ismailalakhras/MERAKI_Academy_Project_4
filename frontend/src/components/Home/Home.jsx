@@ -11,13 +11,12 @@ import Chat from "../Chat/Chat";
 
 
 const Home = () => {
-  const [chatScreen, setChatScreen] = useState(false);
   const [isActive, setIsActive] = useState("");
   const [profilePicScreen, setProfilePicScreen] = useState(false);
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const { setToken, toggle, setPageName, setShowComments, setIsLoggedIn } =
+  const { setToken, toggle, setPageName, setShowComments, setIsLoggedIn ,chatScreen, setChatScreen } =
     useContext(AppContext);
 
 
