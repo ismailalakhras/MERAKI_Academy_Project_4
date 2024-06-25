@@ -43,7 +43,7 @@ const UploadPic = ({ setProfilePicScreen }) => {
             }}
           />
         </div>
-        
+
         <div className="button">
           <button
             onClick={() => {

@@ -76,7 +76,7 @@ const RightSide = ({
                     </div>
                   </div>
 
-                  <div
+                  {/* <div
                     onClick={() => {
                       setCreateChat(ele._id);
                       setChatScreen(true);
@@ -95,22 +95,13 @@ const RightSide = ({
                     className="message-contact"
                   >
                     <i class="fa-regular fa-message"></i>
-                  </div>
+                  </div> */}
 
                   {following?.some((element) => {
                     return element._id === ele._id;
                   }) ? (
                     <div
                       onClick={() => {
-                        //!-------------------------------------------
-
-                        // const filtredArray = posts.filter((elem, i) => {
-                        //   return elem._id !== ele._id;
-                        // });
-                        // setPosts(filtredArray);
-
-                        //!-------------------------------------------
-
                         axios
                           .put(
                             `http://localhost:5000/users/unFollow/${ele._id}`,

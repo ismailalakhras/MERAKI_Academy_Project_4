@@ -223,7 +223,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background: rgba(0, 0, 0, 0);
     color: white;
     width: 90%;
@@ -237,10 +237,12 @@
 
   .post-container {
     margin: 5px 0;
+
   }
 
   .posts {
     padding: 0;
+    width: 100%;
   }
 }
 

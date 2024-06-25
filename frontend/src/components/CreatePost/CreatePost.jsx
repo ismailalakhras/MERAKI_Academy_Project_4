@@ -3,7 +3,7 @@ import "./CreatePost.css";
 
 const CreatePost = ({ setProfilePicScreen, setAddPostScreen }) => {
   return (
-    <div>
+    <div className="createPost-parent">
       <div className="createPost">
         <div className="image">
           <img src={localStorage.getItem("profilePic")} alt="" />

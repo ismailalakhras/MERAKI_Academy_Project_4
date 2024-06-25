@@ -3,7 +3,7 @@ import "./AddCommentScreen.css";
 import axios from "axios";
 import { AppContext } from "../../App";
 
-const AddCommentScreen = ({ setAddCommentScreen }) => {
+const AddCommentScreen = ({ setAddCommentScreen, }) => {
   const [comment, setComment] = useState("");
 
   const { token, setToken, toggle, setToggle } = useContext(AppContext);
@@ -55,6 +55,7 @@ const AddCommentScreen = ({ setAddCommentScreen }) => {
                   setAddCommentScreen(false);
                   setToggle(!toggle);
                   setComment("");
+                  
                   console.log(result.data);
                 })
                 .catch((err) => {

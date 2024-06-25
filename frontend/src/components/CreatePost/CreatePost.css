@@ -1,5 +1,4 @@
 .createPost {
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,15 +17,15 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: #025cc9;
+  background-image: url("../../pic/no-img.png") ;
   border-radius: 100%;
 }
 
 .createPost .image img {
   width: 50px;
   height: 50px;
-  background: #025cc9;
   border-radius: 100%;
+
 }
 
 .createPost .image div {

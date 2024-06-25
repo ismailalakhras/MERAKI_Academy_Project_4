@@ -115,9 +115,9 @@ const Posts = () => {
       <Suggestions
         following={following}
         followers={followers}
-        setFollowers={setFollowers}   
+        setFollowers={setFollowers}
         setFollowing={setFollowing}
-        setPosts = {setPosts}
+        setPosts={setPosts}
         user={user}
       />
 

@@ -27,6 +27,8 @@ const Suggestions = ({
     setSuggestions,
     createChat,
     setCreateChat,
+    chatScreen,
+    setChatScreen,
   } = useContext(AppContext);
 
   const [toggle_2, setToggle_2] = useState(false);
@@ -88,7 +90,7 @@ const Suggestions = ({
         .catch((err) => {
           console.log(err.response.data.message);
         });
-  }, []);
+  }, [toggle]);
 
   return (
     <div className={suggestions ? "suggestios visible" : "suggestios "}>
@@ -250,6 +252,26 @@ const Suggestions = ({
                   </div>
                   <div
                     onClick={() => {
+                      setCreateChat(ele._id);
+                      setChatScreen(true);
+
+                      axios
+                        .post(`http://localhost:5000/chat`, {
+                          senderId: localStorage.getItem("userId"),
+                          receiverId: ele._id,
+                        })
+
+                        .then((result) => {})
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
+                    }}
+                    className="message-contact"
+                  >
+                    <i class="fa-regular fa-message"></i>
+                  </div>
+                  <div
+                    onClick={() => {
                       axios
                         .put(
                           `http://localhost:5000/users/unFollow/${ele._id}`,
@@ -294,33 +316,8 @@ const Suggestions = ({
                     }}
                   >
                     <div className="left-side">
-                      <img
-                        src={ele.profileImage}
-                        alt=""
-                        onClick={(e) => {
-                          console.log("test");
-                        }}
-                      />
-                      <div
-                        className="userName"
-                        onClick={(e) => {
-                          console.log("xxxxxxxxx");
-                          // setCreateChat(ele._id);
-                          // axios
-                          //   .post(`http://localhost:5000/chat`, {
-                          //     senderId: localStorage.getItem("userId"),
-                          //     receiverId: ele._id,
-                          //   })
-
-                          //   .then((result) => {
-                          //     console.log(result.data);
-                          //     console.log("xxxxxxxxx");
-                          //   })
-                          //   .catch((err) => {
-                          //     console.log(err.response.data.message);
-                          //   });
-                        }}
-                      >
+                      <img src={ele.profileImage} alt="" />
+                      <div className="userName">
                         {ele.firstName} {ele.lastName}
                       </div>
                     </div>
