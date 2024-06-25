@@ -2,17 +2,61 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../../App";
 
-const RightSide = ({ following, user }) => {
+const RightSide = ({
+  following,
+  setFollowing,
+  followers,
+  setFollowers,
+  user,
+  posts,
+  setPosts,
+}) => {
   const {
     token,
     users,
-    toggle,
-    setToggle,
+
     createChat,
     setCreateChat,
     chatScreen,
     setChatScreen,
   } = useContext(AppContext);
+
+  const [toggle_2, setToggle_2] = useState(false);
+
+  useEffect(() => {
+    console.log("posts useEffect");
+    axios
+      .get("http://localhost:5000/posts", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        // setPageName("My Profile Info");
+        setPosts(result.data.posts);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle_2]);
+
+  useEffect(() => {
+    console.log("xxxxxxxxxxxx");
+    axios
+      .get(`http://localhost:5000/users/userId`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        setFollowers(result.data.user.followers);
+
+        setFollowing(result.data.user.following);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle_2]);
 
   return (
     <div className="suggestios rightSide">
@@ -26,28 +70,31 @@ const RightSide = ({ following, user }) => {
                 <div key={ele._id} className="suggestios-container-user ">
                   <div className="left-side">
                     <img src={ele.profileImage} alt="" />
-                    <div
-                      onClick={() => {
-                        setCreateChat(ele._id);
-                        axios
-                          .post(`http://localhost:5000/chat`, {
-                            senderId: localStorage.getItem("userId"),
-                            receiverId: ele._id,
-                          })
 
-                          .then((result) => {
-                            setChatScreen(true);
-                          })
-                          .catch((err) => {
-                            console.log(err.response.data.message);
-                          });
-                      }}
-                      className="userName"
-                    >
-
+                    <div className="userName">
                       {ele.firstName} {ele.lastName}
-                    <i class="fa-brands fa-rocketchat"></i>
                     </div>
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      setCreateChat(ele._id);
+                      setChatScreen(true);
+
+                      axios
+                        .post(`http://localhost:5000/chat`, {
+                          senderId: localStorage.getItem("userId"),
+                          receiverId: ele._id,
+                        })
+
+                        .then((result) => {})
+                        .catch((err) => {
+                          console.log(err.response.data.message);
+                        });
+                    }}
+                    className="message-contact"
+                  >
+                    <i class="fa-regular fa-message"></i>
                   </div>
 
                   {following?.some((element) => {
@@ -55,6 +102,15 @@ const RightSide = ({ following, user }) => {
                   }) ? (
                     <div
                       onClick={() => {
+                        //!-------------------------------------------
+
+                        // const filtredArray = posts.filter((elem, i) => {
+                        //   return elem._id !== ele._id;
+                        // });
+                        // setPosts(filtredArray);
+
+                        //!-------------------------------------------
+
                         axios
                           .put(
                             `http://localhost:5000/users/unFollow/${ele._id}`,
@@ -66,7 +122,7 @@ const RightSide = ({ following, user }) => {
                             }
                           )
                           .then((result) => {
-                            setToggle(!toggle);
+                            setToggle_2(!toggle_2);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -91,7 +147,7 @@ const RightSide = ({ following, user }) => {
                           )
 
                           .then((result) => {
-                            setToggle(!toggle);
+                            setToggle_2(!toggle_2);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);

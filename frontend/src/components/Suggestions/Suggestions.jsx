@@ -4,8 +4,14 @@ import { AppContext } from "../../App";
 import axios from "axios";
 import PostTimestamp from "../PostTimestamp";
 
-const Suggestions = ({ followers, following, user }) => {
-
+const Suggestions = ({
+  followers,
+  following,
+  user,
+  setFollowers,
+  setFollowing,
+  setPosts,
+}) => {
   const {
     pageName,
     showComments,
@@ -19,9 +25,46 @@ const Suggestions = ({ followers, following, user }) => {
     toggle,
     suggestions,
     setSuggestions,
-    createChat, setCreateChat
+    createChat,
+    setCreateChat,
   } = useContext(AppContext);
 
+  const [toggle_2, setToggle_2] = useState(false);
+
+  useEffect(() => {
+    console.log("posts useEffect");
+    axios
+      .get("http://localhost:5000/posts", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        // setPageName("My Profile Info");
+        setPosts(result.data.posts);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle_2]);
+
+  useEffect(() => {
+    console.log("xxxxxxxxxxxx");
+    axios
+      .get(`http://localhost:5000/users/userId`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        setFollowers(result.data.user.followers);
+
+        setFollowing(result.data.user.following);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  }, [toggle_2]);
 
   useEffect(() => {
     createChat && console.log("createChat", createChat);
@@ -45,10 +88,10 @@ const Suggestions = ({ followers, following, user }) => {
         .catch((err) => {
           console.log(err.response.data.message);
         });
-  }, [toggle]);
+  }, []);
 
   return (
-    <div className={suggestions ? "suggestios visible" : "suggestios "} >
+    <div className={suggestions ? "suggestios visible" : "suggestios "}>
       <div className="suggestios-container">
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
@@ -149,7 +192,7 @@ const Suggestions = ({ followers, following, user }) => {
                             }
                           )
                           .then((result) => {
-                            setToggle(!toggle);
+                            setToggle_2(!toggle_2);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -174,7 +217,7 @@ const Suggestions = ({ followers, following, user }) => {
                           )
 
                           .then((result) => {
-                            setToggle(!toggle);
+                            setToggle_2(!toggle_2);
                           })
                           .catch((err) => {
                             console.log(err.response.data.message);
@@ -219,7 +262,7 @@ const Suggestions = ({ followers, following, user }) => {
                         )
 
                         .then((result) => {
-                          setToggle(!toggle);
+                          setToggle_2(!toggle_2);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
@@ -243,15 +286,23 @@ const Suggestions = ({ followers, following, user }) => {
             if (ele._id !== user._id) {
               return (
                 <>
-                  <div key={ind} className="suggestios-container-user" onClick={(e)=>{
-                    console.log("test")
-                  }}>
+                  <div
+                    key={ind}
+                    className="suggestios-container-user"
+                    onClick={(e) => {
+                      console.log("test");
+                    }}
+                  >
                     <div className="left-side">
-                      <img src={ele.profileImage} alt="" onClick={(e)=>{
-                    console.log("test")
-                  }} />
+                      <img
+                        src={ele.profileImage}
+                        alt=""
+                        onClick={(e) => {
+                          console.log("test");
+                        }}
+                      />
                       <div
-                      className="userName"
+                        className="userName"
                         onClick={(e) => {
                           console.log("xxxxxxxxx");
                           // setCreateChat(ele._id);

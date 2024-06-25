@@ -35,6 +35,7 @@ const Posts = () => {
   const [postId, setPostId] = useState(null);
 
   useEffect(() => {
+    console.log("posts useEffect");
     axios
       .get("http://localhost:5000/posts", {
         headers: {
@@ -51,6 +52,8 @@ const Posts = () => {
   }, [toggle]);
 
   useEffect(() => {
+    console.log("users useEffect");
+
     axios
       .get(`http://localhost:5000/users/userId`, {
         headers: {
@@ -76,6 +79,8 @@ const Posts = () => {
   const [postToDelete, setPostToDelete] = useState(null);
 
   useEffect(() => {
+    console.log("posts delete useEffect");
+
     if (postToDelete) {
       const timer = setTimeout(() => {
         axios
@@ -84,11 +89,12 @@ const Posts = () => {
             console.log("deleted");
 
             setToggle(!toggle);
+
             setPostToDelete(null);
-            const filtredArray = posts.filter((elem,i)=>{
-              return elem._id!==postToDelete
-            })
-            setPosts(filtredArray)
+            const filtredArray = posts.filter((elem, i) => {
+              return elem._id !== postToDelete;
+            });
+            setPosts(filtredArray);
           })
           .catch((err) => {
             console.log(err);
@@ -106,7 +112,14 @@ const Posts = () => {
 
   return (
     <div className="posts-page">
-      <Suggestions following={following} followers={followers} user={user} />
+      <Suggestions
+        following={following}
+        followers={followers}
+        setFollowers={setFollowers}   
+        setFollowing={setFollowing}
+        setPosts = {setPosts}
+        user={user}
+      />
 
       <div className="posts">
         {posts?.map((post, ind) => {
@@ -187,7 +200,7 @@ const Posts = () => {
                           setShowComments(true);
                           setComments(result.data.post.comments);
                           setPost(result.data.post);
-                          setSuggestions(true)
+                          setSuggestions(true);
                         })
                         .catch((err) => {
                           console.log(err.response.data.message);
@@ -271,7 +284,15 @@ const Posts = () => {
         })}
       </div>
 
-      <RightSide following={following} user={user} />
+      <RightSide
+        following={following}
+        followers={followers}
+        setFollowers={setFollowers}
+        setFollowing={setFollowing}
+        user={user}
+        posts={posts}
+        setPosts={setPosts}
+      />
       {addCommentScreen && (
         <AddCommentScreen
           addCommentScreen={addCommentScreen}
@@ -299,7 +320,6 @@ const Posts = () => {
                   setPostToDelete(postId);
 
                   setConfirmDelete(false);
-                  
                 }}
                 className="delete"
               >

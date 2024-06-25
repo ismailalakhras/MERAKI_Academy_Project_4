@@ -130,21 +130,17 @@ const unFollow = async (req, res) => {
     const userId = req.token.userId;
     const unFollowId = req.params.unFollowId;
 
-    const user = await userModel.findById(userId);
-    const result = await userModel.findById(unFollowId);
+    const user = await userModel.findOneAndUpdate(
+      { _id: userId },
+      { $pull: { following: unFollowId } },
+      { new: true }
+    );
 
-    const indexOfFollowing = user.following.indexOf(unFollowId);
-    const indexOfFollowers = result.followers.indexOf(userId);
-
-    if (indexOfFollowing !== -1) {
-      user.following.splice(indexOfFollowing, 1);
-      await user.save();
-    }
-
-    if (indexOfFollowers !== -1) {
-      result.followers.splice(indexOfFollowers, 1);
-      await result.save();
-    }
+    const result = await userModel.findOneAndUpdate(
+      { _id: unFollowId },
+      { $pull: { followers: userId } },
+      { new: true }
+    );
 
     res.status(201).json({
       success: true,
@@ -166,10 +162,11 @@ const follow = async (req, res) => {
     const userId = req.token.userId;
     const followId = req.params.followId;
 
-    const user = await userModel.findOne({
-      _id: userId,
-      following: { $ne: followId } // التحقق من عدم وجود followId في الـ following
-    });
+    const user = await userModel.findOneAndUpdate(
+      { _id: userId, following: { $ne: followId } },
+      { $push: { following: followId } },
+      { new: true }
+    );
 
     if (!user) {
       return res.status(400).json({
@@ -178,12 +175,11 @@ const follow = async (req, res) => {
       });
     }
 
-    user.following.push(followId);
-    await user.save();
-
-    const result = await userModel.findById(followId);
-    result.followers.push(userId);
-    await result.save();
+    const result = await userModel.findOneAndUpdate(
+      { _id: followId },
+      { $push: { followers: userId } },
+      { new: true }
+    );
 
     res.status(201).json({
       success: true,

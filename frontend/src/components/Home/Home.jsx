@@ -21,6 +21,7 @@ const Home = () => {
 
 
   useEffect(() => {
+    
     setToken(localStorage.getItem("token"));
 
     axios

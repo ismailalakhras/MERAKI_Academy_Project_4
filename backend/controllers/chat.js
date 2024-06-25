@@ -5,7 +5,7 @@ const createChat = (req, res) => {
 
 
     chatModel.findOne({
-        members: { $all: [senderId, receiverId ] }
+        members: { $all: [senderId, receiverId] }
     })
         .then(result => {
             if (!result) {
