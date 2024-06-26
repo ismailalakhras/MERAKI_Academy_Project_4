@@ -180,7 +180,7 @@
 }
 
 .message-contact {
-  display: flex;  
+  display: flex;
   align-items: center;
   justify-content: center;
   color: #000000;
@@ -200,8 +200,6 @@
   background: rgb(99, 99, 99);
   color: white;
 }
-
-
 
 .suggestios-container-user .button:hover {
   background: rgb(2, 72, 129);
@@ -249,6 +247,17 @@
 .fa-message {
   margin: 0 5px;
 }
+
+
+.close-suggestions {
+  text-align: center;
+  position: absolute;
+  bottom: 100px;
+  background: #cf0202;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: none;
+}
 /* ---------------------------------------------------- */
 /* ---------------------------------------------------- */
 /* ---------------------------------------------------- */
@@ -286,11 +295,24 @@
     display: none;
   }
 
+  
+
   .suggestios-container {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 50px);
+    bottom: 0;
   }
 
   .suggestios.visible {
+    display: block;
+  }
+
+  .close-suggestions {
+    text-align: center;
+    position: absolute;
+    bottom: 100px;
+    background: #cf0202;
+    padding: 5px 10px;
+    border-radius: 5px;
     display: block;
   }
 }

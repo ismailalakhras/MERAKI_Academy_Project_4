@@ -401,6 +401,9 @@ const Suggestions = ({
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
         {/* ------------------------------------------- */}
+      <div onClick={()=>{
+        setSuggestions(false)
+      }} className="close-suggestions">Close Tap</div>
       </div>
     </div>
   );

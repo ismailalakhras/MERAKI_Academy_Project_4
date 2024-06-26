@@ -15,7 +15,7 @@ const Home = () => {
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const [sideBar, setSideBar] = useState(true);
+  const [sideBar, setSideBar] = useState(false);
 
   const {
     setToken,
@@ -25,6 +25,8 @@ const Home = () => {
     setIsLoggedIn,
     chatScreen,
     setChatScreen,
+    suggestions,
+    setSuggestions,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -84,6 +86,8 @@ const Home = () => {
               setShowComments(false);
               setIsActive("home");
               setPageName("My Profile Info");
+              setSideBar(false)
+
             }}
             className="link home"
           >
@@ -95,6 +99,8 @@ const Home = () => {
 
               setIsActive("followers");
               setPageName("Followers");
+              setSideBar(false)
+
             }}
             className="link followers"
           >
@@ -106,6 +112,8 @@ const Home = () => {
 
               setIsActive("following");
               setPageName("Following");
+              setSideBar(false)
+
             }}
             className="link following"
           >
@@ -117,6 +125,7 @@ const Home = () => {
 
               setIsActive("suggestion");
               setPageName("Suggestions");
+              setSideBar(false)
             }}
             className="link suggestion"
           >
@@ -128,6 +137,8 @@ const Home = () => {
               setToken("");
               setIsLoggedIn(false);
               setShowComments(false);
+              setSideBar(false)
+
               localStorage.clear();
             }}
             className="link logout"
@@ -145,7 +156,15 @@ const Home = () => {
             <i className="fa-regular fa-message"></i>
             {/* <div>0</div> */}
           </div>
-          <div onClick={() => { setSideBar(!sideBar)}} className="menu">
+          <div
+            onClick={() => {
+              setSideBar(!sideBar);
+              setTimeout(() => {
+                setSuggestions(true);
+              }, 1000);
+            }}
+            className="menu"
+          >
             <i class="fa-solid fa-bars"></i>
           </div>
         </div>
