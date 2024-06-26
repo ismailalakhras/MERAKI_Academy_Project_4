@@ -9,19 +9,25 @@ import CreatePost from "../CreatePost/CreatePost";
 import AddPostScreen from "../addPostScreen/addPostScreen";
 import Chat from "../Chat/Chat";
 
-
 const Home = () => {
   const [isActive, setIsActive] = useState("");
   const [profilePicScreen, setProfilePicScreen] = useState(false);
 
   const [addPostScreen, setAddPostScreen] = useState(false);
 
-  const { setToken, toggle, setPageName, setShowComments, setIsLoggedIn ,chatScreen, setChatScreen } =
-    useContext(AppContext);
+  const [sideBar, setSideBar] = useState(true);
 
+  const {
+    setToken,
+    toggle,
+    setPageName,
+    setShowComments,
+    setIsLoggedIn,
+    chatScreen,
+    setChatScreen,
+  } = useContext(AppContext);
 
   useEffect(() => {
-    
     setToken(localStorage.getItem("token"));
 
     axios
@@ -49,7 +55,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      {chatScreen && <Chat setChatScreen={setChatScreen}  />}
+      {chatScreen && <Chat setChatScreen={setChatScreen} />}
 
       {profilePicScreen && (
         <>
@@ -65,7 +71,14 @@ const Home = () => {
             <img src={require("../../pic/logo2.png")} alt="" />
           </div>
         </div>
-        <div className={`header-middle ${isActive}`}>
+
+        <div
+          className={
+            sideBar
+              ? `header-middle show  ${isActive}`
+              : `header-middle ${isActive}`
+          }
+        >
           <Link
             onClick={() => {
               setShowComments(false);
@@ -114,6 +127,7 @@ const Home = () => {
               setIsActive("logout");
               setToken("");
               setIsLoggedIn(false);
+              setShowComments(false);
               localStorage.clear();
             }}
             className="link logout"
@@ -121,6 +135,7 @@ const Home = () => {
             <i className="fa-solid fa-right-from-bracket"></i>Logout
           </Link>
         </div>
+
         <div className="header-right_side">
           <div className="notification">
             <i className="fa-regular fa-bell"></i>
@@ -129,6 +144,9 @@ const Home = () => {
           <div onClick={() => setChatScreen(true)} className="message">
             <i className="fa-regular fa-message"></i>
             {/* <div>0</div> */}
+          </div>
+          <div onClick={() => { setSideBar(!sideBar)}} className="menu">
+            <i class="fa-solid fa-bars"></i>
           </div>
         </div>
       </div>
