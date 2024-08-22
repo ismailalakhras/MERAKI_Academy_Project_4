@@ -1,15 +1,14 @@
 <p align="center">
 <a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo">
+ <img width="400px" height="100px" src="./frontend/src/pic/logo2.png" alt="Project logo">
  </a>
 </p>
 
-<h3 align="center">Project Title
-</h3>
+<h3 align="center">social media platform</h3>
 
 ---
 
-<p align="center"> An awesome Project to describe README 
+<p align="center"> online services that allow users to create, share, and interact with content and other users
     <br> 
 <a href=''>Demo</a>
     <br> 
@@ -27,9 +26,13 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Are you searching for a fast and simple way to put, through share, and lock in with others? Meraki is the greatest and most exact applications to do this for you.
 
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+it makes a difference you to form and minister substance, construct systems, remain up-to-date on current patterns, and interact with friends, family, and like-minded people.
+
+The MeraKi provides a straightforward and instinctive plan to guarantee you have got the most excellent client encounter. Whether you incline toward to precise yourself through photographs, recordings, or composed posts, these stages offer a consistent way to put through with the world around you.
+
+Open the control of MeraKi and begin sharing your story nowadays.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -47,10 +50,10 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/C11-ismailalakhras/MERAKI_Academy_Project_4.git
 ```
 
-2. Install packeges repeat this step in backend and frontend folder
+2. Install packeges repeat this step in backend and frontend and socket folder
 
 ```
 npm i
@@ -62,7 +65,13 @@ npm i
 npm run dev
 ```
 
-4. Run application using git bash inside frontend folder
+4. Run socket server using git bash inside socket folder
+
+```
+npm run dev
+```
+
+5. Run application using git bash inside frontend folder
 
 ```
 npm run start
@@ -72,13 +81,11 @@ Now app ready to use
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-Ex.
-
-- You don't have to register to navigate our web app
+- You must be registered to navigate our web App
 - You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+- You can click on the **following** tab provided in the navigation bar to see the people you follow 
+- You can click on the **followers** tab provided in the navigation bar to see people who follow you
+- You can click on the **+** sign located on the profile picture with the header to change the profile picture
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -89,12 +96,12 @@ Ex.
 
 ## User Story <a name = "#user_story"></a>
 
-Your trello board link
-<a href=''>Trello</a>
+
+<a href='https://trello.com/b/9xkdfNf7/project-4'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="./images/data flow.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 

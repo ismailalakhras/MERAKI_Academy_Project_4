@@ -44,7 +44,7 @@ const Chat = ({ setChatScreen }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/chat/${localStorage.getItem("userId")}`)
+      .get(`http://localhost:5001/chat/${localStorage.getItem("userId")}`)
       .then((result) => {
         setChats(result.data);
       })

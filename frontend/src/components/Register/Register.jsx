@@ -72,7 +72,7 @@ const Register = () => {
             <button
               onClick={() => {
                 axios
-                  .post("http://localhost:5000/users/register", {
+                  .post("http://localhost:5001/users/register", {
                     firstName,
                     lastName,
                     age,
@@ -127,7 +127,7 @@ const Register = () => {
             <button
               onClick={() => {
                 axios
-                  .post("http://localhost:5000/users/login", {
+                  .post("http://localhost:5001/users/login", {
                     email,
                     password,
                   })

@@ -22,7 +22,7 @@
 //   useEffect(() => {
 
 //     axios
-//       .get(`http://localhost:5000/users/userId`, {
+//       .get(`http://localhost:5001/users/userId`, {
 //         headers: {
 //           authorization: `Bearer ${localStorage.getItem("token")}`,
 //         },
@@ -41,7 +41,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get(`http://localhost:5000/users`)
+//       .get(`http://localhost:5001/users`)
 //       .then((result) => {
 //         console.log(result.data.users);
 //         setUsers(result.data.users);
@@ -77,7 +77,7 @@
 //                       onClick={() => {
 //                         axios
 //                           .put(
-//                             `http://localhost:5000/users/unFollow/${ele._id}`,
+//                             `http://localhost:5001/users/unFollow/${ele._id}`,
 //                             {},
 //                             {
 //                               headers: {
@@ -101,7 +101,7 @@
 //                       onClick={() => {
 //                         axios
 //                           .put(
-//                             `http://localhost:5000/users/follow/${ele._id}`,
+//                             `http://localhost:5001/users/follow/${ele._id}`,
 //                             {},
 //                             {
 //                               headers: {

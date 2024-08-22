@@ -44,7 +44,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users`)
+      .get(`http://localhost:5001/users`)
       .then((result) => {
         // console.log("from App.jsx", result.data.users);
         setUsers(result.data.users);

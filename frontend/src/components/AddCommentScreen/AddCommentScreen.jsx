@@ -41,7 +41,7 @@ const AddCommentScreen = ({ setAddCommentScreen, }) => {
                 console.log(localStorage.getItem("postId"));
               axios
                 .post(
-                  `http://localhost:5000/posts/${
+                  `http://localhost:5001/posts/${
                     localStorage.getItem("postId")
                   }/comments`,
                   { comment },

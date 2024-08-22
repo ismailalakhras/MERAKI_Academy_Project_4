@@ -14,7 +14,7 @@ const chatRouter = require("./routes/chat");
 const messageRouter = require("./routes/message");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 
 app.use(cors());
