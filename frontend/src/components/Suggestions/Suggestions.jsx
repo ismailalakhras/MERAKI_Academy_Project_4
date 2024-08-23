@@ -36,7 +36,7 @@ const Suggestions = ({
   useEffect(() => {
     console.log("posts useEffect");
     axios
-      .get("http://localhost:5001/posts", {
+      .get("https://webpulse-35pb.onrender.com/posts", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -53,7 +53,7 @@ const Suggestions = ({
   useEffect(() => {
     console.log("xxxxxxxxxxxx");
     axios
-      .get(`http://localhost:5001/users/userId`, {
+      .get(`https://webpulse-35pb.onrender.com/users/userId`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -76,7 +76,7 @@ const Suggestions = ({
     post &&
       axios
         .get(
-          `http://localhost:5001/posts/${post._id}/comments`,
+          `https://webpulse-35pb.onrender.com/posts/${post._id}/comments`,
 
           {
             headers: {
@@ -123,7 +123,7 @@ const Suggestions = ({
                       onClick={() => {
                         axios
                           .delete(
-                            `http://localhost:5001/posts/delete/comment/${ele._id}/${post._id}`
+                            `https://webpulse-35pb.onrender.com/posts/delete/comment/${ele._id}/${post._id}`
                           )
                           .then((result) => {
                             console.log("deleted");
@@ -185,7 +185,7 @@ const Suggestions = ({
                       onClick={() => {
                         axios
                           .put(
-                            `http://localhost:5001/users/unFollow/${ele._id}`,
+                            `https://webpulse-35pb.onrender.com/users/unFollow/${ele._id}`,
                             {},
                             {
                               headers: {
@@ -209,7 +209,7 @@ const Suggestions = ({
                       onClick={() => {
                         axios
                           .put(
-                            `http://localhost:5001/users/follow/${ele._id}`,
+                            `https://webpulse-35pb.onrender.com/users/follow/${ele._id}`,
                             {},
                             {
                               headers: {
@@ -256,7 +256,7 @@ const Suggestions = ({
                       setChatScreen(true);
 
                       axios
-                        .post(`http://localhost:5001/chat`, {
+                        .post(`https://webpulse-35pb.onrender.com/chat`, {
                           senderId: localStorage.getItem("userId"),
                           receiverId: ele._id,
                         })
@@ -274,7 +274,7 @@ const Suggestions = ({
                     onClick={() => {
                       axios
                         .put(
-                          `http://localhost:5001/users/unFollow/${ele._id}`,
+                          `https://webpulse-35pb.onrender.com/users/unFollow/${ele._id}`,
                           {},
                           {
                             headers: {
@@ -329,7 +329,7 @@ const Suggestions = ({
                         onClick={() => {
                           axios
                             .put(
-                              `http://localhost:5001/users/unFollow/${ele._id}`,
+                              `https://webpulse-35pb.onrender.com/users/unFollow/${ele._id}`,
                               {},
                               {
                                 headers: {
@@ -352,7 +352,7 @@ const Suggestions = ({
                         onClick={() => {
                           axios
                             .put(
-                              `http://localhost:5001/users/follow/${ele._id}`,
+                              `https://webpulse-35pb.onrender.com/users/follow/${ele._id}`,
                               {},
                               {
                                 headers: {

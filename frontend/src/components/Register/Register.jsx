@@ -72,7 +72,7 @@ const Register = () => {
             <button
               onClick={() => {
                 axios
-                  .post("http://localhost:5001/users/register", {
+                  .post("https://webpulse-35pb.onrender.com/users/register", {
                     firstName,
                     lastName,
                     age,
@@ -127,7 +127,7 @@ const Register = () => {
             <button
               onClick={() => {
                 axios
-                  .post("http://localhost:5001/users/login", {
+                  .post("https://webpulse-35pb.onrender.com/users/login", {
                     email,
                     password,
                   })

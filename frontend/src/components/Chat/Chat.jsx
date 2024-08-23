@@ -44,7 +44,7 @@ const Chat = ({ setChatScreen }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/chat/${localStorage.getItem("userId")}`)
+      .get(`https://webpulse-35pb.onrender.com/chat/${localStorage.getItem("userId")}`)
       .then((result) => {
         setChats(result.data);
       })

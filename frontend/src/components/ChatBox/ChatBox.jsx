@@ -31,7 +31,7 @@ const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
   useEffect(() => {
     chat &&
       axios
-        .get(`http://localhost:5001/message/${chat._id}`)
+        .get(`https://webpulse-35pb.onrender.com/message/${chat._id}`)
         .then((result) => {
           setMessages(result.data);
         })
@@ -104,7 +104,7 @@ const ChatBox = ({ chat, setSendMessage, receiveMessage }) => {
           onClick={() => {
             newMessage &&
               axios
-                .post(`http://localhost:5001/message`, {
+                .post(`https://webpulse-35pb.onrender.com/message`, {
                   senderId: localStorage.getItem("userId"),
                   text: newMessage,
                   chatId: chat._id,

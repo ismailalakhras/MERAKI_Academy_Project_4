@@ -26,7 +26,7 @@ const RightSide = ({
   useEffect(() => {
     console.log("posts useEffect");
     axios
-      .get("http://localhost:5001/posts", {
+      .get("https://webpulse-35pb.onrender.com/posts", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -43,7 +43,7 @@ const RightSide = ({
   useEffect(() => {
     console.log("xxxxxxxxxxxx");
     axios
-      .get(`http://localhost:5001/users/userId`, {
+      .get(`https://webpulse-35pb.onrender.com/users/userId`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -82,7 +82,7 @@ const RightSide = ({
                       setChatScreen(true);
 
                       axios
-                        .post(`http://localhost:5001/chat`, {
+                        .post(`https://webpulse-35pb.onrender.com/chat`, {
                           senderId: localStorage.getItem("userId"),
                           receiverId: ele._id,
                         })
@@ -104,7 +104,7 @@ const RightSide = ({
                       onClick={() => {
                         axios
                           .put(
-                            `http://localhost:5001/users/unFollow/${ele._id}`,
+                            `https://webpulse-35pb.onrender.com/users/unFollow/${ele._id}`,
                             {},
                             {
                               headers: {
@@ -128,7 +128,7 @@ const RightSide = ({
                       onClick={() => {
                         axios
                           .put(
-                            `http://localhost:5001/users/follow/${ele._id}`,
+                            `https://webpulse-35pb.onrender.com/users/follow/${ele._id}`,
                             {},
                             {
                               headers: {

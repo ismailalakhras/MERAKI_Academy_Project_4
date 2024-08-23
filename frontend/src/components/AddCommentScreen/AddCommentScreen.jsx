@@ -41,7 +41,7 @@ const AddCommentScreen = ({ setAddCommentScreen, }) => {
                 console.log(localStorage.getItem("postId"));
               axios
                 .post(
-                  `http://localhost:5001/posts/${
+                  `https://webpulse-35pb.onrender.com/posts/${
                     localStorage.getItem("postId")
                   }/comments`,
                   { comment },

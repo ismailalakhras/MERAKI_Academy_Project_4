@@ -37,7 +37,7 @@ const Posts = () => {
   useEffect(() => {
     console.log("posts useEffect");
     axios
-      .get("http://localhost:5001/posts", {
+      .get("https://webpulse-35pb.onrender.com/posts", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -55,7 +55,7 @@ const Posts = () => {
     console.log("users useEffect");
 
     axios
-      .get(`http://localhost:5001/users/userId`, {
+      .get(`https://webpulse-35pb.onrender.com/users/userId`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -84,7 +84,7 @@ const Posts = () => {
     if (postToDelete) {
       const timer = setTimeout(() => {
         axios
-          .delete(`http://localhost:5001/posts/delete/${postToDelete}`)
+          .delete(`https://webpulse-35pb.onrender.com/posts/delete/${postToDelete}`)
           .then((result) => {
             console.log("deleted");
 
@@ -187,7 +187,7 @@ const Posts = () => {
                     onClick={() => {
                       axios
                         .get(
-                          `http://localhost:5001/posts/${post._id}/comments`,
+                          `https://webpulse-35pb.onrender.com/posts/${post._id}/comments`,
 
                           {
                             headers: {
@@ -219,7 +219,7 @@ const Posts = () => {
 
                       axios
                         .post(
-                          `http://localhost:5001/posts/${post._id}/like`,
+                          `https://webpulse-35pb.onrender.com/posts/${post._id}/like`,
                           {},
                           {
                             headers: {
@@ -254,7 +254,7 @@ const Posts = () => {
                       localStorage.setItem("postId", post._id);
                       axios
                         .get(
-                          `http://localhost:5001/posts/${post._id}/comments`,
+                          `https://webpulse-35pb.onrender.com/posts/${post._id}/comments`,
 
                           {
                             headers: {

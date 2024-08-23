@@ -33,7 +33,7 @@ const Home = () => {
     setToken(localStorage.getItem("token"));
 
     axios
-      .get("http://localhost:5001/users/userId ", {
+      .get("https://webpulse-35pb.onrender.com/users/userId ", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },

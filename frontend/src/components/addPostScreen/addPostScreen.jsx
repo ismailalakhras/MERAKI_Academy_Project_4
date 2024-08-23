@@ -83,7 +83,7 @@ const AddPostScreen = ({ setAddPostScreen }) => {
               formData.append("postContent", postContent);
               axios
                 .post(
-                  "http://localhost:5001/createPost/upload",
+                  "https://webpulse-35pb.onrender.com/createPost/upload",
                   formData,
 
                   {
